@@ -14,7 +14,7 @@ class Prodi extends Model
     protected $fillable = [
         'nama_prodi',
         'jenjang',
-        'fakultas',
+        'kode_jurusan',
         'akreditasi',
         'tes_ujian',
         'ujian',
@@ -38,5 +38,4 @@ class Prodi extends Model
     {
         return static::where('id', $id)->first() ?: null;
     }
-
 }

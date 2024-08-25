@@ -15,7 +15,7 @@ class ProdiController extends Controller
 {
     public function index(): Response
     {
-        $prodi = Prodi::all();
+        $prodi = Prodi::latest()->get();
         return Inertia::render('Admin/Prodi', [
             'prodi' => $prodi,
             'knowledges' => Exams::activeExamSelect(),
@@ -27,7 +27,7 @@ class ProdiController extends Controller
         $request->validate([
             'nama_prodi' => 'required|string|max:255',
             'jenjang' => 'required|string|max:255',
-            'fakultas' => 'required|string|max:255',
+            'kode_jurusan' => 'required|string|max:255',
             'akreditasi' => 'required|string|max:255',
             'tes_ujian' => 'required|boolean',
             'ujian' => 'nullable|string|max:100',
@@ -41,7 +41,7 @@ class ProdiController extends Controller
         Prodi::create([
             'nama_prodi' => $request->nama_prodi,
             'jenjang' => $request->jenjang,
-            'fakultas' => $request->fakultas,
+            'kode_jurusan' => $request->kode_jurusan,
             'akreditasi' => $request->akreditasi,
             'tes_ujian' => $request->tes_ujian,
             'ujian' => $request->ujian,
@@ -60,7 +60,7 @@ class ProdiController extends Controller
         $request->validate([
             'nama_prodi' => 'required|string|max:255',
             'jenjang' => 'required|string|max:255',
-            'fakultas' => 'required|string|max:255',
+            'kode_jurusan' => 'required|string|max:255',
             'akreditasi' => 'required|string|max:255',
             'tes_ujian' => 'required|boolean',
             'ujian' => 'nullable|string|max:100',
@@ -74,7 +74,7 @@ class ProdiController extends Controller
         Prodi::where('id', $id)->update([
             'nama_prodi' => $request->nama_prodi,
             'jenjang' => $request->jenjang,
-            'fakultas' => $request->fakultas,
+            'kode_jurusan' => $request->kode_jurusan,
             'akreditasi' => $request->akreditasi,
             'tes_ujian' => $request->tes_ujian,
             'ujian' => $request->ujian,

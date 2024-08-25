@@ -23,8 +23,8 @@ defineProps({
 
 const form = useForm({
     nama_prodi: "",
+    kode_jurusan: "",
     jenjang: "",
-    fakultas: "",
     akreditasi: "",
     tes_ujian: false,
     ujian: [],
@@ -78,7 +78,7 @@ const editProdi = (item = null) => {
         );
 
         form.akreditasi = findProdi.akreditasi;
-        form.fakultas = findProdi.fakultas;
+        form.kode_jurusan = findProdi.kode_jurusan;
         form.jenjang = findProdi.jenjang;
         form.nama_prodi = findProdi.nama_prodi;
         form.tes_kesehatan = findProdi.tes_kesehatan == 1 ? "true" : "false";
@@ -139,22 +139,15 @@ const closeModal = () => {
                                 <tr>
                                     <th scope="col" class="px-6 py-3">Name</th>
                                     <th scope="col" class="px-6 py-3">
-                                        Jenjang
+                                        Kode Jurusan
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Fakultas
+                                        Jenjang
                                     </th>
                                     <th scope="col" class="px-6 py-3">
                                         Akreditasi
                                     </th>
                                     <th scope="col" class="px-6 py-3">Ujian</th>
-                                    <!-- <th scope="col" class="px-6 py-3">
-                                        Tes Wawancara
-                                    </th>
-
-                                    <th scope="col" class="px-6 py-3">
-                                        Tes Kesehatan
-                                    </th> -->
                                     <th scope="col" class="px-6 py-3">
                                         Biaya Registrasi
                                     </th>
@@ -171,10 +164,10 @@ const closeModal = () => {
                                         {{ prodi.nama_prodi }}
                                     </th>
                                     <td class="px-6 py-4">
-                                        {{ prodi.jenjang }}
+                                        {{ prodi.kode_jurusan }}
                                     </td>
                                     <td class="px-6 py-4">
-                                        {{ prodi.fakultas }}
+                                        {{ prodi.jenjang }}
                                     </td>
                                     <td class="px-6 py-4">
                                         {{ prodi.akreditasi }}
@@ -182,16 +175,6 @@ const closeModal = () => {
                                     <td class="px-6 py-4">
                                         {{ prodi.tes_ujian ? "Ya" : "Tidak" }}
                                     </td>
-                                    <!-- <td class="px-6 py-4">
-                                        {{
-                                            prodi.tes_wawancara ? "Ya" : "Tidak"
-                                        }}
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        {{
-                                            prodi.tes_kesehatan ? "Ya" : "Tidak"
-                                        }}
-                                    </td> -->
                                     <td class="px-6 py-4">
                                         {{
                                             new Intl.NumberFormat("id-ID", {
@@ -233,17 +216,17 @@ const closeModal = () => {
                         </div>
 
                         <div>
+                            <InputLabel for="kode_jurusan" value="Kode Jurusan" />
+                            <TextInput id="kode_jurusan" ref="kodeJurusanInput" v-model="form.kode_jurusan" type="text"
+                                class="mt-1 block w-full" placeholder="Kode Jurusan" />
+                            <InputError :message="form.errors.kode_jurusan" class="mt-2" />
+                        </div>
+
+                        <div>
                             <InputLabel for="jenjang" value="Jenjang" />
                             <TextInput id="jenjang" ref="jenjangInput" v-model="form.jenjang" type="text"
                                 class="mt-1 block w-full" placeholder="Jenjang" />
                             <InputError :message="form.errors.jenjang" class="mt-2" />
-                        </div>
-
-                        <div>
-                            <InputLabel for="fakultas" value="Fakultas" />
-                            <TextInput id="fakultas" ref="fakultasInput" v-model="form.fakultas" type="text"
-                                class="mt-1 block w-full" placeholder="Fakultas" />
-                            <InputError :message="form.errors.fakultas" class="mt-2" />
                         </div>
 
                         <div>
@@ -283,41 +266,6 @@ const closeModal = () => {
                                 class="mt-1 block w-full" placeholder="Nilai Dibawah" />
                             <InputError :message="form.errors.nilai_dibawah" class="mt-2" />
                         </div>
-
-                        <!-- <div>
-                            <InputLabel for="tes_wawancara" value="Tes Wawancara" />
-
-                            <Combobox id="tes_wawancara" ref="tes_wawancaraInput" v-model="form.tes_wawancara"
-                                class="mt-1 block w-full" placeholder="Tes Wawancara" :option-value="[
-                                    {
-                                        value: true,
-                                        text: 'Ya',
-                                    },
-                                    {
-                                        value: false,
-                                        text: 'Tidak',
-                                    },
-                                ]" />
-
-                            <InputError :message="form.errors.tes_wawancara" class="mt-2" />
-                        </div> -->
-
-                        <!-- <div>
-                            <InputLabel for="tes_kesehatan" value="Tes Kesehatan" />
-                            <Combobox id="tes_kesehatan" ref="tes_kesehatanInput" v-model="form.tes_kesehatan"
-                                class="mt-1 block w-full" placeholder="Tes Kesehatan" :option-value="[
-                                    {
-                                        value: true,
-                                        text: 'Ya',
-                                    },
-                                    {
-                                        value: false,
-                                        text: 'Tidak',
-                                    },
-                                ]" />
-                            <InputError :message="form.errors.tes_kesehatan" class="mt-2" />
-                        </div> -->
-
                         <div>
                             <InputLabel for="biaya_registrasi" value="Biaya Registrasi" />
                             <TextInput id="biaya_registrasi" ref="biaya_registrasiInput" v-model="form.biaya_registrasi"

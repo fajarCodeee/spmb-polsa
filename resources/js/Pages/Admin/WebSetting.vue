@@ -32,6 +32,9 @@ defineProps({
             contact_maps: "",
             contact_facebook: "",
             contact_whatsapp: "",
+            payment_bank: "",
+            payment_account: "",
+            payment_name: "",
             contact_instagram: "",
             contact_twitter: "",
             contact_youtube: "",
@@ -50,6 +53,9 @@ const form = useForm({
     title_dashboard: websetting.title_dashboard || "",
     title_exam: websetting.title_exam || "",
     footer: websetting.footer || "",
+    payment_bank: websetting.payment_bank || "",
+    payment_account: websetting.payment_account || "",
+    payment_name: websetting.payment_name || "",
     contact_telp: websetting.contact_telp || "",
     contact_email: websetting.contact_email || "",
     contact_fax: websetting.contact_fax || "",
@@ -171,21 +177,6 @@ const formbackup = useForm({});
                                             v-model="form.institution_history" />
                                         <InputError class="mt-2" :message="form.errors.institution_history" />
                                     </div>
-                                    <!-- <div class="col-span-1">
-                                        <InputLabel
-                                            for="contact_maps"
-                                            value="Kontak Maps"
-                                        />
-                                        <TextareaInput
-                                            id="contact_maps"
-                                            class="mt-1 block w-full"
-                                            v-model="form.contact_maps"
-                                        />
-                                        <InputError
-                                            class="mt-2"
-                                            :message="form.errors.contact_maps"
-                                        />
-                                    </div> -->
 
                                     <div class="col-span-1">
                                         <InputLabel for="contact_facebook" value="Kontak Facebook" />
@@ -231,6 +222,27 @@ const formbackup = useForm({});
                                         <InputLabel for="link_univ" value="Link Universitas" />
                                         <TextInput id="link_univ" class="mt-1 block w-full" v-model="form.link_univ" />
                                         <InputError class="mt-2" :message="form.errors.link_univ" />
+                                    </div>
+
+                                    <div class="col-span-1">
+                                        <InputLabel for="payment_bank" value="BANK" />
+                                        <TextInput id="payment_bank" class="mt-1 block w-full"
+                                            v-model="form.payment_bank" placholder="Bank BNI" />
+                                        <InputError class="mt-2" :message="form.errors.payment_bank" />
+                                    </div>
+
+                                    <div class="col-span-1">
+                                        <InputLabel for="payment_account" value="Nomer Rekening" />
+                                        <TextInput id="payment_account" class="mt-1 block w-full"
+                                            v-model="form.payment_account" placeholder="Cth: 00323-01-30-000028-7" />
+                                        <InputError class="mt-2" :message="form.errors.payment_account" />
+                                    </div>
+
+                                    <div class="col-span-1">
+                                        <InputLabel for="payment_name" value="Nama Pemilik Akun Bank" />
+                                        <TextInput id="payment_name" class="mt-1 block w-full"
+                                            v-model="form.payment_name" placeholder="Nama Lengkap Pemiliki Bank" />
+                                        <InputError class="mt-2" :message="form.errors.payment_name" />
                                     </div>
                                 </div>
                                 <div class="flex justify-end gap-4">

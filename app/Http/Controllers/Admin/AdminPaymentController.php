@@ -34,6 +34,7 @@ class AdminPaymentController extends Controller
                 'prodi' => $item->user->getForm->prodi->only('nama_prodi', 'biaya_registrasi', 'jenjang', 'fakultas') ?? 'Belum diisi',
             ];
         });
+        // dd($payment);
         return Inertia::render('Admin/Payment', [
             'payment' => $payment
         ]);

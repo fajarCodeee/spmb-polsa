@@ -55,12 +55,7 @@ const updateDisability = () => {
                 <div class="col-span-2">
                     <InputLabel for="address" value="Alamat" />
 
-                    <TextareaInput
-                        id="address"
-                        class="mt-1 block w-full"
-                        type="text"
-                        v-model="form.address"
-                    />
+                    <TextareaInput id="address" class="mt-1 block w-full" type="text" v-model="form.address" />
 
                     <InputError class="mt-2" :message="form.errors.address" />
                 </div>
@@ -68,12 +63,7 @@ const updateDisability = () => {
                 <div class="col-span-1">
                     <InputLabel for="city" value="Kota" />
 
-                    <TextInput
-                        id="city"
-                        class="mt-1 block w-full"
-                        type="text"
-                        v-model="form.city"
-                    />
+                    <TextInput id="city" class="mt-1 block w-full" type="text" v-model="form.city" />
 
                     <InputError class="mt-2" :message="form.errors.city" />
                 </div>
@@ -81,12 +71,7 @@ const updateDisability = () => {
                 <div class="col-span-1">
                     <InputLabel for="province" value="Provinsi" />
 
-                    <TextInput
-                        id="province"
-                        class="mt-1 block w-full"
-                        type="text"
-                        v-model="form.province"
-                    />
+                    <TextInput id="province" class="mt-1 block w-full" type="text" v-model="form.province" />
 
                     <InputError class="mt-2" :message="form.errors.province" />
                 </div>
@@ -94,28 +79,15 @@ const updateDisability = () => {
                 <div class="col-span-1">
                     <InputLabel for="subdistrict" value="Kecamatan" />
 
-                    <TextInput
-                        id="subdistrict"
-                        class="mt-1 block w-full"
-                        type="text"
-                        v-model="form.subdistrict"
-                    />
+                    <TextInput id="subdistrict" class="mt-1 block w-full" type="text" v-model="form.subdistrict" />
 
-                    <InputError
-                        class="mt-2"
-                        :message="form.errors.subdistrict"
-                    />
+                    <InputError class="mt-2" :message="form.errors.subdistrict" />
                 </div>
 
                 <div class="col-span-1">
                     <InputLabel for="country" value="Negara" />
 
-                    <TextInput
-                        id="country"
-                        class="mt-1 block w-full"
-                        type="text"
-                        v-model="form.country"
-                    />
+                    <TextInput id="country" class="mt-1 block w-full" type="text" v-model="form.country" />
 
                     <InputError class="mt-2" :message="form.errors.country" />
                 </div>
@@ -123,26 +95,15 @@ const updateDisability = () => {
                 <div class="col-span-1">
                     <InputLabel for="postal_code" value="Kode Pos" />
 
-                    <NumberInput
-                        id="postal_code"
-                        class="mt-1 block w-full"
-                        v-model="form.postal_code"
-                    />
+                    <NumberInput id="postal_code" class="mt-1 block w-full" v-model="form.postal_code" />
 
-                    <InputError
-                        class="mt-2"
-                        :message="form.errors.postal_code"
-                    />
+                    <InputError class="mt-2" :message="form.errors.postal_code" />
                 </div>
 
                 <div class="col-span-1">
                     <InputLabel for="rt" value="RT" />
 
-                    <TextInput
-                        id="rt"
-                        class="mt-1 block w-full"
-                        v-model="form.rt"
-                    />
+                    <TextInput id="rt" class="mt-1 block w-full" v-model="form.rt" placeholder="000" />
 
                     <InputError class="mt-2" :message="form.errors.rt" />
                 </div>
@@ -150,11 +111,7 @@ const updateDisability = () => {
                 <div class="col-span-1">
                     <InputLabel for="rw" value="RW" />
 
-                    <TextInput
-                        id="rw"
-                        class="mt-1 block w-full"
-                        v-model="form.rw"
-                    />
+                    <TextInput id="rw" class="mt-1 block w-full" v-model="form.rw" placeholder="000" />
 
                     <InputError class="mt-2" :message="form.errors.rw" />
                 </div>
@@ -162,36 +119,19 @@ const updateDisability = () => {
                 <div class="col-span-1">
                     <InputLabel for="phone_number" value="Nomor Telepon" />
 
-                    <TextInput
-                        id="phone_number"
-                        class="mt-1 block w-full"
-                        type="text"
-                        v-model="form.phone_number"
-                    />
+                    <TextInput id="phone_number" class="mt-1 block w-full" type="text" v-model="form.phone_number"
+                        placeholder="Cth: 08xxxxxxxx" />
 
-                    <InputError
-                        class="mt-2"
-                        :message="form.errors.phone_number"
-                    />
+                    <InputError class="mt-2" :message="form.errors.phone_number" />
                 </div>
 
                 <div class="col-span-1">
-                    <InputLabel
-                        for="phone_number_alt"
-                        value="Nomor Telepon Alternatif"
-                    />
+                    <InputLabel for="phone_number_alt" value="Nomor Telepon Alternatif" />
 
-                    <TextInput
-                        id="phone_number_alt"
-                        class="mt-1 block w-full"
-                        type="text"
-                        v-model="form.phone_number_alt"
-                    />
+                    <TextInput id="phone_number_alt" class="mt-1 block w-full" type="text"
+                        v-model="form.phone_number_alt" placeholder="Cth: 08xxxxxxxx" />
 
-                    <InputError
-                        class="mt-2"
-                        :message="form.errors.phone_number_alt"
-                    />
+                    <InputError class="mt-2" :message="form.errors.phone_number_alt" />
                 </div>
             </div>
 

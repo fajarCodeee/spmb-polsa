@@ -96,7 +96,7 @@ return new class extends Migration {
             // Status
             $table->foreignId('wave_id')->nullable()->constrained('waves')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('option_id')->nullable()->constrained('prodi');
-            $table->foreignId('option_2_id')->nullable()->constrained('prodi');
+            $table->foreignId('kelas_id')->nullable()->constrained('kelas');
 
             $table->boolean('is_via_online')->default(true);
             $table->boolean('is_lock')->default(false);

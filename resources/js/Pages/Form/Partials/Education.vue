@@ -35,196 +35,87 @@ const form = useForm({
             </p>
         </header>
 
-        <form
-            @submit.prevent="form.patch(route('form.update'))"
-            class="mt-6 space-y-6"
-        >
+        <form @submit.prevent="form.patch(route('form.update'))" class="mt-6 space-y-6">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div class="col-span-1">
-                    <InputLabel
-                        for="last_education"
-                        value="Pendidikan Terakhir"
-                    />
+                    <InputLabel for="last_education" value="Pendidikan Terakhir" />
 
-                    <TextInput
-                        id="last_education"
-                        type="text"
-                        class="mt-1 block w-full"
-                        v-model="form.last_education"
-                    />
+                    <TextInput id="last_education" type="text" class="mt-1 block w-full"
+                        v-model="form.last_education" />
 
-                    <InputError
-                        class="mt-2"
-                        :message="form.errors.last_education"
-                    />
+                    <InputError class="mt-2" :message="form.errors.last_education" />
                 </div>
 
                 <div class="col-span-1">
-                    <InputLabel
-                        for="education_number"
-                        value="Nomor Edukasi (NIS/NIM)"
-                    />
+                    <InputLabel for="education_number" value="NISN" />
 
-                    <TextInput
-                        id="education_number"
-                        type="text"
-                        class="mt-1 block w-full"
-                        v-model="form.education_number"
-                    />
+                    <TextInput id="education_number" type="text" class="mt-1 block w-full"
+                        v-model="form.education_number" />
 
-                    <InputError
-                        class="mt-2"
-                        :message="form.errors.education_number"
-                    />
+                    <InputError class="mt-2" :message="form.errors.education_number" />
                 </div>
 
                 <div class="col-span-1">
-                    <InputLabel
-                        for="education_name"
-                        value="Nama Tempat Pendidikan"
-                    />
+                    <InputLabel for="education_name" value="Nama Instansi Pendidikan" />
 
-                    <TextInput
-                        id="education_name"
-                        type="text"
-                        class="mt-1 block w-full"
-                        v-model="form.education_name"
-                    />
+                    <TextInput id="education_name" type="text" class="mt-1 block w-full"
+                        v-model="form.education_name" />
 
-                    <InputError
-                        class="mt-2"
-                        :message="form.errors.education_name"
-                    />
+                    <InputError class="mt-2" :message="form.errors.education_name" />
                 </div>
 
                 <div class="col-span-1">
                     <InputLabel for="education_city" value="Kota" />
 
-                    <TextInput
-                        id="education_city"
-                        type="text"
-                        class="mt-1 block w-full"
-                        v-model="form.education_city"
-                    />
+                    <TextInput id="education_city" type="text" class="mt-1 block w-full"
+                        v-model="form.education_city" />
 
-                    <InputError
-                        class="mt-2"
-                        :message="form.errors.education_city"
-                    />
+                    <InputError class="mt-2" :message="form.errors.education_city" />
                 </div>
 
                 <div class="col-span-1">
                     <InputLabel for="education_province" value="Provinsi" />
 
-                    <TextInput
-                        id="education_province"
-                        type="text"
-                        class="mt-1 block w-full"
-                        v-model="form.education_province"
-                    />
+                    <TextInput id="education_province" type="text" class="mt-1 block w-full"
+                        v-model="form.education_province" />
 
-                    <InputError
-                        class="mt-2"
-                        :message="form.errors.education_province"
-                    />
+                    <InputError class="mt-2" :message="form.errors.education_province" />
                 </div>
 
                 <div class="col-span-1">
                     <InputLabel for="education_subdistrict" value="Kecamatan" />
 
-                    <TextInput
-                        id="education_subdistrict"
-                        type="text"
-                        class="mt-1 block w-full"
-                        v-model="form.education_subdistrict"
-                    />
+                    <TextInput id="education_subdistrict" type="text" class="mt-1 block w-full"
+                        v-model="form.education_subdistrict" />
 
-                    <InputError
-                        class="mt-2"
-                        :message="form.errors.education_subdistrict"
-                    />
+                    <InputError class="mt-2" :message="form.errors.education_subdistrict" />
                 </div>
 
                 <div class="col-span-1">
                     <InputLabel for="education_country" value="Negara" />
 
-                    <TextInput
-                        id="education_country"
-                        type="text"
-                        class="mt-1 block w-full"
-                        v-model="form.education_country"
-                    />
+                    <TextInput id="education_country" type="text" class="mt-1 block w-full"
+                        v-model="form.education_country" />
 
-                    <InputError
-                        class="mt-2"
-                        :message="form.errors.education_country"
-                    />
+                    <InputError class="mt-2" :message="form.errors.education_country" />
                 </div>
 
                 <div class="col-span-1">
-                    <InputLabel for="education_postal_code" value="Nomor Pos" />
+                    <InputLabel for="education_postal_code" value="Kode Pos" />
 
-                    <TextInput
-                        id="education_postal_code"
-                        type="number"
-                        class="mt-1 block w-full"
-                        v-model="form.education_postal_code"
-                    />
+                    <TextInput id="education_postal_code" type="number" class="mt-1 block w-full"
+                        v-model="form.education_postal_code" />
 
-                    <InputError
-                        class="mt-2"
-                        :message="form.errors.education_postal_code"
-                    />
+                    <InputError class="mt-2" :message="form.errors.education_postal_code" />
                 </div>
 
                 <div class="col-span-1">
-                    <InputLabel
-                        for="education_graduation_year"
-                        value="Tahun Kelulusan"
-                    />
+                    <InputLabel for="education_graduation_year" value="Tahun Kelulusan" />
 
-                    <TextInput
-                        id="education_graduation_year"
-                        type="text"
-                        class="mt-1 block w-full"
-                        v-model="form.education_graduation_year"
-                    />
+                    <TextInput id="education_graduation_year" type="text" class="mt-1 block w-full"
+                        v-model="form.education_graduation_year" />
 
-                    <InputError
-                        class="mt-2"
-                        :message="form.errors.education_graduation_year"
-                    />
-                </div>
-
-                <div class="col-span-1">
-                    <InputLabel for="education_major" value="Tingkatan" />
-
-                    <TextInput
-                        id="education_major"
-                        type="text"
-                        class="mt-1 block w-full"
-                        v-model="form.education_major"
-                    />
-
-                    <InputError
-                        class="mt-2"
-                        :message="form.errors.education_major"
-                    />
-                </div>
-
-                <div class="col-span-1">
-                    <InputLabel for="education_grade" value="Nilai" />
-
-                    <NumberInput
-                        id="education_grade"
-                        class="mt-1 block w-full"
-                        v-model="form.education_grade"
-                    />
-
-                    <InputError
-                        class="mt-2"
-                        :message="form.errors.education_grade"
-                    />
+                    <InputError class="mt-2" :message="form.errors.education_graduation_year" />
                 </div>
             </div>
 

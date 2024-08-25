@@ -73,30 +73,22 @@ const close = () => {
 </script>
 
 <template>
+
     <Head title="Bukti Pembayaran" />
 
     <AuthenticatedLayout>
         <div>
-            <div
-                class="max-w-7xl mx-auto bg-white shadow-md sm:shadow-lg p-4 sm:p-8"
-            >
+            <div class="max-w-7xl mx-auto bg-white shadow-md sm:shadow-lg p-4 sm:p-8">
                 <div
-                    class="flex flex-column sm:flex-grow flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4"
-                >
-                    <header
-                        class="text-lg font-semibold text-gray-900 dark:text-gray-100"
-                    >
+                    class="flex flex-column sm:flex-grow flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
+                    <header class="text-lg font-semibold text-gray-900 dark:text-gray-100">
                         Bukti pembayaran
                     </header>
                     <PrimaryButton @click="open()">Upload</PrimaryButton>
                 </div>
                 <div class="relative overflow-x-auto">
-                    <table
-                        class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
-                    >
-                        <thead
-                            class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
-                        >
+                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
                                 <th scope="col" class="px-6 py-3">Bank</th>
                                 <th scope="col" class="px-6 py-3">
@@ -113,15 +105,10 @@ const close = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr
-                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-                                v-for="item in payment"
-                                :key="item.id"
-                            >
-                                <th
-                                    scope="row"
-                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                                >
+                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                                v-for="item in payment" :key="item.id">
+                                <th scope="row"
+                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     {{ item.bank }}
                                 </th>
 
@@ -137,9 +124,9 @@ const close = () => {
                                         item.amount == "-"
                                             ? "-"
                                             : new Intl.NumberFormat("id-ID", {
-                                                  style: "currency",
-                                                  currency: "IDR",
-                                              }).format(item.amount)
+                                                style: "currency",
+                                                currency: "IDR",
+                                            }).format(item.amount)
                                     }}
                                 </td>
                                 <td class="px-6 py-4 truncate">
@@ -156,38 +143,25 @@ const close = () => {
                                     <span v-else>-</span>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <div
-                                        class="flex items-center justify-center"
-                                    >
-                                        <i
-                                            v-if="item.status !== '-'"
-                                            class="fas fa-circle"
-                                            :class="{
-                                                'text-green-500':
-                                                    item.status == 'approved',
-                                                'text-yellow-500':
-                                                    item.status == 'pending',
-                                                'text-red-500':
-                                                    item.status == 'rejected',
-                                            }"
-                                        >
+                                    <div class="flex items-center justify-center">
+                                        <i v-if="item.status !== '-'" class="fas fa-circle" :class="{
+                                            'text-green-500':
+                                                item.status == 'approved',
+                                            'text-yellow-500':
+                                                item.status == 'pending',
+                                            'text-red-500':
+                                                item.status == 'rejected',
+                                        }">
                                         </i>
                                         <span v-else>-</span>
                                     </div>
                                 </td>
                                 <td class="px-6 py-4" v-if="item.bank !== '-'">
-                                    <button
-                                        v-if="item.status == 'pending'"
-                                        @click="open(2, item.id)"
-                                        class="text-red-600 hover:text-red-900"
-                                    >
+                                    <button v-if="item.status == 'pending'" @click="open(2, item.id)"
+                                        class="text-red-600 hover:text-red-900">
                                         <i class="fa-solid fa-trash"></i>
                                     </button>
-                                    <button
-                                        v-else
-                                        @click="open(4, item)"
-                                        class="text-blue-600 hover:text-blue-900"
-                                    >
+                                    <button v-else @click="open(4, item)" class="text-blue-600 hover:text-blue-900">
                                         <i class="fa-solid fa-eye"></i>
                                     </button>
                                 </td>
@@ -195,30 +169,23 @@ const close = () => {
                             </tr>
                         </tbody>
                     </table>
-                    <div
-                        v-if="payment.length === 0"
-                        class="flex items-center justify-center p-4"
-                    >
-                        <p
-                            class="text-gray-500 dark:text-gray-400 text-xs md:text-base"
-                        >
+                    <div v-if="payment.length === 0" class="flex items-center justify-center p-4">
+                        <p class="text-gray-500 dark:text-gray-400 text-xs md:text-base">
                             Kamu belum mengupload bukti pembayaran
                         </p>
                     </div>
                 </div>
                 <Modal :show="dialog" @close="close">
                     <div class="p-6">
-                        <h2
-                            class="text-lg font-medium text-gray-900 dark:text-gray-100"
-                        >
+                        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
                             {{
                                 dialogType == 0
                                     ? "Upload"
                                     : dialogType == 1
-                                    ? "Edit"
-                                    : dialogType == 2
-                                    ? "Hapus"
-                                    : "Detail"
+                                        ? "Edit"
+                                        : dialogType == 2
+                                            ? "Hapus"
+                                            : "Detail"
                             }}
                             bukti pembayaran
                         </h2>
@@ -228,131 +195,66 @@ const close = () => {
                                     dialogType == 0
                                         ? "Silahkan upload bukti pembayaran dibawah ini."
                                         : dialogType == 1
-                                        ? "Silahkan edit bukti pembayaran dibawah ini."
-                                        : dialogType == 2
-                                        ? "Apakah anda yakin ingin menghapus bukti pembayaran ini?"
-                                        : "Berikut adalah detail bukti pembayaran."
+                                            ? "Silahkan edit bukti pembayaran dibawah ini."
+                                            : dialogType == 2
+                                                ? "Apakah anda yakin ingin menghapus bukti pembayaran ini?"
+                                                : "Berikut adalah detail bukti pembayaran."
                                 }}
                             </p>
                         </div>
 
                         <div class="mt-6 space-y-6">
-                            <div
-                                class="grid grid-cols-2 md:grid-cols-4 gap-4"
-                                v-if="dialogType !== 2 && dialogType !== 4"
-                            >
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4"
+                                v-if="dialogType !== 2 && dialogType !== 4">
                                 <div class="col-span-1 md:col-span-2">
-                                    <InputLabel for="bank" value="Bank" />
+                                    <InputLabel for="bank" value="Nama Bank/E-Wallet" />
 
-                                    <TextInput
-                                        id="bank"
-                                        class="mt-1 block w-full"
-                                        v-model="form.bank"
-                                    />
-                                    <InputError
-                                        class="mt-2"
-                                        :message="form.errors.bank"
-                                    />
+                                    <TextInput id="bank" class="mt-1 block w-full" v-model="form.bank" />
+                                    <InputError class="mt-2" :message="form.errors.bank" />
                                 </div>
 
                                 <div class="col-span-1 md:col-span-2">
-                                    <InputLabel
-                                        for="account_number"
-                                        value="Nomor rekening"
-                                    />
+                                    <InputLabel for="account_number" value="Nomor rekening/No. Akun E-Wallet" />
 
-                                    <TextInput
-                                        id="account_number"
-                                        class="mt-1 block w-full"
-                                        v-model="form.account_number"
-                                    />
-                                    <InputError
-                                        class="mt-2"
-                                        :message="form.errors.account_number"
-                                    />
+                                    <TextInput id="account_number" class="mt-1 block w-full"
+                                        v-model="form.account_number" />
+                                    <InputError class="mt-2" :message="form.errors.account_number" />
                                 </div>
 
                                 <div class="col-span-2 md:col-span-4">
-                                    <InputLabel
-                                        for="account_name"
-                                        value="Nama pemilik rekening"
-                                    />
+                                    <InputLabel for="account_name" value="Nama pemilik rekening/E-Wallet" />
 
-                                    <TextInput
-                                        id="account_name"
-                                        class="mt-1 block w-full"
-                                        v-model="form.account_name"
-                                    />
-                                    <InputError
-                                        class="mt-2"
-                                        :message="form.errors.account_name"
-                                    />
+                                    <TextInput id="account_name" class="mt-1 block w-full"
+                                        v-model="form.account_name" />
+                                    <InputError class="mt-2" :message="form.errors.account_name" />
                                 </div>
 
                                 <div class="col-span-1 md:col-span-2">
-                                    <InputLabel
-                                        for="date"
-                                        value="Tanggal pembayaran"
-                                    />
+                                    <InputLabel for="date" value="Tanggal pembayaran" />
 
-                                    <DateInput
-                                        id="date"
-                                        ref="date"
-                                        v-model="form.date"
-                                        class="mt-1 block w-full"
-                                        placeholder="Tanggal pembayaran"
-                                    />
-                                    <InputError
-                                        class="mt-2"
-                                        :message="form.errors.date"
-                                    />
+                                    <DateInput id="date" ref="date" v-model="form.date" class="mt-1 block w-full"
+                                        placeholder="Tanggal pembayaran" />
+                                    <InputError class="mt-2" :message="form.errors.date" />
                                 </div>
                                 <div class="col-span-1 md:col-span-2">
-                                    <InputLabel
-                                        for="amount"
-                                        value="Nominal pembayaran"
-                                        class="overflow-x-hidden"
-                                    />
+                                    <InputLabel for="amount" value="Nominal pembayaran" class="overflow-x-hidden" />
 
-                                    <TextInput
-                                        id="amount"
+                                    <TextInput id="amount"
                                         class="mt-1 block w-full [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                                        type="number"
-                                        v-model="form.amount"
-                                    />
-                                    <InputError
-                                        class="mt-2"
-                                        :message="form.errors.amount"
-                                    />
+                                        type="number" v-model="form.amount" />
+                                    <InputError class="mt-2" :message="form.errors.amount" />
                                 </div>
                                 <div class="col-span-1 md:col-span-2">
-                                    <InputLabel
-                                        for="code"
-                                        value="Kode pembayaran"
-                                    />
+                                    <InputLabel for="code" value="Kode pembayaran" />
 
-                                    <TextInput
-                                        id="code"
-                                        class="mt-1 block w-full"
-                                        v-model="form.code"
-                                    />
-                                    <InputError
-                                        class="mt-2"
-                                        :message="form.errors.code"
-                                    />
+                                    <TextInput id="code" class="mt-1 block w-full" v-model="form.code" />
+                                    <InputError class="mt-2" :message="form.errors.code" />
                                 </div>
                                 <div class="col-span-1 md:col-span-2">
-                                    <InputLabel
-                                        for="type_payment"
-                                        value="Jenis pembayaran"
-                                    />
+                                    <InputLabel for="type_payment" value="Jenis pembayaran" />
 
-                                    <Combobox
-                                        id="type_payment"
-                                        class="mt-1 block w-full"
-                                        v-model="form.type_payment"
-                                        placeholder="Pilih Jenis Pembayaran"
-                                        :option-value="[
+                                    <Combobox id="type_payment" class="mt-1 block w-full" v-model="form.type_payment"
+                                        placeholder="Pilih Jenis Pembayaran" :option-value="[
                                             {
                                                 value: 'form',
                                                 text: 'Formulir',
@@ -361,68 +263,41 @@ const close = () => {
                                                 value: 'registration',
                                                 text: 'Registrasi',
                                             },
-                                        ]"
-                                    />
+                                        ]" />
 
-                                    <InputError
-                                        class="mt-2"
-                                        :message="form.errors.type_payment"
-                                    />
+                                    <InputError class="mt-2" :message="form.errors.type_payment" />
                                 </div>
                                 <div class="col-span-2 md:col-span-4">
-                                    <InputLabel
-                                        for="image"
-                                        value="Bukti pembayaran"
-                                    />
-                                    <FileInput
-                                        id="image"
+                                    <InputLabel for="image" value="Bukti pembayaran" />
+                                    <FileInput id="image"
                                         class="my-2 block w-full text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                                        v-model="form.image"
-                                        accept="image/*"
-                                    />
+                                        v-model="form.image" accept="image/*" />
 
-                                    <InputError
-                                        class="mt-2"
-                                        :message="form.errors.image"
-                                    />
+                                    <InputError class="mt-2" :message="form.errors.image" />
                                 </div>
                             </div>
 
-                            <div
-                                class="grid grid-cols-1"
-                                v-else-if="dialogType !== 2"
-                            >
+                            <div class="grid grid-cols-1" v-else-if="dialogType !== 2">
                                 <div class="flex items-center justify-center">
-                                    <img
-                                        :src="dialogItem.image"
-                                        alt=""
-                                        class="max-h-60"
-                                    />
+                                    <img :src="dialogItem.image" alt="" class="max-h-60" />
                                 </div>
                                 <div class="grid grid-cols-2 gap-4">
                                     <p class="text-gray-500">
-                                        <span class="font-semibold"
-                                            >Status:</span
-                                        >
+                                        <span class="font-semibold">Status:</span>
                                         {{
                                             dialogItem.status == "approved"
                                                 ? "Disetujui"
                                                 : dialogItem.status == "pending"
-                                                ? "Menunggu"
-                                                : "Ditolak"
+                                                    ? "Menunggu"
+                                                    : "Ditolak"
                                         }}
                                     </p>
                                     <p class="text-gray-500">
                                         <span class="font-semibold">Kode:</span>
                                         {{ dialogItem.code }}
                                     </p>
-                                    <p
-                                        class="text-gray-500"
-                                        v-if="dialogItem.note"
-                                    >
-                                        <span class="font-semibold"
-                                            >Catatan:</span
-                                        >
+                                    <p class="text-gray-500" v-if="dialogItem.note">
+                                        <span class="font-semibold">Catatan:</span>
                                         {{ dialogItem.note }}
                                     </p>
                                 </div>
@@ -431,17 +306,13 @@ const close = () => {
                                 <SecondaryButton @click="close" class="ml-2">
                                     close
                                 </SecondaryButton>
-                                <PrimaryButton
-                                    v-if="dialogType !== 4"
-                                    @click="save()"
-                                    >{{
-                                        dialogType == 0
-                                            ? "create"
-                                            : dialogType == 1
+                                <PrimaryButton v-if="dialogType !== 4" @click="save()">{{
+                                    dialogType == 0
+                                        ? "create"
+                                        : dialogType == 1
                                             ? "update"
                                             : "delete"
-                                    }}</PrimaryButton
-                                >
+                                }}</PrimaryButton>
                             </div>
                         </div>
                     </div>

@@ -40,27 +40,17 @@ const print = async () => {
                         <h2 class="text-2xl font-bold text-center">
                             Panitia Penerimaan Mahasiswa Baru
                         </h2>
-                        <h3
-                            class="text-xl font-semibold text-center capitalize"
-                        >
-                            Universitas Hang Tuah Pekanbaru Tahun Ajaran
+                        <h3 class="text-xl font-semibold text-center capitalize">
+                            Politeknik Sawunggalih Aji
                             {{ form.wave.tahun_akademik }}
                         </h3>
                         <div class="flex flex-col gap-4 mt-24">
                             <Display label="Nama" :value="form.name" />
                             <Display label="Email" :value="form.email" />
-                            <Display
-                                label="Tempat, Tanggal lahir"
-                                :value="`${form.birth_place_city}, ${form.birth_date}`"
-                            />
-                            <Display
-                                label="Program Studi"
-                                :value="form.prodi"
-                            />
-                            <Display
-                                label="No. Peserta"
-                                :value="form.no_exam"
-                            />
+                            <Display label="Tempat, Tanggal lahir"
+                                :value="`${form.birth_place_city}, ${form.birth_date}`" />
+                            <Display label="Program Studi" :value="form.prodi" />
+                            <Display label="No. Peserta" :value="form.no_exam" />
                             <Display label="Status" :value="form.end_status" />
 
                             <div>
@@ -70,21 +60,14 @@ const print = async () => {
                                     {{ form.name }} dinyatakan:
                                 </p>
 
-                                <div
-                                    v-if="form.end_status == 'approved'"
-                                    class="bg-green-200 p-4 rounded-lg mt-4"
-                                >
-                                    <p
-                                        class="text-green font-bold uppercase text-center"
-                                    >
+                                <div v-if="form.end_status == 'approved'" class="bg-green-200 p-4 rounded-lg mt-4">
+                                    <p class="text-green font-bold uppercase text-center">
                                         Diterima
                                     </p>
                                 </div>
                                 <div v-else-if="form.end_status == 'rejected'">
                                     <div class="bg-red-200 p-4 rounded-lg mt-4">
-                                        <p
-                                            class="text-red font-bold uppercase text-center"
-                                        >
+                                        <p class="text-red font-bold uppercase text-center">
                                             Ditolak
                                         </p>
                                     </div>
@@ -96,12 +79,8 @@ const print = async () => {
                                     </div>
                                 </div>
                                 <div v-else>
-                                    <div
-                                        class="bg-yellow-200 p-4 rounded-lg mt-4"
-                                    >
-                                        <p
-                                            class="text-yellow font-bold uppercase text-center"
-                                        >
+                                    <div class="bg-yellow-200 p-4 rounded-lg mt-4">
+                                        <p class="text-yellow font-bold uppercase text-center">
                                             Menunggu
                                         </p>
                                     </div>
@@ -113,23 +92,16 @@ const print = async () => {
                                 </div>
                             </div>
 
-                            <div
-                                class="flex justify-start items-center gap-4 mt-8"
-                            >
-                                <PrimaryButton
-                                    v-if="form.end_status == 'approved'"
-                                    @click="print"
-                                >
+                            <!-- <div class="flex justify-start items-center gap-4 mt-8">
+                                <PrimaryButton v-if="form.end_status == 'approved'" @click="print">
                                     Cetak Bukti Kelulusan
                                 </PrimaryButton>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
 
-                    <div
-                        v-if="form.end_status == 'submitted'"
-                        class="absolute top-0 left-0 bg-gray-800 text-white p-4 rounded-lg opacity-80 w-full h-full flex justify-center items-center"
-                    >
+                    <div v-if="form.end_status == 'submitted'"
+                        class="absolute top-0 left-0 bg-gray-800 text-white p-4 rounded-lg opacity-80 w-full h-full flex justify-center items-center">
                         <p class="text-center">
                             Pengumuman belum dapat dikeluarkan karena belum
                             diverifikasi oleh admin.

@@ -36,8 +36,7 @@ const checkRole = (role = []) => {
 
             <aside
                 class="fixed top-0 left-0 z-40 w-64 pt-20 h-screen transition-transform -translate-x-full md:translate-x-0 bg-white dark:bg-gray-800"
-                :class="{ 'translate-x-0': isSideBarOpen }"
-            >
+                :class="{ 'translate-x-0': isSideBarOpen }">
                 <div class="h-full px-3 py-4 overflow-y-auto">
                     <MenuUser :check="checkRole(['user'])" />
                     <MenuPanitia v-if="checkRole(['admin', 'panitia'])" />
@@ -46,11 +45,8 @@ const checkRole = (role = []) => {
                     <MenuAdmin v-if="checkRole(['admin'])" />
                 </div>
             </aside>
-            <div
-                v-show="isSideBarOpen"
-                class="fixed inset-0 z-30 bg-gray-500 opacity-50"
-                @click="isSideBarOpen = false"
-            />
+            <div v-show="isSideBarOpen" class="fixed inset-0 z-30 bg-gray-500 opacity-50"
+                @click="isSideBarOpen = false" />
             <main class="p-4 py-20 md:ml-64">
                 <slot />
             </main>

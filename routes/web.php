@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\HealthVerificationController;
 use App\Http\Controllers\Admin\AdminInterviewController;
 use App\Http\Controllers\Admin\AdminEndValidation;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\KelasController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\DocumentsController;
 use App\Http\Controllers\Exams\HealthController;
@@ -36,7 +37,6 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/', function () {
-
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
@@ -78,7 +78,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/{id}', [FormController::class, 'edit'])->name('edit');
         Route::patch('/', [FormController::class, 'update'])->name('update');
         Route::post('/validation', [FormController::class, 'validation'])->name('validation');
-
     });
 
     Route::middleware(['payform'])->prefix('/documents')->name('documents.')->group(function () {
@@ -102,7 +101,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::middleware(['examaccess:tes_wawancara'])->group(function () {
             Route::get('/interview', [InterviewController::class, 'index'])->name('interview');
         });
-
     });
 });
 
@@ -115,6 +113,11 @@ Route::middleware(['auth', 'verified', "role:admin,panitia,keuangan"])->prefix('
         Route::post('/program-studi', [ProdiController::class, 'store'])->name('prodi.store');
         Route::patch('/program-studi/{id}', [ProdiController::class, 'update'])->name('prodi.update');
         Route::delete('/program-studi/{id}', [ProdiController::class, 'destroy'])->name('prodi.destroy');
+
+        Route::get('/kelas', [KelasController::class, 'index'])->name('kelas');
+        Route::post('/kelas', [KelasController::class, 'store'])->name('kelas.store');
+        Route::patch('/kelas/{id}', [KelasController::class, 'update'])->name('kelas.update');
+        Route::delete('/kelas/{id}', [KelasController::class, 'destroy'])->name('kelas.destroy');
 
         Route::get('/wave', [WaveController::class, 'index'])->name('wave');
         Route::post('/wave', [WaveController::class, 'store'])->name('wave.store');
@@ -165,8 +168,6 @@ Route::middleware(['auth', 'verified', "role:admin,panitia,keuangan"])->prefix('
         Route::patch('/web-setting/backup', [WebSettingController::class, 'backup'])->name('web-setting.backup');
         Route::patch('/web-setting', [WebSettingController::class, 'update'])->name('web-setting.update');
     });
-
-
 });
 
 

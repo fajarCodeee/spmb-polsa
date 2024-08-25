@@ -15,6 +15,7 @@ use App\Models\ExamHistory;
 use App\Http\Requests\FormUpdateRequest;
 use Illuminate\Support\Facades\Redirect;
 use App\Helper\MyPdf;
+use App\Models\Kelas;
 use App\Models\WebSettings;
 
 class FormController extends Controller
@@ -96,13 +97,16 @@ class FormController extends Controller
 
     public function submissionStore(Request $request): RedirectResponse
     {
+
         $request->validate([
             'wave' => 'required|numeric',
             'option' => 'required|numeric',
-            'option_2' => 'numeric|nullable',
+            'kelas' => 'required|numeric',
         ]);
 
         $user = auth()->user();
+
+        // dd(!$user->getForm);
 
         if ($user->getForm) {
             return Redirect::back()->withErrors(['form' => 'Anda sudah mengisi form']);
@@ -116,8 +120,8 @@ class FormController extends Controller
             return Redirect::back()->withErrors(['option' => 'Pilihan prodi tidak tersedia']);
         }
 
-        if ($request->option_2 && !Prodi::getProdiById($request->option_2)) {
-            return Redirect::back()->withErrors(['option_2' => 'Pilihan prodi tidak tersedia']);
+        if (!Kelas::getKelasById($request->kelas)) {
+            return Redirect::back()->withErrors(['kelas' => 'Pilihan kelas tidak tersedia']);
         }
 
         if (!$user->getForm) {
@@ -127,7 +131,7 @@ class FormController extends Controller
         $user->getForm()->update([
             'wave_id' => $request->wave,
             'option_id' => $request->option,
-            'option_2_id' => $request->option_2 ?? null,
+            'kelas_id' => $request->kelas,
             'code_registration' => rand(1000, 9999),
         ]);
 

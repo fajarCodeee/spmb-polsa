@@ -1,10 +1,11 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use App\Http\Resources\ApiResource;
-use App\Models\Prodi;
 use App\Models\Wave;
+use App\Models\Kelas;
+use App\Models\Prodi;
+use Illuminate\Http\Request;
+use App\Http\Resources\ApiResource;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,10 @@ use App\Models\Wave;
 
 Route::get('/program-studi', function () {
     return new ApiResource(200, 'LIST_PRODI', Prodi::where('status', 1)->get());
+});
+
+Route::get('/kelas', function () {
+    return new ApiResource(200, 'LIST_KELAS', Kelas::all());
 });
 
 Route::get('/gelombang', function () {

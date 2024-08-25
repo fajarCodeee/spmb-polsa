@@ -13,6 +13,7 @@ import Combobox from "@/Components/Combobox.vue";
 import TextareaInput from "@/Components/TextareaInput.vue";
 import Grid from "@/Components/Grid.vue";
 import Display from "@/Components/Display.vue";
+import { onMounted } from 'vue';
 
 defineProps({
     payment: {
@@ -70,30 +71,25 @@ const save = () => {
 </script>
 
 <template>
-    <Head title="Setting Prodi" />
+
+    <Head title="Pembayaran" />
     <AuthenticatedLayout>
         <div>
             <div class="max-w-7xl mx-auto">
                 <div class="shadow-md sm:shadow-lg p-4 sm:p-8 bg-white">
                     <div
-                        class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4"
-                    >
+                        class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
                         <header>
-                            <h2
-                                class="text-lg font-bold text-gray-900 dark:text-gray-100"
-                            >
+                            <h2 class="text-lg font-bold text-gray-900 dark:text-gray-100">
                                 Kelola Pembayaran
                             </h2>
                         </header>
                     </div>
 
                     <div class="relative overflow-x-auto">
-                        <table
-                            class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
-                        >
+                        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                             <thead
-                                class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
-                            >
+                                class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
                                     <th scope="col" class="px-6 py-3">Bank</th>
 
@@ -118,15 +114,10 @@ const save = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr
-                                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-                                    v-for="item in payment.data"
-                                    :key="item.id"
-                                >
-                                    <th
-                                        scope="row"
-                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                                    >
+                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                                    v-for="item in payment.data" :key="item.id">
+                                    <th scope="row"
+                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         {{ item.bank }}
                                     </th>
                                     <td class="px-6 py-4 truncate">
@@ -147,36 +138,24 @@ const save = () => {
                                         {{ item.date }}
                                     </td>
                                     <td class="px-6 py-4">
-                                        <i
-                                            class="fas fa-circle"
-                                            :class="{
-                                                'text-green-500':
-                                                    item.status == 'approved',
-                                                'text-yellow-500':
-                                                    item.status == 'pending',
-                                                'text-red-500':
-                                                    item.status == 'rejected',
-                                            }"
-                                        >
+                                        <i class="fas fa-circle" :class="{
+                                            'text-green-500':
+                                                item.status == 'approved',
+                                            'text-yellow-500':
+                                                item.status == 'pending',
+                                            'text-red-500':
+                                                item.status == 'rejected',
+                                        }">
                                         </i>
                                     </td>
                                     <td class="px-6 py-4">
                                         <div class="flex gap-2">
-                                            <button
-                                                @click="open(1, item)"
-                                                class="text-indigo-600 hover:text-indigo-900"
-                                            >
-                                                <i
-                                                    class="fa-solid fa-pencil"
-                                                ></i>
+                                            <button @click="open(1, item)"
+                                                class="text-indigo-600 hover:text-indigo-900">
+                                                <i class="fa-solid fa-pencil"></i>
                                             </button>
-                                            <button
-                                                @click="open(2, item)"
-                                                class="text-red-600 hover:text-red-900"
-                                            >
-                                                <i
-                                                    class="fa-solid fa-trash"
-                                                ></i>
+                                            <button @click="open(2, item)" class="text-red-600 hover:text-red-900">
+                                                <i class="fa-solid fa-trash"></i>
                                             </button>
                                         </div>
                                     </td>
@@ -192,13 +171,8 @@ const save = () => {
                                 :class="{
                                     'cursor-not-allowed opacity-50':
                                         link.active || !link.url,
-                                }"
-                                v-for="link in payment.links"
-                                :key="link.label"
-                                :href="link.url || ''"
-                                :disabled="link.active"
-                                @click.prevent="router.visit(link.url)"
-                            >
+                                }" v-for="link in payment.links" :key="link.label" :href="link.url || ''"
+                                :disabled="link.active" @click.prevent="router.visit(link.url)">
                                 <span v-html="link.label" class="truncate">
                                 </span>
                             </button>
@@ -208,85 +182,52 @@ const save = () => {
             </div>
             <Modal :show="dialog" @close="close()">
                 <div class="p-6">
-                    <h2
-                        class="text-lg font-medium text-gray-900 dark:text-gray-100"
-                    >
+                    <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
                         {{
                             dialogIndex == 0
                                 ? "Create"
                                 : dialogIndex == 1
-                                ? "Kelola Pembayaran"
-                                : "Hapus Pembayaran"
+                                    ? "Kelola Pembayaran"
+                                    : "Hapus Pembayaran"
                         }}
                     </h2>
 
-                    <div
-                        class="mt-6 grid grid-cols-1 gap-4"
-                        v-if="dialogIndex != 2"
-                    >
+                    <div class="mt-6 grid grid-cols-1 gap-4" v-if="dialogIndex != 2">
                         <div class="col-span-1">
-                            <img
-                                :src="dialogItem.image"
-                                :alt="`Bukti pembayaran ${dialogItem.user_id}`"
-                                class="w-full"
-                            />
+                            <img :src="dialogItem.image" :alt="`Bukti pembayaran ${console.log(dialogItem)}`"
+                                class="w-full" />
                         </div>
 
                         <Grid col="2" class="mt-4 mb-6">
-                            <Display
-                                label="Pilihan Prodi"
-                                :value="dialogItem?.prodi.nama_prodi"
-                            />
-                            <Display
-                                label="Pilihan Fakultas"
-                                :value="dialogItem?.prodi.fakultas"
-                            />
-                            <Display
-                                label="Biaya Registrasi Prodi"
-                                :value="
-                                    new Intl.NumberFormat('id-ID', {
-                                        style: 'currency',
-                                        currency: 'IDR',
-                                    }).format(
-                                        dialogItem?.prodi.biaya_registrasi
-                                    )
-                                "
-                            />
+                            <Display label="Pilihan Prodi" :value="dialogItem?.prodi.nama_prodi" />
+                            <Display label="Pilihan Fakultas" :value="dialogItem?.prodi.fakultas" />
+                            <Display label="Biaya Registrasi Prodi" :value="new Intl.NumberFormat('id-ID', {
+                                style: 'currency',
+                                currency: 'IDR',
+                            }).format(
+                                dialogItem?.prodi.biaya_registrasi
+                            )
+                                " />
                         </Grid>
 
                         <div class="col-span-1">
                             <InputLabel for="status">Status</InputLabel>
-                            <Combobox
-                                v-model="form.status"
-                                id="status"
-                                class="mt-1 block w-full"
-                                :option-value="[
-                                    { value: 'approved', text: 'Approved' },
-                                    { value: 'pending', text: 'Pending' },
-                                    { value: 'rejected', text: 'Rejected' },
-                                ]"
-                            />
-                            <InputError
-                                :message="form.errors.status"
-                            ></InputError>
+                            <Combobox v-model="form.status" id="status" class="mt-1 block w-full" :option-value="[
+                                { value: 'approved', text: 'Approved' },
+                                { value: 'pending', text: 'Pending' },
+                                { value: 'rejected', text: 'Rejected' },
+                            ]" />
+                            <InputError :message="form.errors.status"></InputError>
                         </div>
 
                         <div class="col-span-1">
                             <InputLabel for="note">Catatan</InputLabel>
-                            <TextareaInput
-                                v-model="form.note"
-                                id="note"
-                                class="mt-1 block w-full"
-                            />
-                            <InputError
-                                :message="form.errors.note"
-                            ></InputError>
+                            <TextareaInput v-model="form.note" id="note" class="mt-1 block w-full" />
+                            <InputError :message="form.errors.note"></InputError>
                         </div>
                     </div>
                     <div v-else>
-                        <h2
-                            class="text-lg font-medium text-gray-900 dark:text-gray-100"
-                        >
+                        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
                             Anda yakin ingin menghapus pembayaran ini?
                         </h2>
                     </div>
@@ -296,8 +237,8 @@ const save = () => {
                                 dialogIndex == 0
                                     ? "Create"
                                     : dialogIndex == 1
-                                    ? "Edit"
-                                    : "Delete"
+                                        ? "Edit"
+                                        : "Delete"
                             }}
                         </PrimaryButton>
                         <SecondaryButton @click="close" class="ml-2">

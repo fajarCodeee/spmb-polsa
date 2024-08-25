@@ -10,4 +10,6 @@ class WebSettings extends Model
     use HasFactory;
 
     protected $table = 'web_settings';
+
+    protected $guarded = [''];
 }

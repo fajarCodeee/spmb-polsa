@@ -148,13 +148,13 @@ const closeModal = () => {
                                         Akreditasi
                                     </th>
                                     <th scope="col" class="px-6 py-3">Ujian</th>
-                                    <th scope="col" class="px-6 py-3">
+                                    <!-- <th scope="col" class="px-6 py-3">
                                         Tes Wawancara
                                     </th>
 
                                     <th scope="col" class="px-6 py-3">
                                         Tes Kesehatan
-                                    </th>
+                                    </th> -->
                                     <th scope="col" class="px-6 py-3">
                                         Biaya Registrasi
                                     </th>
@@ -182,7 +182,7 @@ const closeModal = () => {
                                     <td class="px-6 py-4">
                                         {{ prodi.tes_ujian ? "Ya" : "Tidak" }}
                                     </td>
-                                    <td class="px-6 py-4">
+                                    <!-- <td class="px-6 py-4">
                                         {{
                                             prodi.tes_wawancara ? "Ya" : "Tidak"
                                         }}
@@ -191,7 +191,7 @@ const closeModal = () => {
                                         {{
                                             prodi.tes_kesehatan ? "Ya" : "Tidak"
                                         }}
-                                    </td>
+                                    </td> -->
                                     <td class="px-6 py-4">
                                         {{
                                             new Intl.NumberFormat("id-ID", {
@@ -284,7 +284,7 @@ const closeModal = () => {
                             <InputError :message="form.errors.nilai_dibawah" class="mt-2" />
                         </div>
 
-                        <div>
+                        <!-- <div>
                             <InputLabel for="tes_wawancara" value="Tes Wawancara" />
 
                             <Combobox id="tes_wawancara" ref="tes_wawancaraInput" v-model="form.tes_wawancara"
@@ -300,9 +300,9 @@ const closeModal = () => {
                                 ]" />
 
                             <InputError :message="form.errors.tes_wawancara" class="mt-2" />
-                        </div>
+                        </div> -->
 
-                        <div>
+                        <!-- <div>
                             <InputLabel for="tes_kesehatan" value="Tes Kesehatan" />
                             <Combobox id="tes_kesehatan" ref="tes_kesehatanInput" v-model="form.tes_kesehatan"
                                 class="mt-1 block w-full" placeholder="Tes Kesehatan" :option-value="[
@@ -316,7 +316,7 @@ const closeModal = () => {
                                     },
                                 ]" />
                             <InputError :message="form.errors.tes_kesehatan" class="mt-2" />
-                        </div>
+                        </div> -->
 
                         <div>
                             <InputLabel for="biaya_registrasi" value="Biaya Registrasi" />

@@ -11,6 +11,7 @@ import InputError from "@/Components/InputError.vue";
 import DateInput from "@/Components/DateInput.vue";
 import Combobox from "@/Components/Combobox.vue";
 import TextareaInput from "@/Components/TextareaInput.vue";
+import FileInput from "@/Components/FileInput.vue";
 
 defineProps({
     webSettings: {
@@ -39,6 +40,8 @@ defineProps({
             contact_twitter: "",
             contact_youtube: "",
             link_univ: "",
+            path_brosur: "",
+            path_rincian_biaya: "",
         }),
     },
 });
@@ -67,6 +70,8 @@ const form = useForm({
     contact_twitter: websetting.contact_twitter || "",
     contact_youtube: websetting.contact_youtube || "",
     link_univ: websetting.link_univ || "",
+    path_brosur: websetting.path_brosur || "",
+    path_rincian_biaya: websetting.path_rincian_biaya || "",
 });
 
 const formbackup = useForm({});
@@ -77,13 +82,6 @@ const formbackup = useForm({});
     <Head title="Web Setting" />
     <AuthenticatedLayout>
         <div>
-            <!-- <header
-                class="max-w-7xl mx-auto shadow-md sm:shadow-lg p-4 sm:p-4 bg-white"
-            >
-                <h2 class="text-lg font-bold text-gray-900 dark:text-gray-100">
-                    Web Setting
-                </h2>
-            </header> -->
             <div class="pt-8 flex flex-col gap-4">
                 <div class="mx-auto w-full">
                     <div class="shadow-md sm:shadow-lg p-4 sm:p-8 bg-white">
@@ -244,6 +242,21 @@ const formbackup = useForm({});
                                             v-model="form.payment_name" placeholder="Nama Lengkap Pemiliki Bank" />
                                         <InputError class="mt-2" :message="form.errors.payment_name" />
                                     </div>
+
+                                    <!-- <div class="col-span-1">
+                                        <InputLabel for="path_brosur" value="Brosur Pendaftaran" />
+                                        <FileInput id="path_brosur" class="mt-1 block w-full border p-1"
+                                            v-model="form.path_brosur" placeholder="Brosur Pendaftaran" />
+                                        <InputError class="mt-2" :message="form.errors.path_brosur" />
+                                    </div>
+
+                                    <div class="col-span-1">
+                                        <InputLabel for="path_rincian_biaya" value="Rincian Biaya" />
+                                        <FileInput id="path_rincian_biaya" class="mt-1 block w-full border p-1"
+                                            v-model="form.path_rincian_biaya" placeholder="Rincian Biaya" />
+                                        <InputError class="mt-2" :message="form.errors.path_rincian_biaya" />
+                                    </div> -->
+
                                 </div>
                                 <div class="flex justify-end gap-4">
                                     <PrimaryButton type="submit" class="mt-4" :disabled="form.processing">

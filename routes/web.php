@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\WebSettingController;
 use App\Http\Controllers\Admin\HealthVerificationController;
 use App\Http\Controllers\Admin\AdminInterviewController;
 use App\Http\Controllers\Admin\AdminEndValidation;
+use App\Http\Controllers\Admin\DaftarPesertaContoller;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\KelasController;
 use App\Http\Controllers\PaymentController;
@@ -109,6 +110,11 @@ Route::middleware(['auth', 'verified', "role:admin,panitia,keuangan"])->prefix('
     Route::get('/dashboard-chart', [DashboardController::class, 'index'])->name('dashboard.chart');
 
     Route::middleware(['role:admin,panitia'])->group(function () {
+
+        Route::get('/daftar-peserta', [DaftarPesertaContoller::class, 'index'])->name('daftar_peserta');
+        Route::get('/export-data', [DaftarPesertaContoller::class, 'export'])->name('daftar_peserta.export');
+        // Route::get('/donwload/{tahun_akademik}', [DaftarPesertaContoller::class, 'download'])->name('donwload');
+
         Route::get('/program-studi', [ProdiController::class, 'index'])->name('prodi');
         Route::post('/program-studi', [ProdiController::class, 'store'])->name('prodi.store');
         Route::patch('/program-studi/{id}', [ProdiController::class, 'update'])->name('prodi.update');

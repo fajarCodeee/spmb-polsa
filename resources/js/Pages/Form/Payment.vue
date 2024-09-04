@@ -270,7 +270,7 @@ const close = () => {
                                 <div class="col-span-2 md:col-span-4">
                                     <InputLabel for="image" value="Bukti pembayaran" />
                                     <FileInput id="image"
-                                        class="my-2 block w-full text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                                        class="my-2 p-1 block w-full text-gray-900 border  border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                                         v-model="form.image" accept="image/*" />
 
                                     <InputError class="mt-2" :message="form.errors.image" />

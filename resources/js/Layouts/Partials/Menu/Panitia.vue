@@ -9,6 +9,13 @@ import ResponsiveSideBar from "@/Components/ResponsiveSideBar.vue";
         </header>
         <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
             <li>
+                <ResponsiveSideBar :href="route('admin.daftar_peserta')"
+                    :active="route().current('admin.daftar_peserta')" icon="fa-solid fa-users">
+                    Daftar Peserta
+                </ResponsiveSideBar>
+            </li>
+
+            <li>
                 <ResponsiveSideBar :href="route('admin.prodi')" :active="route().current('admin.prodi')"
                     icon="fa-solid fa-university">
                     Prodi

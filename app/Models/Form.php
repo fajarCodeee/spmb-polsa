@@ -47,6 +47,6 @@ class Form extends Model implements HasMedia
         $this->addMediaCollection('ktp')->singleFile();
         $this->addMediaCollection('foto')->singleFile();
         $this->addMediaCollection('ijazah')->singleFile();
-        $this->addMediaCollection('transkrip_nilai')->singleFile();
+        $this->addMediaCollection('kartu_keluarga')->singleFile();
     }
 }

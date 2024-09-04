@@ -50,7 +50,7 @@ const showingNavigationDropdown = ref(false);
 
         <div class="flex flex-col min-h-screen bg-gray-100">
             <nav class="fixed w-full z-20 top-0 start-0 bg-gray-100 transition-all duration-500" :class="{
-                'bg-opacity-90 border-b shadow-md -top-0 h-20':
+                'bg-opacity-90 border-b drop-shadow-md top-0 h-20':
                     scrollY >= 270,
                 'h-24': scrollY <= 270,
             }">
@@ -62,7 +62,7 @@ const showingNavigationDropdown = ref(false);
                             <ApplicationLogo class="block h-9 w-auto" />
                             </Link>
                             <h1
-                                class="text-lg md:text-2xl inline-flex items-center font-bold text-gray-900 px-3 leading-relaxed">
+                                class="text-md w-1/2 md:w-full md:text-2xl inline-flex items-center font-black text-gray-900 px-3 leading-relaxed">
                                 {{ $page.props.web_settings.title_home }}
                             </h1>
                         </div>
@@ -128,7 +128,8 @@ const showingNavigationDropdown = ref(false);
                     </div>
                 </div>
             </nav>
-            <main class="flex-grow w-full bg-gray-100">
+
+            <main class="flex-grow w-full bg-gray-100 pt-10 md:pt-0">
                 <slot />
             </main>
 

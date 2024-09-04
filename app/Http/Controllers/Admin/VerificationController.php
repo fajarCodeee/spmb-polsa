@@ -55,7 +55,7 @@ class VerificationController extends Controller
                 'ktp' => $form->getFirstMedia('ktp')?->getUrl() ?? null,
                 'foto' => $form->getFirstMedia('foto')?->getUrl() ?? null,
                 'ijazah' => $form->getFirstMedia('ijazah')?->getUrl() ?? null,
-                'transkrip_nilai' => $form->getFirstMedia('transkrip_nilai')?->getUrl() ?? null,
+                'kartu_keluarga' => $form->getFirstMedia('kartu_keluarga')?->getUrl() ?? null,
             ]
         ]);
     }

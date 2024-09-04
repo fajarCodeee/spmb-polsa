@@ -117,6 +117,24 @@ const form = useForm({
 
                     <InputError class="mt-2" :message="form.errors.education_graduation_year" />
                 </div>
+
+                <div class="col-span-1">
+                    <InputLabel for="education_major" value="Jurusan" />
+
+                    <TextInput id="education_major" type="text" class="mt-1 block w-full"
+                        v-model="form.education_major" />
+
+                    <InputError class="mt-2" :message="form.errors.education_major" />
+                </div>
+
+                <div class="col-span-1">
+                    <InputLabel for="education_grade" value="Nilai Akhir" />
+
+                    <TextInput id="education_grade" type="text" class="mt-1 block w-full"
+                        v-model="form.education_grade" />
+
+                    <InputError class="mt-2" :message="form.errors.education_grade" />
+                </div>
             </div>
 
             <div class="flex justify-end gap-4">

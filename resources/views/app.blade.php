@@ -16,6 +16,7 @@
     <link rel="shortcut icon" href="/assets/img/logo-polsa.png" type="image/x-icon">
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdn.ckeditor.com/4.25.0-lts/standard/ckeditor.js"></script>
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/datepicker.min.js"></script> --}}
 
     <!-- Scripts -->

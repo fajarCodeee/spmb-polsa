@@ -9,12 +9,6 @@ import ResponsiveSideBar from "@/Components/ResponsiveSideBar.vue";
         </header>
         <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
             <li>
-                <ResponsiveSideBar :href="route('admin.user')" :active="route().current('admin.user')"
-                    icon="fa-solid fa-users">
-                    Users
-                </ResponsiveSideBar>
-            </li>
-            <li>
                 <ResponsiveSideBar :href="route('admin.web-setting')" :active="route().current('admin.web-setting')"
                     icon="fa-solid fa-cog">
                     Web Setting

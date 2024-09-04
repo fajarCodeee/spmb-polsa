@@ -19,7 +19,7 @@ class DocumentsController extends Controller
             'ktp' => $form->getFirstMedia('ktp')?->getUrl() ?? null,
             'foto' => $form->getFirstMedia('foto')?->getUrl() ?? null,
             'ijazah' => $form->getFirstMedia('ijazah')?->getUrl() ?? null,
-            'transkrip_nilai' => $form->getFirstMedia('transkrip_nilai')?->getUrl() ?? null,
+            'kartu_keluarga' => $form->getFirstMedia('kartu_keluarga')?->getUrl() ?? null,
         ]);
     }
 
@@ -38,8 +38,8 @@ class DocumentsController extends Controller
             $form->addMedia($request->file('ijazah'))->toMediaCollection('ijazah');
         }
 
-        if ($request->hasFile('transkrip_nilai') && $request->file('transkrip_nilai')->isValid()) {
-            $form->addMedia($request->file('transkrip_nilai'))->toMediaCollection('transkrip_nilai');
+        if ($request->hasFile('kartu_keluarga') && $request->file('kartu_keluarga')->isValid()) {
+            $form->addMedia($request->file('kartu_keluarga'))->toMediaCollection('kartu_keluarga');
         }
 
         return Redirect::route('documents.index');

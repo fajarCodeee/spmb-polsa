@@ -5,31 +5,27 @@ import { ref, computed } from "vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import Modal from "@/Components/Modal.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
-import TextInput from "@/Components/TextInput.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import InputError from "@/Components/InputError.vue";
-import NumberInput from "@/Components/NumberInput.vue";
-import Combobox from "@/Components/Combobox.vue";
-import TextareaInput from "@/Components/TextareaInput.vue";
 
 defineProps({
     ktp: String,
     foto: String,
     ijazah: String,
-    transkrip_nilai: String,
+    kartu_keluarga: String,
 });
 
 const form = useForm({
     ktp: null,
     foto: null,
     ijazah: null,
-    transkrip_nilai: null,
+    kartu_keluarga: null,
 });
 
 const file = ref(null);
 const url = ref(null);
 
-const form_type = ["ktp", "foto", "ijazah", "transkrip_nilai"];
+const form_type = ["ktp", "foto", "ijazah", "kartu_keluarga"];
 
 const dialog = ref(false);
 const dialogIndex = ref(null); // 0 = create, 1 = edit, 2 = delete
@@ -37,7 +33,9 @@ const dialogItem = ref(null);
 
 const onFileChange = (e) => {
     file.value = e.target.files[0];
+
     form[dialogItem.value] = e.target.files[0];
+    console.log(form[dialogItem.value]);
     if (file.value) {
         url.value = URL.createObjectURL(file.value);
     } else {
@@ -122,7 +120,7 @@ const save = () => {
                         <div>
                             <InputLabel class="capitalize" for="name">{{
                                 dialogItem.replace("_", " ")
-                            }}</InputLabel>
+                                }}</InputLabel>
                             <div class="flex items-center justify-center w-full">
                                 <label for="dropzone-file"
                                     class="flex flex-col items-center justify-center w-full h-auto border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
@@ -138,12 +136,6 @@ const save = () => {
                                     </div>
                                     <div class="flex flex-col items-center justify-center pt-5 pb-6" v-else>
                                         <img :src="url" :alt="dialogItem" class="object-contain w-full h-full" />
-                                        <!-- <iframe
-                                            v-else
-                                            :src="url"
-                                            :alt="dialogItem"
-                                            class="object-contain w-full h-full"
-                                        /> -->
                                     </div>
                                     <input id="dropzone-file" type="file" class="hidden" accept="image/*"
                                         @change="onFileChange" />

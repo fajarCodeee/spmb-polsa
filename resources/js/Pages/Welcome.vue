@@ -71,21 +71,6 @@ const primacy = [
     },
 ];
 
-const cooperate = [
-    ["https://unp.ac.id/", "https://htp.ac.id/asset/kerjasama/UNP.png"],
-    ["https://umsu.ac.id/", "https://htp.ac.id/asset/kerjasama/UMSU.png"],
-    ["https://uisi.ac.id/", "https://htp.ac.id/asset/kerjasama/UISI.png"],
-    [
-        "https://lincoln.edu.my/",
-        "https://htp.ac.id/asset/kerjasama/LINCOLN.png",
-    ],
-    [
-        "https://dinkes.riau.go.id/",
-        "https://htp.ac.id/asset/kerjasama/Bakti-Husada.png",
-    ],
-    ["https://upiyptk.ac.id/", "https://htp.ac.id/asset/kerjasama/upi.png"],
-];
-
 const setting_carousel = {
     autoplay: 3000,
     settings: {
@@ -120,18 +105,22 @@ const setting_carousel = {
         <section class="min-h-screen p-6 md:p-16 lg:p-12 xl:p-16 flex items-center">
             <div class="container px-6 lg:px-8 mx-auto">
                 <div class="grid grid-cols-1 lg:grid-cols-2 items-center gap-3">
+                    <div class="w-full hidden lg:block">
+                        <img class="mx-auto" src="/images/500x500.png" alt="Cover Pmb Hang Tuah
+                        Pekanbaru" />
+                    </div>
                     <div class="w-full text-gray-900 text-center md:text-left">
-                        <h1 class="text-2xl md:text-5xl font-bold pb-3">
+                        <h2 class="text-2xl md:text-5xl font-extrabold pb-3">
                             Penerimaan Mahasiwa Baru
-                        </h1>
+                        </h2>
                         <div class="pb-3">
-                            <h2 class="text-xl md:text-3xl font-semibold">
-                                <span
-                                    class="bg-gradient-to-r from-primary-700 to-primary bg-clip-text font-[800] text-transparent">{{
-                                        $page.props.web_settings
-                                            .institution_name
-                                    }}</span>
-                            </h2>
+                            <!-- <h2 class="text-xl md:text-3xl font-semibold border"> -->
+                            <span
+                                class="bg-gradient-to-r from-primary-700 to-primary bg-clip-text font-[800] text-transparent">{{
+                                    $page.props.web_settings
+                                        .institution_name
+                                }}</span>
+                            <!-- </h2> -->
                             <!-- <span class="bg-gradient-to-r from-primary to-rose-500 bg-clip-text font-[800] text-transparent">Mitra TopupKuy</span> -->
                             <p class="leading-relaxed">
                                 {{
@@ -141,25 +130,22 @@ const setting_carousel = {
                             </p>
                             <div class="flex gap-3 pt-4 items-center justify-center md:justify-start">
                                 <Link :href="route('register')"
-                                    class="inline-flex items-center py-2.5 px-5 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:text-gray-900 focus:text-gray-900 active:text-gray-900 hover:bg-gray-100 hover:ring-2 hover:ring-gray-500 focus:bg-gray-100 active:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                    class="inline-flex items-center py-2.5 px-5 bg-yellow-600 dark:bg-yellow-200 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:text-gray-900 focus:text-gray-900 active:text-gray-900 hover:bg-gray-100 hover:ring-2 hover:ring-gray-500 focus:bg-gray-100 active:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
                                 <i class="fa-solid fa-user-graduate pr-2" />
                                 Daftar sekarang
                                 </Link>
                             </div>
                         </div>
                     </div>
-                    <div class="w-full hidden lg:block">
-                        <img class="mx-auto" src="/images/pmbcover.png" alt="Cover Pmb Hang Tuah
-                        Pekanbaru" />
-                    </div>
+
                 </div>
             </div>
         </section>
-        <section class="py-6 md:p-16 lg:p-12 xl:p-16 bg-[#C3FCF2]">
+        <section class="py-6 md:p-16 lg:p-12 xl:p-16 bg-yellow-500">
             <div class="container mx-auto" data-aos="fade-up" data-aos-duration="2000">
-                <h2 class="text-2xl md:text-3xl text-gray-800 text-center font-bold pb-5 mb-10 capitalize">
+                <h2 class="text-2xl md:text-3xl text-white text-center font-bold pb-5 mb-10 capitalize">
                     <span class="relative inline-block">
-                        <span class="absolute inline-block w-full h-2 bg-yellow-300 bottom-1.5"></span>
+                        <!-- <span class="absolute inline-block w-full h-2 bg-yellow-300 bottom-1.5"></span> -->
                         <span class="relative"> Keunggulan </span>
                     </span>
                     {{ $page.props.web_settings.institution_short_name }}
@@ -183,7 +169,7 @@ const setting_carousel = {
                 <h2 class="text-2xl md:text-3xl text-black text-center font-bold pb-5 mb-10 capitalize">
                     Sekilas Tentang
                     <span class="relative inline-block">
-                        <span class="absolute inline-block w-full h-2 bg-yellow-300 bottom-1.5"></span>
+                        <span class="absolute inline-block w-full h-2 bg-yellow-500 bottom-1.5"></span>
                         <span class="relative">
                             {{
                                 $page.props.web_settings.institution_short_name
@@ -213,10 +199,10 @@ const setting_carousel = {
                 </div>
             </div>
         </section>
-        <section class="p-6 md:p-16 lg:p-12 xl:p-16 bg-[#C3FCF2] flex justify-center" data-aos="fade-up"
+        <section class="p-6 md:p-16 lg:p-12 xl:p-16 bg-yellow-500 flex justify-center" data-aos="fade-up"
             data-aos-duration="2000">
             <div class="container mx-auto">
-                <h2 class="text-2xl md:text-3xl text-gray-600 text-center font-bold pb-5 mb-10 capitalize">
+                <h2 class="text-2xl md:text-3xl text-white text-center font-bold pb-5 mb-10 capitalize">
                     Panduan Singkat Pendaftaran
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
@@ -310,8 +296,7 @@ const setting_carousel = {
         <section class="p-6 md:p-16 lg:p-12 xl:p-16">
             <div class="text-white" data-aos="fade-up" data-aos-duration="2000">
                 <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-4">
-                    <div
-                        class="flex flex-wrap gap-2 justify-between bg-background-primary container mx-auto rounded-lg p-6">
+                    <div class="flex flex-wrap gap-2 justify-between bg-yellow-600 container mx-auto rounded-lg p-6">
                         <div>
                             <h5 class="text-2xl font-bold text-left pb-3 leading-relaxed">
                                 Punya pertanyaan seputar PMB
@@ -326,14 +311,14 @@ const setting_carousel = {
                         <div class="flex">
                             <div
                                 class="flex flex-row gap-3 items-center sm:flex-row sm:gap-5 sm:justify-end sm:items-center">
-                                <Link
-                                    class="p-2 bg-transparent ring-2 ring-white rounded-lg hover:bg-teal-600 text-xs sm:text-base"
-                                    href="https://wa.me/628112503131">
-                                <span class="flex items-center justify-center">
-                                    <i class="fa-brands fa-whatsapp pr-2"></i>
-                                    Whatsapp
-                                </span>
-                                </Link>
+                                <a class="p-2 bg-transparent ring-2 ring-white rounded-lg hover:bg-teal-600 text-xs sm:text-base"
+                                    :href="`https://wa.me/${$page.props.web_settings.contact_whatsapp}`"
+                                    target="_blank">
+                                    <span class="flex items-center justify-center">
+                                        <i class="fa-brands fa-whatsapp pr-2"></i>
+                                        Whatsapp
+                                    </span>
+                                </a>
 
                                 <Link href=""
                                     class="p-2 bg-transparent ring-2 ring-white rounded-lg hover:bg-teal-600 text-xs sm:text-base">
@@ -345,8 +330,7 @@ const setting_carousel = {
                             </div>
                         </div>
                     </div>
-                    <div
-                        class="flex flex-wrap gap-2 justify-between bg-background-primary container mx-auto rounded-lg p-6">
+                    <div class="flex flex-wrap gap-2 justify-between bg-yellow-600 container mx-auto rounded-lg p-6">
                         <div>
                             <h5 class="text-2xl font-bold text-left pb-3 leading-relaxed">
                                 Browsur dan Rincian Biaya
@@ -361,8 +345,7 @@ const setting_carousel = {
                             <div
                                 class="flex flex-row gap-3 items-center sm:flex-row sm:gap-5 sm:justify-end sm:items-center">
                                 <button type="button" @click="download('brosur.jpg')"
-                                    class="p-2 bg-transparent ring-2 ring-white rounded-lg hover:bg-teal-600 text-xs sm:text-base"
-                                    href="https://wa.me/628112503131">
+                                    class="p-2 bg-transparent ring-2 ring-white rounded-lg hover:bg-teal-600 text-xs sm:text-base">
                                     <span class="flex items-center justify-center">
                                         <i class="fa-solid fa-image pr-2"></i>
                                         Brosur

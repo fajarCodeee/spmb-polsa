@@ -49,6 +49,8 @@ class WebSettingsRequest extends FormRequest
             'contact_twitter' => ['nullable', 'string'],
             'contact_youtube' => ['nullable', 'string'],
             'link_univ' => ['nullable', 'string'],
+            'path_brosur' => ['nullable', 'image', 'extensions:jpeg,png,jpg,gif,svg', 'max:5000'],
+            'path_rincian_harga' => ['nullable', 'image', 'extensions:jpeg,png,jpg,gif,svg', 'max:5000'],
         ];
     }
 }

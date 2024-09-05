@@ -6,11 +6,12 @@
 
 
 - **📝Typo**
-	- [ ] Ganti nama kolom `nilai dibawah` menjadi `nilai dibawah rata - rata ijazah`  
-	- [ ] Ganti field `nomer telepon` menjadi `Nomer Whatsapp Aktif` 
-	- [ ] Ganti pilihan jenis pembayaran `['Formulir', 'Registrasi']` menjadi `['Pendaftaran', 'Registrasi']` 
-	- [ ] Hapus tulisan `Pilihan Fakultas` di menu pembayaran *(admin)* 
-	- [ ] Hapus informasi sejarah dari Kampus
+	- [*] Ganti nama kolom `nilai dibawah` menjadi `nilai dibawah rata - rata ijazah`  
+	- [*] Ganti field `nomer telepon` menjadi `Nomer Whatsapp Aktif` 
+	- [*] Ganti pilihan jenis pembayaran `['Formulir', 'Registrasi']` menjadi `['Pendaftaran', 'Registrasi']
+
+	- [*] Hapus tulisan `Pilihan Fakultas` di menu pembayaran *(admin)* 
+	- [*] Hapus informasi sejarah dari Kampus
 	- [ ] *coming soon* 
 
 - **⚠Validasi**

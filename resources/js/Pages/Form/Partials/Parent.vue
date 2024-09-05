@@ -22,7 +22,7 @@ const form_data = usePage().props.form;
 const form = useForm({
     familyMembers: [
         {
-            role: "father",
+            role: "Ayah",
             name: form_data.father_name || "",
             birth_date: form_data.father_birth_date || "",
             place: form_data.father_place || "",
@@ -32,7 +32,7 @@ const form = useForm({
             email: form_data.father_email || "",
         },
         {
-            role: "mother",
+            role: "Ibu",
             name: form_data.mother_name || "",
             birth_date: form_data.mother_birth_date || "",
             place: form_data.mother_place || "",
@@ -42,7 +42,7 @@ const form = useForm({
             email: form_data.mother_email || "",
         },
         {
-            role: "guardian",
+            role: "Wali",
             name: form_data.guardian_name || "",
             birth_date: form_data.guardian_birth_date || "",
             place: form_data.guardian_place || "",

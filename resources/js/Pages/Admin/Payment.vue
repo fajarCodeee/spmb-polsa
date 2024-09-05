@@ -100,6 +100,9 @@ const save = () => {
                                         Nomor Rekening
                                     </th>
                                     <th scope="col" class="px-6 py-3">
+                                        Kode Pembayaran
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
                                         Jumlah
                                     </th>
                                     <th scope="col" class="px-6 py-3">
@@ -125,6 +128,9 @@ const save = () => {
                                     </td>
                                     <td class="px-6 py-4">
                                         {{ item.account_number }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ item.code }}
                                     </td>
                                     <td class="px-6 py-4">
                                         {{
@@ -198,16 +204,16 @@ const save = () => {
                                 class="w-full" />
                         </div>
 
-                        <Grid col="2" class="mt-4 mb-6">
+                        <Grid col="3" class="mt-4 mb-6">
                             <Display label="Pilihan Prodi" :value="dialogItem?.prodi.nama_prodi" />
-                            <Display label="Pilihan Fakultas" :value="dialogItem?.prodi.fakultas" />
-                            <Display label="Biaya Registrasi Prodi" :value="new Intl.NumberFormat('id-ID', {
+                            <Display label="Biaya Pendaftaran" :value="new Intl.NumberFormat('id-ID', {
                                 style: 'currency',
                                 currency: 'IDR',
                             }).format(
                                 dialogItem?.prodi.biaya_registrasi
                             )
                                 " />
+                            <Display label="Kode Pembayaran" :value="dialogItem.code" />
                         </Grid>
 
                         <div class="col-span-1">

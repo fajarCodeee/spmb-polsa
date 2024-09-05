@@ -133,6 +133,9 @@ const save = () => {
                                         <p class="text-xs text-gray-500 dark:text-gray-400">
                                             PNG, JPG (MAX. 800x400px)
                                         </p>
+                                        <p class="text-xs text-red-500 dark:text-gray-400">
+                                            Max Ukuran File: 512Kb
+                                        </p>
                                     </div>
                                     <div class="flex flex-col items-center justify-center pt-5 pb-6" v-else>
                                         <img :src="url" :alt="dialogItem" class="object-contain w-full h-full" />

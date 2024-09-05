@@ -117,7 +117,7 @@ const updateDisability = () => {
                 </div>
 
                 <div class="col-span-1">
-                    <InputLabel for="phone_number" value="Nomor Telepon" />
+                    <InputLabel for="phone_number" value="Nomer Whatsapp Aktif" />
 
                     <TextInput id="phone_number" class="mt-1 block w-full" type="text" v-model="form.phone_number"
                         placeholder="Cth: 08xxxxxxxx" />
@@ -126,7 +126,7 @@ const updateDisability = () => {
                 </div>
 
                 <div class="col-span-1">
-                    <InputLabel for="phone_number_alt" value="Nomor Telepon Alternatif" />
+                    <InputLabel for="phone_number_alt" value="Nomor Whatsapp Alternatif" />
 
                     <TextInput id="phone_number_alt" class="mt-1 block w-full" type="text"
                         v-model="form.phone_number_alt" placeholder="Cth: 08xxxxxxxx" />

@@ -257,7 +257,7 @@ const close = () => {
                                         placeholder="Pilih Jenis Pembayaran" :option-value="[
                                             {
                                                 value: 'form',
-                                                text: 'Formulir',
+                                                text: 'Pendaftaran',
                                             },
                                             {
                                                 value: 'registration',

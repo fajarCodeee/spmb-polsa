@@ -1,6 +1,8 @@
 <script setup>
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
+import SearchForm from "@/Components/SearchForm.vue";
+import FilterDropdown from "@/Components/FilterDropdown.vue";
 import Modal from "@/Components/Modal.vue";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, useForm, router } from "@inertiajs/vue3";
@@ -16,57 +18,36 @@ import {
     CategoryScale,
     LinearScale,
 } from "chart.js";
-import { ref } from "vue";
+import { computed, handleError, onMounted, ref } from "vue";
 
 Chart.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-defineProps({
+const props = defineProps({
     peserta: {
-        type: Object
+        type: Array
     },
     wave: {
         type: Object
     }
 });
 
-
 const form = useForm({
-    term: '',
-    tahun_akademik: '',
-    selectedYear: null
+    term: ''
 })
 
-const search = () => {
-    // console.log(form.term);
-    form.get(route("admin.daftar_peserta", { term: form.term }), {
-        preserveState: true,
-        preserveScroll: true,
-    })
+const searchFilter = ref('');
+
+const filterItems = computed(() => {
+    if(searchFilter.value !== '') {
+        return props.peserta.filter(peserta => peserta.name.includes(searchFilter.value) || peserta.get_form.national_id.includes(searchFilter.value));
+    }
+
+    return props.peserta;
+});
+
+const handleSearch = (search) => {
+    searchFilter.value = search;
 };
-
-
-const dialogExportPDF = ref(false)
-
-const closeModal = () => {
-    dialogExportPDF.value = false
-};
-
-const exportData = () => {
-    axios.get(`/admin/export-data?tahun_akademik=${form.selectedYear}`)
-        .then(response => {
-            // Handle respon jika berhasil
-            const link = document.createElement('a');
-            link.href = response.data.url;
-            link.download = response.data.filename;
-            link.click();
-        })
-        .catch(error => {
-            // Handle error jika gagal
-            console.error(error);
-        });
-}
-
-
 
 </script>
 
@@ -78,22 +59,18 @@ const exportData = () => {
             <div class="max-w-7xl mx-auto">
                 <div class="shadow-md sm:shadow-lg p-4 sm:p-8 bg-white">
                     <div
-                        class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-start gap-3 pb-4">
-                        <header>
+                        class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between gap-3 pb-4">
+                        <header class="flex flex-row items-center">
                             <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
                                 Daftar Peserta
                             </h2>
-
+                            <!-- search form -->
+                            <SearchForm @search="handleSearch"/>
+                            <!-- filter dropdown -->
                         </header>
 
-                        <div class="flex flex-columm inline-block  w-5/6 justify-between">
-                            <TextInput id="search" ref="nameInput" v-model="form.term" type="text" class="mt-1 block"
-                                placeholder="Search Here" @keyup="search" />
-                            <PrimaryButton @click="exportPDF" class="bg-red-500 hover:bg-red-600"><i
-                                    class="fas fa-download"></i> Export
-                            </PrimaryButton>
-                            <!-- <a class="text-red-500 font-bold" href="/admin/daftar-peserta-export">Export <i
-                                    class="fas fa-download"></i></a> -->
+                        <div class="flex flex-columm justify-between">
+                            <FilterDropdown :items="peserta"/>
                         </div>
 
                     </div>
@@ -145,7 +122,7 @@ const exportData = () => {
                             <!-- {{ }} -->
                             <tbody>
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-                                    v-for="peserta in peserta" :key="peserta.id">
+                                    v-for="peserta in filterItems" :key="peserta.id">
                                     <th scope="row"
                                         class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         {{ peserta.name }}

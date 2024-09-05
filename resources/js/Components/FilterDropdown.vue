@@ -12,7 +12,7 @@ const props = defineProps({
 });
 
 const tahun_akademik = computed(() => {
-    return [...new Set(props.items.map(peserta => peserta.get_form.wave.tahun_akademik))]
+    return [...new Set(props.items.map(peserta => peserta.get_form.wave.tahun_akademik))];
 });
 
 </script>

@@ -36,17 +36,37 @@ const form = useForm({
 })
 
 const searchFilter = ref('');
+const tahunAkademikFilter = ref([]);
 
 const filterItems = computed(() => {
-    if(searchFilter.value !== '') {
-        return props.peserta.filter(peserta => peserta.name.includes(searchFilter.value) || peserta.get_form.national_id.includes(searchFilter.value));
+
+    let peserta = props.peserta;
+
+    if(tahunAkademikFilter.value.length) {
+        peserta = peserta.filter(peserta => tahunAkademikFilter.value.includes(peserta.get_form.wave.tahun_akademik));
+        console.log(peserta);
+
     }
 
-    return props.peserta;
+    if (searchFilter.value !== '') {
+        peserta = peserta.filter(peserta => peserta.name.includes(searchFilter.value) || peserta.get_form.national_id.includes(searchFilter.value));
+    }
+
+    return peserta;
 });
 
 const handleSearch = (search) => {
     searchFilter.value = search;
+};
+
+const handleCheckbox = (filter) => {
+    console.log(tahunAkademikFilter);
+
+    if (tahunAkademikFilter.value.includes(filter)) {
+        return tahunAkademikFilter.value.splice(tahunAkademikFilter.value.indexOf(filter), 1);
+    }
+
+    return tahunAkademikFilter.value.push(filter);
 };
 
 </script>
@@ -65,12 +85,12 @@ const handleSearch = (search) => {
                                 Daftar Peserta
                             </h2>
                             <!-- search form -->
-                            <SearchForm @search="handleSearch"/>
+                            <SearchForm @search="handleSearch" />
                             <!-- filter dropdown -->
                         </header>
 
                         <div class="flex flex-columm justify-between">
-                            <FilterDropdown :items="peserta"/>
+                            <FilterDropdown :items="peserta" @filter="handleCheckbox" />
                         </div>
 
                     </div>

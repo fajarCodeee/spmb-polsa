@@ -22,7 +22,7 @@ const form_data = usePage().props.form;
 const form = useForm({
     familyMembers: [
         {
-            role: "Ayah",
+            role: "father",
             name: form_data.father_name || "",
             birth_date: form_data.father_birth_date || "",
             place: form_data.father_place || "",
@@ -32,7 +32,7 @@ const form = useForm({
             email: form_data.father_email || "",
         },
         {
-            role: "Ibu",
+            role: "mother",
             name: form_data.mother_name || "",
             birth_date: form_data.mother_birth_date || "",
             place: form_data.mother_place || "",
@@ -42,7 +42,7 @@ const form = useForm({
             email: form_data.mother_email || "",
         },
         {
-            role: "Wali",
+            role: "guardian",
             name: form_data.guardian_name || "",
             birth_date: form_data.guardian_birth_date || "",
             place: form_data.guardian_place || "",
@@ -124,8 +124,10 @@ const capitalize = (string) => {
             <div v-for="member in form.familyMembers" :key="member.role">
                 <h3 class="text-black dark:text-white font-bold text-1xl">
                     {{
-                        member.role.charAt(0).toUpperCase() +
-                        member.role.slice(1)
+                        // member.role.charAt(0).toUpperCase() +
+                        // member.role.slice(1)
+
+                        member.role === 'father' ? 'Ayah' : member.role === 'mother' ? 'Ibu' : member.role === 'guardian' ? 'Wali' : ''
                     }}
                 </h3>
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-4">

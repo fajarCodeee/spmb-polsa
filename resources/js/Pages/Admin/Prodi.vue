@@ -261,7 +261,7 @@ const closeModal = () => {
                         </div>
 
                         <div v-if="form.tes_ujian == 'true'">
-                            <InputLabel for="nilai_dibawah" value="Nilai Dibawah" />
+                            <InputLabel for="nilai_dibawah" value="nilai dibawah rata - rata ijazah" class="capitalize"/>
                             <NumberInput id="nilai_dibawah" ref="nilai_dibawahInput" v-model="form.nilai_dibawah"
                                 class="mt-1 block w-full" placeholder="Nilai Dibawah" />
                             <InputError :message="form.errors.nilai_dibawah" class="mt-2" />

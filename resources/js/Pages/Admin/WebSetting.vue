@@ -170,13 +170,6 @@ const formbackup = useForm({});
                                         <InputError class="mt-2" :message="form.errors.institution_vision_mission" />
                                     </div>
                                     <div class="col-span-1">
-                                        <InputLabel for="institution_history" value="Sejarah" />
-                                        <TextareaInput id="institution_history" class="mt-1 block w-full"
-                                            v-model="form.institution_history" />
-                                        <InputError class="mt-2" :message="form.errors.institution_history" />
-                                    </div>
-
-                                    <div class="col-span-1">
                                         <InputLabel for="contact_facebook" value="Kontak Facebook" />
                                         <TextInput id="contact_facebook" class="mt-1 block w-full"
                                             v-model="form.contact_facebook" />

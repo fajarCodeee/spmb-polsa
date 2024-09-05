@@ -176,24 +176,16 @@ const setting_carousel = {
                             }}</span>
                     </span>
                 </h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div class="grid grid-cols-1 md:grid-cols-1 gap-5">
                     <div>
                         <h3 class="text-xl font-bold pb-3 text-center">
                             Visi dan Misi
                         </h3>
-                        <p class="text-justify text-sm md:text-base font-normal indent-8 text-pretty">
+                        <p class="text-sm md:text-base font-normal indent-8 text-pretty text-center">
                             {{
                                 $page.props.web_settings
                                     .institution_vision_mission
                             }}
-                        </p>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-bold pb-3 text-center">
-                            Sejarah
-                        </h3>
-                        <p class="text-justify text-sm md:text-base font-normal indent-8 text-pretty">
-                            {{ $page.props.web_settings.institution_history }}
                         </p>
                     </div>
                 </div>

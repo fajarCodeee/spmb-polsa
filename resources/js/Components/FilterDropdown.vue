@@ -1,6 +1,8 @@
 <script setup>
+import { useForm } from '@inertiajs/vue3';
 import { computed, ref } from 'vue';
 
+const emit = defineEmits(['filter']);
 
 const show = ref(false);
 
@@ -15,6 +17,13 @@ const tahun_akademik = computed(() => {
     return [...new Set(props.items.map(peserta => peserta.get_form.wave.tahun_akademik))];
 });
 
+const filter = (e) => {
+    emit('filter', e.target.value);
+    console.log(e.target.value);
+};
+
+const selected = ref([]);
+
 </script>
 
 <template>
@@ -28,7 +37,7 @@ const tahun_akademik = computed(() => {
             <!-- <hr class="mb-3"> -->
             <ul class="space-y-2 text-sm">
                 <li v-for="(tahun_akademik, index) in tahun_akademik">
-                    <input type="checkbox" :id="`filter_options_${index}`" :value="tahun_akademik" class="w-4 h-4 bg-gray-50 rounded-sm"/>
+                    <input type="checkbox" :id="`filter_options_${index}`" @change="filter" v-model="selected" :value="tahun_akademik" class="w-4 h-4 bg-gray-50 rounded-sm"/>
                     <label :for="`filter_options_${index}`" class="ml-2 text-sm font-medium text-gray-900">{{ tahun_akademik }}</label>
                 </li>
             </ul>

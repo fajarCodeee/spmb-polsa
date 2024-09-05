@@ -6,6 +6,7 @@ import TextInput from "@/Components/TextInput.vue";
 import Combobox from "@/Components/Combobox.vue";
 import DateInput from "@/Components/DateInput.vue";
 import { Link, useForm, usePage } from "@inertiajs/vue3";
+import { onMounted } from "vue";
 
 defineProps({
     mustVerifyEmail: {
@@ -14,6 +15,10 @@ defineProps({
     status: {
         type: String,
     },
+});
+
+onMounted(() => {
+    console.log(form);
 });
 
 const user = usePage().props.auth.user;

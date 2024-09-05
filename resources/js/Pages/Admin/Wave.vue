@@ -185,13 +185,13 @@ const close = () => {
                                         {{ item.akhir_daftar }}
                                     </td>
                                     <td class="px-6 py-4 truncate">
-                                        {{ item.tes_tulis }}
+                                        {{ item.tes_tulis ?? '-' }}
                                     </td>
                                     <td class="px-6 py-4 truncate">
-                                        {{ item.tes_kesehatan }}
+                                        {{ item.tes_kesehatan ?? '-' }}
                                     </td>
                                     <td class="px-6 py-4 truncate">
-                                        {{ item.wawancara }}
+                                        {{ item.wawancara ?? '-' }}
                                     </td>
                                     <td class="px-6 py-4">
                                         <i
@@ -322,7 +322,7 @@ const close = () => {
                             />
                         </div>
 
-                        <div>
+                        <!-- <div>
                             <InputLabel for="tes_tulis" value="Tes Tulis" />
                             <DateInput
                                 id="tes_tulis"
@@ -366,7 +366,7 @@ const close = () => {
                                 :message="form.errors.wawancara"
                                 class="mt-2"
                             />
-                        </div>
+                        </div> -->
 
                         <div>
                             <InputLabel for="active" value="Active" />

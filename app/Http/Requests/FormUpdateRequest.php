@@ -96,7 +96,6 @@ class FormUpdateRequest extends FormRequest
         return [
             'min' => 'Nilai :attribute minimal :min',
             'max' => 'Nilai :attribute maksimal :max',
-            'required'=>':attribute wajib diisi '
         ];
     }
 

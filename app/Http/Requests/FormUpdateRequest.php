@@ -29,7 +29,7 @@ class FormUpdateRequest extends FormRequest
             'birth_place_city' => ['string', 'max:255', 'nullable'],
             'birth_place_province' => ['string', 'max:255', 'nullable'],
             'birth_place_country' => ['string', 'max:255', 'nullable'],
-            'national_id' => ['string', 'nullable','max:16'],
+            'national_id' => ['string', 'nullable'],
             'is_color_blind' => ['boolean', 'nullable',],
             'is_disability' => ['boolean', 'nullable'],
             'disability_note' => ['string', 'max:255', 'nullable'],
@@ -39,8 +39,8 @@ class FormUpdateRequest extends FormRequest
             'subdistrict' => ['string', 'max:255', 'nullable'],
             'country' => ['string', 'max:255', 'nullable'],
             'postal_code' => ['integer', 'nullable'],
-            'rt' => ['required', 'min:3','max:3'],
-            'rw' => ['required', 'min:3','max:3'],
+            'rt' => ['string', 'nullable'],
+            'rw' => ['string', 'nullable'],
             'phone_number' => ['string', 'max:255', 'nullable'],
             'phone_number_alt' => ['string', 'max:255', 'nullable'],
             'last_education' => ['string', 'max:255', 'nullable'],
@@ -96,7 +96,6 @@ class FormUpdateRequest extends FormRequest
         return [
             'min' => 'Nilai :attribute minimal :min',
             'max' => 'Nilai :attribute maksimal :max',
-            'required'=>':attribute wajib diisi '
         ];
     }
 

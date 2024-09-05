@@ -58,6 +58,8 @@ class FormController extends Controller
             return Redirect::back();
         }
 
+        // dd($request->validated());
+
         $user->getForm()->update($request->validated());
         session()->flash('alert', [
             'type' => 'success',

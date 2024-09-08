@@ -206,6 +206,17 @@ const save = () => {
 
                         <Grid col="3" class="mt-4 mb-6">
                             <Display label="Pilihan Prodi" :value="dialogItem?.prodi.nama_prodi" />
+
+                            <!-- perbaiki tampilan rincian biaya.
+                             cek terlebih dahulu jika type_payment == "registration" tampilkan rincian biaya registrasi(bukan biaya pendaftaran)
+                             apabila type_payment == "form" maka tampilkan rincian biaya pendaftaran
+
+                             *nb: rincian biaya registrasi akan dikirim via WhatsApp peserta,
+                             maka ambil data harga yang dikirim oleh peserta untuk detail rincian biaya tersebut..
+
+                             coba lihat diconsole mungkin akan ada petunjuk 😁
+                             -->
+
                             <Display label="Biaya Pendaftaran" :value="new Intl.NumberFormat('id-ID', {
                                 style: 'currency',
                                 currency: 'IDR',

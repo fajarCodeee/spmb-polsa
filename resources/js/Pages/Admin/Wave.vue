@@ -139,7 +139,7 @@ const close = () => {
                                         Akhir Pendaftaran
                                     </th>
 
-                                    <th scope="col" class="px-6 py-3">
+                                    <!-- <th scope="col" class="px-6 py-3">
                                         Tes Tulis
                                     </th>
 
@@ -149,10 +149,10 @@ const close = () => {
 
                                     <th scope="col" class="px-6 py-3">
                                         Wawancara
-                                    </th>
+                                    </th> -->
 
                                     <th scope="col" class="px-6 py-3">
-                                        Active
+                                        Is_Active
                                     </th>
 
                                     <th scope="col" class="px-6 py-3">
@@ -184,7 +184,7 @@ const close = () => {
                                     <td class="px-6 py-4">
                                         {{ item.akhir_daftar }}
                                     </td>
-                                    <td class="px-6 py-4 truncate">
+                                    <!-- <td class="px-6 py-4 truncate">
                                         {{ item.tes_tulis ?? '-' }}
                                     </td>
                                     <td class="px-6 py-4 truncate">
@@ -192,7 +192,7 @@ const close = () => {
                                     </td>
                                     <td class="px-6 py-4 truncate">
                                         {{ item.wawancara ?? '-' }}
-                                    </td>
+                                    </td> -->
                                     <td class="px-6 py-4">
                                         <i
                                             v-if="item.active"

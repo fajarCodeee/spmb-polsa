@@ -67,9 +67,9 @@ defineProps({
                         Gelombang :
                         <span>{{ form.wave.code }}</span>
                     </div>
-                    <div>
+                    <!-- <div>
                         <PrimaryButton> Cetak Kartu Ujian </PrimaryButton>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </Card>

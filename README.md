@@ -5,6 +5,10 @@
 2. Memudahkan CS/Akademik untuk memanipulasi data peserta pendaftaran.
 
 
+- **[NEW] Fix the feature!**
+  - [ ] Lakukan perubahan pada saat melakukan pengecekan pembayaran.. rincian masalah dijelaskan pada file FE Admin/Payment line 210. good luck😂
+
+
 - **📝Typo**
 	- [x] Ganti nama kolom `nilai dibawah` menjadi `nilai dibawah rata - rata ijazah`  
 	- [x] Ganti field `nomer telepon` menjadi `Nomer Whatsapp Aktif` 
@@ -15,7 +19,7 @@
 	- [ ] *coming soon* 
 
 - **⚠Validasi**
-	- [ ] Validasi input NIK 16 Digits
+	- [x] Validasi input NIK 16 Digits
 	- [ ] *coming soon*
 
 - **👾Bugs & Errors**
@@ -23,7 +27,7 @@
 	- Pada tampilan pembayaran tidak muncul identitas dari peserta yang melakukan pembayaran `Kode Pembayaran!` 
 	
 - **🛠Fitur yang perlu direvisi**
-	- Fitur export data peserta yang telah melakukan pembayaran biaya pendaftaran
+	- Fitur export data peserta yang telah melakukan pembayaran biaya pendaftaran [_in progress_]
 	- Tambah menu untuk **laporan** data peserta yang telah berhasil melakukan pembayaran registrasi dengan filter berdasarkan gelombang, prodi, dan tahun akademik
 	- Fitur untuk mengedit informasi brosur dan rincian harga
 	- Realtime Notifikasi *jika memungkinkan*

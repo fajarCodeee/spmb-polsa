@@ -5,6 +5,10 @@
 2. Memudahkan CS/Akademik untuk memanipulasi data peserta pendaftaran.
 
 
+- **[NEW] Fix the feature!**
+  - [ ] Lakukan perubahan pada saat melakukan pengecekan pembayaran.. rincian masalah dijelaskan pada file FE Admin/Payment line 210. good luck😂
+
+
 - **📝Typo**
 	- [x] Ganti nama kolom `nilai dibawah` menjadi `nilai dibawah rata - rata ijazah`  
 	- [x] Ganti field `nomer telepon` menjadi `Nomer Whatsapp Aktif` 

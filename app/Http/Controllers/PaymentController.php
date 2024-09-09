@@ -32,6 +32,9 @@ class PaymentController extends Controller
 
     public function store(PaymentRequest $request): RedirectResponse
     {
+
+        // dd($request);
+
         $request->validated();
         $payment = User::find(auth()->user()->id)->payments()->create(
             [

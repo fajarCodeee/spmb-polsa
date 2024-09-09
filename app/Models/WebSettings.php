@@ -17,7 +17,7 @@ class WebSettings extends Model implements HasMedia
 
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('path_brosur')->singleFile();
-        $this->addMediaCollection('path_rincian_harga')->singleFile();
+        $this->addMediaCollection('brosur')->singleFile();
+        $this->addMediaCollection('rincian_biaya')->singleFile();
     }
 }

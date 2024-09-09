@@ -27,6 +27,9 @@ use App\Http\Controllers\Admin\DaftarPesertaContoller;
 use App\Http\Controllers\Admin\VerificationController;
 use App\Http\Controllers\Admin\AdminInterviewController;
 use App\Http\Controllers\Admin\HealthVerificationController;
+use App\Http\Controllers\Admin\Media;
+use App\Http\Controllers\Admin\MediaController;
+use App\Models\WebSettings;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +46,8 @@ Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
+        'brosur' => WebSettings::first()->getFirstMediaUrl('brosur'),
+        'rincian_biaya' => WebSettings::first()->getFirstMediaUrl('rincian_biaya')
     ]);
 })->name('welcome');
 
@@ -120,6 +125,9 @@ Route::middleware(['auth', 'verified', "role:admin,panitia,keuangan"])->prefix('
             $filteredData = $request->input('filteredData');  // Data hasil filter dari frontend
             return Excel::download(new PesertaExport($filteredData), now().'_DATA_PESERTA[NON REGISTRASI].xlsx');
         })->name('export-peserta');
+
+        Route::get('/media', [MediaController::class, 'index'])->name('media');
+        Route::post('/media', [MediaController::class, 'update'])->name('media.update');
 
         Route::get('/program-studi', [ProdiController::class, 'index'])->name('prodi');
         Route::post('/program-studi', [ProdiController::class, 'store'])->name('prodi.store');

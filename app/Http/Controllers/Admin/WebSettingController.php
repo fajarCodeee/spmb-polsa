@@ -25,11 +25,11 @@ class WebSettingController extends Controller
 
     public function update(WebSettingsRequest $request): RedirectResponse
     {
+
+
         $webSettings = WebSettings::first();
 
         $validateData = $request->validated();
-
-        dd($validateData);
 
         $updateData = [
             'name' => $validateData->name,

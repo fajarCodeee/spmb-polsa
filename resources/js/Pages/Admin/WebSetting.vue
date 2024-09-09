@@ -2,7 +2,7 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import Modal from "@/Components/Modal.vue";
 import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
-import { nextTick, ref } from "vue";
+import { nextTick, onMounted, ref } from "vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
@@ -39,12 +39,11 @@ defineProps({
             contact_instagram: "",
             contact_twitter: "",
             contact_youtube: "",
-            link_univ: "",
-            path_brosur: "",
-            path_rincian_biaya: "",
+            link_univ: ""
         }),
     },
 });
+
 const websetting = usePage().props.webSettings;
 const form = useForm({
     name: websetting.name || "",
@@ -235,20 +234,6 @@ const formbackup = useForm({});
                                             v-model="form.payment_name" placeholder="Nama Lengkap Pemiliki Bank" />
                                         <InputError class="mt-2" :message="form.errors.payment_name" />
                                     </div>
-
-                                    <!-- <div class="col-span-1">
-                                        <InputLabel for="path_brosur" value="Brosur Pendaftaran" />
-                                        <FileInput id="path_brosur" class="mt-1 block w-full border p-1"
-                                            v-model="form.path_brosur" placeholder="Brosur Pendaftaran" />
-                                        <InputError class="mt-2" :message="form.errors.path_brosur" />
-                                    </div>
-
-                                    <div class="col-span-1">
-                                        <InputLabel for="path_rincian_biaya" value="Rincian Biaya" />
-                                        <FileInput id="path_rincian_biaya" class="mt-1 block w-full border p-1"
-                                            v-model="form.path_rincian_biaya" placeholder="Rincian Biaya" />
-                                        <InputError class="mt-2" :message="form.errors.path_rincian_biaya" />
-                                    </div> -->
 
                                 </div>
                                 <div class="flex justify-end gap-4">

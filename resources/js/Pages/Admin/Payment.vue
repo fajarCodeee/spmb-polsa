@@ -214,7 +214,7 @@ const save = () => {
                              *nb: rincian biaya registrasi akan dikirim via WhatsApp peserta,
                              maka ambil data harga yang dikirim oleh peserta untuk detail rincian biaya tersebut..
 
-                             coba lihat diconsole mungkin akan ada petunjuk 😁
+                             coba lihat di console mungkin akan ada petunjuk 😁
                              -->
 
                             <Display label="Biaya Pendaftaran" :value="new Intl.NumberFormat('id-ID', {

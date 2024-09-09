@@ -29,7 +29,7 @@
 - **🛠Fitur yang perlu direvisi**
 	- Fitur export data peserta yang telah melakukan pembayaran biaya pendaftaran [_in progress_]
 	- Tambah menu untuk **laporan** data peserta yang telah berhasil melakukan pembayaran registrasi dengan filter berdasarkan gelombang, prodi, dan tahun akademik
-	- Fitur untuk mengedit informasi brosur dan rincian harga
+	- [x] Fitur untuk mengedit informasi brosur dan rincian harga
 	- Realtime Notifikasi *jika memungkinkan*
 	
 - **💎Fitur yang ditekankan pada sistem**

@@ -16,7 +16,7 @@ import ResponsiveSideBar from "@/Components/ResponsiveSideBar.vue";
             </li>
             <li>
                 <ResponsiveSideBar :href="route('admin.media')" :active="route().current('admin.media')"
-                    icon="fa-solid fa-cog">
+                    icon="fas fa-images">
                     Media
                 </ResponsiveSideBar>
             </li>

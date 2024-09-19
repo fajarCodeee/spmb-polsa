@@ -119,11 +119,12 @@ Route::middleware(['auth', 'verified', "role:admin,panitia,keuangan"])->prefix('
     Route::middleware(['role:admin,panitia'])->group(function () {
 
         Route::get('/daftar-peserta', [DaftarPesertaContoller::class, 'index'])->name('daftar_peserta');
+        Route::get('/data-mahasiswa', [DaftarPesertaContoller::class, 'laporanAll'])->name('data_mahasiswa');
         // Route::get('/export-data', [DaftarPesertaContoller::class, 'export'])->name('daftar_peserta.export');
 
         Route::post('/export-peserta', function (Request $request) {
             $filteredData = $request->input('filteredData');  // Data hasil filter dari frontend
-            return Excel::download(new PesertaExport($filteredData), now().'_DATA_PESERTA[NON REGISTRASI].xlsx');
+            return Excel::download(new PesertaExport($filteredData), now() . '_DATA_PESERTA[NON REGISTRASI].xlsx');
         })->name('export-peserta');
 
         Route::get('/media', [MediaController::class, 'index'])->name('media');

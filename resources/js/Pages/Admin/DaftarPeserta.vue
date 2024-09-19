@@ -26,6 +26,12 @@ const props = defineProps({
     }
 });
 
+onMounted(() => {
+    console.log(props.peserta);
+
+});
+
+
 const searchFilter = ref('');
 const tahunAkademikFilter = ref([]);
 const gelombangFilter = ref([]);
@@ -79,7 +85,8 @@ const exportData = () => {
     //     JSON.parse(JSON.stringify(filterItems.value)));
 
     axios.post('/admin/export-peserta', {
-        filteredData: JSON.parse(JSON.stringify(filterItems.value))  // Mengirim data yang sudah difilter
+        filteredData: JSON.parse(JSON.stringify(filterItems.value)),
+        nim: 'test NIM'
     }, {
         responseType: 'blob' // Pastikan menerima response sebagai file Blob
     })
@@ -180,7 +187,7 @@ const exportData = () => {
                                 </tr>
                             </thead>
                             <!-- {{ }} -->
-                            <tbody>
+                            <tbody class="uppercase">
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
                                     v-for="peserta in filterItems" :key="peserta.id">
                                     <th scope="row"
@@ -217,7 +224,7 @@ const exportData = () => {
                                         {{ peserta.get_form.mother_name ?? '(Belum Dilengkapi)' }}
                                     </th>
                                     <th scope="row"
-                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white lowercase">
                                         {{ peserta.email }}
                                     </th>
 

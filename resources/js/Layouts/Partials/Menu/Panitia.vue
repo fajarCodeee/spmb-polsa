@@ -16,6 +16,13 @@ import ResponsiveSideBar from "@/Components/ResponsiveSideBar.vue";
             </li>
 
             <li>
+                <ResponsiveSideBar :href="route('admin.data_mahasiswa')"
+                    :active="route().current('admin.data_mahasiswa')" icon="fas fa-file-alt">
+                    Laporan Mahasiswa
+                </ResponsiveSideBar>
+            </li>
+
+            <li>
                 <ResponsiveSideBar :href="route('admin.prodi')" :active="route().current('admin.prodi')"
                     icon="fa-solid fa-university">
                     Prodi

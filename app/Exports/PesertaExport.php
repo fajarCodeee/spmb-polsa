@@ -62,7 +62,7 @@ class PesertaExport implements FromCollection, WithHeadings
             }
 
             return [
-                '000000000',
+                $item['get_form']['nim'] ?? '',
                 $item['name'],
                 $item['get_form']['birth_place_city'],
                 $item['get_form']['birth_date'],

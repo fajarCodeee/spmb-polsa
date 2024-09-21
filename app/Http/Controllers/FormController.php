@@ -145,6 +145,9 @@ class FormController extends Controller
 
         $user = auth()->user();
         $form = $user->getForm;
+        $web_setting = WebSettings::first();
+
+        $prodi = $form->prodi->nama_prodi;
 
         if (!$form) {
             session()->flash('alert', [
@@ -187,6 +190,12 @@ class FormController extends Controller
             'status' => 'submitted',
             'is_lock' => true
         ]);
+
+        // send notif to admin
+        $no_target = $web_setting->contact_whatsapp;
+        $message = "*[FORMULIR]Menunggu Konfimasi!*, peserta penerimaan mahasiswa baru untuk mengkonfirmasi formulir pendaftaran:\n Nama: $user->name\n NIK: $form->national_id\n Alamat: $form->address\nProdi Pilihan $prodi";
+
+        $this->whatsappNotification($no_target, $message);
 
         session()->flash('alert', [
             'type' => 'success',

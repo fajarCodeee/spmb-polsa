@@ -10,10 +10,15 @@ use Inertia\Inertia;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\PaymentRequest;
+use App\Models\WebSettings;
 use App\Notifications\Candidate;
+use App\Traits\WhatsappNotificationTrait;
+use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
 {
+
+    use WhatsappNotificationTrait;
 
     public function index(Request $request): Response
     {
@@ -33,9 +38,8 @@ class PaymentController extends Controller
     public function store(PaymentRequest $request): RedirectResponse
     {
 
-        // dd($request);
-
         $request->validated();
+        $web_setting = WebSettings::first();
         $payment = User::find(auth()->user()->id)->payments()->create(
             [
                 'bank' => $request->bank,
@@ -54,10 +58,19 @@ class PaymentController extends Controller
             // mengapa gagal mengupload
         }
 
+        $format_date = date('d/m/Y', strtotime($payment->date));
+
+        $no_target = $web_setting->contact_whatsapp;
+        $message = "*[Pembayaran]Menunggu Konfimasi!*, pembayaran peserta penerimaan mahasiswa baru untuk data sebagai berikut:\n*Kode Pembayaran:* $payment->code\n*Atas nama:* $payment->account_name\n*Tanggal:* $format_date";
+
+        $this->whatsappNotification($no_target, $message);
+
         session()->flash('alert', [
             'type' => 'success',
             'message' => 'Pembayaran berhasil diupload'
         ]);
+
+
 
         return Redirect::back();
     }
@@ -65,7 +78,7 @@ class PaymentController extends Controller
     public function userDestroy(string $id): RedirectResponse
     {
         // $payment = Payment::find($id);
-        $userPayment = auth()->user()->id->payments()->where('id', $id)->first();
+        $userPayment = Auth::user()->payments()->where('id', $id)->first();
         if ($userPayment && $userPayment->status !== 'approved') {
             $userPayment->delete();
             session()->flash('alert', [

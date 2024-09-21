@@ -12,11 +12,15 @@ use App\Notifications\Candidate;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PaymentRequest;
+use App\Traits\WhatsappNotificationTrait;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
 
 class AdminPaymentController extends Controller
 {
+
+    use WhatsappNotificationTrait;
+
     public function index(): Response
     {
         $payment = Payment::with('user', 'media')->orderBy('created_at', 'desc')->paginate(10)->through(function ($item) {
@@ -54,6 +58,12 @@ class AdminPaymentController extends Controller
         $form = $user->getForm;
         if ($request->status === 'approved' && $payment->type_payment == 'form') {
             $form->is_paid_registration = $payment->created_at;
+
+            $no_target = $form->phone_number;
+            $message = "*Selamat!*, pembayaran pendaftaran Anda telah diterima. Silahkan lengkapi data diri Anda untuk melanjutkan proses pendaftaran.\n\n~PMB Politeknik Sawunggalih Aji";
+
+            $this->whatsappNotification($no_target, $message);
+
             $user->notify(
                 new Candidate(
                     'Pembayaran',
@@ -116,6 +126,12 @@ class AdminPaymentController extends Controller
                 $form->save();
 
                 // Kirim notifikasi ke user
+
+                $no_target = $form->phone_number;
+                $message = "*Selamat!*, pembayaran Anda telah diterima. Anda telah berhasil mendaftar sebagai mahasiswa Politeknik Sawunggalih Aji\n\n~PMB Politeknik Sawunggalih Aji";
+
+                $this->whatsappNotification($no_target, $message);
+
                 $user->notify(
                     new Candidate(
                         'Pembayaran',
@@ -134,6 +150,12 @@ class AdminPaymentController extends Controller
             }
         } else {
             if ($request->status === 'rejected' && ($payment->type_payment == 'form' || $payment->type_payment == 'registration')) {
+
+                $no_target = $form->phone_number;
+                $message = "Maaf, pembayaran Anda ditolak. Silahkan upload ulang bukti pembayaran!\n\n~PMB Politeknik Sawunggalih Aji";
+
+                $this->whatsappNotification($no_target, $message);
+
                 $user->notify(
                     new Candidate(
                         'Pembayaran',

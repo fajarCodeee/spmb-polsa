@@ -9,9 +9,14 @@ use Inertia\Response;
 use Illuminate\Http\RedirectResponse;
 use App\Models\Exams;
 use App\Models\ExamHistory;
+use App\Models\WebSettings;
+use App\Traits\WhatsappNotificationTrait;
 
 class KnowledgeController extends Controller
 {
+
+    use WhatsappNotificationTrait;
+
     public function index(): Response|RedirectResponse
     {
         $user = auth()->user();
@@ -39,8 +44,7 @@ class KnowledgeController extends Controller
                     'score' => $item['show_result'] ? $history?->score : null,
                 ];
             });
-        }
-        ;
+        };
 
         return Inertia::render('Exams/Knowledge/Index', [
             'ujian' => $ujian,
@@ -154,6 +158,7 @@ class KnowledgeController extends Controller
 
             if ($userHistory && $userHistory?->finished_at && now() > $userHistory?->finished_at)
                 throw new \Exception('Anda sudah pernah mengerjakan ujian ini');
+
             $request->validate([
                 'answers' => 'required|array',
                 'finish' => 'required|boolean',
@@ -175,9 +180,8 @@ class KnowledgeController extends Controller
                     }
                 }
                 $score = $poin / $exam->questions->count() * 100;
-            }
+            };
 
-            ;
             $userHistory->update([
                 'answers' => $answer,
                 'is_submitted' => $finish,
@@ -185,6 +189,16 @@ class KnowledgeController extends Controller
                 'is_active' => !$finish,
                 'score' => $score,
             ]);
+
+            $web_setting = WebSettings::first();
+            $form = $user->getForm;
+            $prodi = $form->prodi->nama_prodi;
+
+            // send notif to admin
+            $no_target = $web_setting->contact_whatsapp;
+            $message = "*[UJIAN]Menunggu Konfimasi!*, peserta penerimaan mahasiswa baru untuk mengkonfirmasi ujian seleksi:\n Nama: $user->name\n NIK: $form->national_id\n Alamat: $form->address\nProdi Pilihan $prodi";
+
+            $this->whatsappNotification($no_target, $message);
 
             if (!$finish)
                 return;

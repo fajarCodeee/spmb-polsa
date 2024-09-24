@@ -7,7 +7,6 @@ use Inertia\Inertia;
 use Inertia\Response;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Models\User;
 use App\Models\Prodi;
 use App\Models\Wave;
 use App\Models\Health;
@@ -17,9 +16,13 @@ use Illuminate\Support\Facades\Redirect;
 use App\Helper\MyPdf;
 use App\Models\Kelas;
 use App\Models\WebSettings;
+use App\Traits\WhatsappNotificationTrait;
 
 class FormController extends Controller
 {
+
+    use WhatsappNotificationTrait;
+
     public function edit(Request $request, string $id): Response|RedirectResponse
     {
         if (!(!$id || $id == "personal" || $id == 'address' || $id == 'disability' || $id == 'education' || $id == 'parent')) {
@@ -58,6 +61,8 @@ class FormController extends Controller
             return Redirect::back();
         }
 
+        // dd($request->validated());
+
         $user->getForm()->update($request->validated());
         session()->flash('alert', [
             'type' => 'success',
@@ -85,13 +90,15 @@ class FormController extends Controller
                 'code' => $form->code_registration ?? null,
                 'is_lock' => $form->is_lock ?? false,
                 'is_submitted' => $form->is_submitted ?? false,
-                'amount' => $form?->prodi->biaya_registrasi ?? 0,
+                'amount' => $form?->prodi->biaya_pendaftaran ?? 0,
                 'foto' => $form?->getFirstMedia('foto')?->getUrl() ?? null,
                 'no_exam' => $form->no_exam ?? null,
                 'note' => $form->note ?? null,
                 'reason_rejected' => $form->reason_rejected ?? null,
+                'biaya_registrasi' => $form->prodi->biaya_registrasi ?? 0,
             ],
             'percent' => $user->getProgress() ?? null,
+
         ]);
     }
 
@@ -132,7 +139,7 @@ class FormController extends Controller
             'wave_id' => $request->wave,
             'option_id' => $request->option,
             'kelas_id' => $request->kelas,
-            'code_registration' => rand(1000, 9999),
+            'code_registration' => rand(100000, 999999),
         ]);
 
         return Redirect::route('form.submission');
@@ -143,6 +150,9 @@ class FormController extends Controller
 
         $user = auth()->user();
         $form = $user->getForm;
+        $web_setting = WebSettings::first();
+
+        $prodi = $form->prodi->nama_prodi;
 
         if (!$form) {
             session()->flash('alert', [
@@ -185,6 +195,12 @@ class FormController extends Controller
             'status' => 'submitted',
             'is_lock' => true
         ]);
+
+        // send notif to admin
+        $no_target = $web_setting->contact_whatsapp;
+        $message = "*[FORMULIR]Menunggu Konfimasi!*\nPeserta penerimaan mahasiswa baru untuk mengkonfirmasi formulir pendaftaran:\n Nama: $user->name\n NIK: $form->national_id\n Alamat: $form->address\nProdi Pilihan $prodi";
+
+        $this->whatsappNotification($no_target, $message);
 
         session()->flash('alert', [
             'type' => 'success',
@@ -230,6 +246,10 @@ class FormController extends Controller
                     throw new \Exception('Anda tidak lulus wawancara');
             }
 
+            $no_target = $user->phone;
+            $message = "*Menunggu Persetujuan!*\nPeserta atas nama *$user->name* telah mencapai tahap penentuan, silahkan cek untuk kebenaranya segera! \n\n~PMB Politeknik Sawunggalih Aji";
+
+            $this->whatsappNotification($no_target, $message);
 
             $user->getForm()->update([
                 'end_status' => 'submitted'

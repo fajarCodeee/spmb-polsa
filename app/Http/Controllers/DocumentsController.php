@@ -26,6 +26,7 @@ class DocumentsController extends Controller
     public function update(DocumentRequest $request): RedirectResponse
     {
         $form = auth()->user()->getForm;
+
         if ($request->hasFile('ktp') && $request->file('ktp')->isValid()) {
             $form->addMedia($request->file('ktp'))->toMediaCollection('ktp');
         }

@@ -1,30 +1,35 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\FormController;
-use App\Http\Controllers\Admin\UsersController;
-use App\Http\Controllers\Admin\AdminPaymentController;
-use App\Http\Controllers\Admin\VerificationController;
-use App\Http\Controllers\Admin\ProdiController;
-use App\Http\Controllers\Admin\WaveController;
-use App\Http\Controllers\Admin\ExamsController;
-use App\Http\Controllers\Admin\ExamQuesionController;
-use App\Http\Controllers\Admin\WebSettingController;
-use App\Http\Controllers\Admin\HealthVerificationController;
-use App\Http\Controllers\Admin\AdminInterviewController;
-use App\Http\Controllers\Admin\AdminEndValidation;
-use App\Http\Controllers\Admin\DaftarPesertaContoller;
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\KelasController;
-use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\DocumentsController;
-use App\Http\Controllers\Exams\HealthController;
-use App\Http\Controllers\Exams\KnowledgeController;
-use App\Http\Controllers\Exams\InterviewController;
-
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
+use App\Exports\PesertaExport;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FormController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DocumentsController;
+use App\Http\Controllers\Admin\WaveController;
+use App\Http\Controllers\Admin\ExamsController;
+use App\Http\Controllers\Admin\KelasController;
+use App\Http\Controllers\Admin\ProdiController;
+use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Exams\HealthController;
+use App\Http\Controllers\Admin\AdminEndValidation;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Exams\InterviewController;
+use App\Http\Controllers\Exams\KnowledgeController;
+use App\Http\Controllers\Admin\WebSettingController;
+use App\Http\Controllers\Admin\ExamQuesionController;
+
+use App\Http\Controllers\Admin\AdminPaymentController;
+use App\Http\Controllers\Admin\DaftarPesertaContoller;
+use App\Http\Controllers\Admin\VerificationController;
+use App\Http\Controllers\Admin\AdminInterviewController;
+use App\Http\Controllers\Admin\HealthVerificationController;
+use App\Http\Controllers\Admin\Media;
+use App\Http\Controllers\Admin\MediaController;
+use App\Models\WebSettings;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +46,8 @@ Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
+        'brosur' => WebSettings::first()->getFirstMediaUrl('brosur'),
+        'rincian_biaya' => WebSettings::first()->getFirstMediaUrl('rincian_biaya')
     ]);
 })->name('welcome');
 
@@ -112,8 +119,16 @@ Route::middleware(['auth', 'verified', "role:admin,panitia,keuangan"])->prefix('
     Route::middleware(['role:admin,panitia'])->group(function () {
 
         Route::get('/daftar-peserta', [DaftarPesertaContoller::class, 'index'])->name('daftar_peserta');
-        Route::get('/export-data', [DaftarPesertaContoller::class, 'export'])->name('daftar_peserta.export');
-        // Route::get('/donwload/{tahun_akademik}', [DaftarPesertaContoller::class, 'download'])->name('donwload');
+        Route::get('/data-mahasiswa', [DaftarPesertaContoller::class, 'laporanAll'])->name('data_mahasiswa');
+        // Route::get('/export-data', [DaftarPesertaContoller::class, 'export'])->name('daftar_peserta.export');
+
+        Route::post('/export-peserta', function (Request $request) {
+            $filteredData = $request->input('filteredData');  // Data hasil filter dari frontend
+            return Excel::download(new PesertaExport($filteredData), now() . '_DATA_PESERTA[NON REGISTRASI].xlsx');
+        })->name('export-peserta');
+
+        Route::get('/media', [MediaController::class, 'index'])->name('media');
+        Route::post('/media', [MediaController::class, 'update'])->name('media.update');
 
         Route::get('/program-studi', [ProdiController::class, 'index'])->name('prodi');
         Route::post('/program-studi', [ProdiController::class, 'store'])->name('prodi.store');

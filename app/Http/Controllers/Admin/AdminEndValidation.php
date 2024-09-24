@@ -12,10 +12,13 @@ use App\Models\ExamHistory;
 use App\Http\Resources\ApiResource;
 use Illuminate\Http\RedirectResponse;
 use App\Notifications\Candidate;
-
+use App\Traits\WhatsappNotificationTrait;
 
 class AdminEndValidation extends Controller
 {
+
+    use WhatsappNotificationTrait;
+
     public function index(): Response
     {
         $data = Form::where('end_status', 'submitted')->orderBy('created_at', 'desc')->with('user', 'prodi', 'wave')->paginate(10)->through(function ($form) {
@@ -68,18 +71,24 @@ class AdminEndValidation extends Controller
 
     public function update(Request $request, string $id): RedirectResponse
     {
+
         $request->validate([
             'status' => ['required', 'in:approved,rejected'],
             'reason' => ['required_if:status,rejected', 'nullable']
         ]);
 
-        $form = Form::find($id);
+        $form = Form::with('user')->find($id);
         if (!$form) {
             return redirect()->back();
         }
         $form->end_status = $request->status;
         $form->reason_rejected = $request->reason;
         $form->save();
+
+        $no_target = $form->user->phone;
+        $message = "*Selamat!*\nHasil akhir anda telah keluar, silahkan cek status pendaftaran Anda.\n\n~PMB Politeknik Sawunggalih Aji";
+
+        $this->whatsappNotification($no_target, $message);
 
         $form->user->notify(
             new Candidate(

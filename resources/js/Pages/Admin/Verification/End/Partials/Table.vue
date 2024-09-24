@@ -56,12 +56,8 @@ const save = () => {
 
 <template>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-4">
-        <table
-            class="w-full text-sm text-left text-gray-500 dark:text-gray-400"
-        >
-            <thead
-                class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
-            >
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     <th scope="col" class="px-3 py-3">No.</th>
                     <th scope="col" class="px-6 py-3">Name</th>
@@ -78,11 +74,8 @@ const save = () => {
                 </tr>
             </thead>
             <tbody>
-                <tr
-                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-                    v-for="(form, index) in forms.data"
-                    :key="form.id"
-                >
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                    v-for="(form, index) in forms.data" :key="form.id">
                     <td class="w-4 p-4">
                         {{
                             index +
@@ -90,10 +83,7 @@ const save = () => {
                             (forms.current_page - 1) * forms.per_page
                         }}
                     </td>
-                    <th
-                        scope="row"
-                        class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white"
-                    >
+                    <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                         <div>
                             <div class="text-base font-semibold">
                                 {{ form.name }}
@@ -116,25 +106,13 @@ const save = () => {
                     <td class="px-6 py-4">
                         <div class="flex justify-center">
                             <div>
-                                <IconButton
-                                    icon="fas fa-check"
-                                    color="green"
-                                    @click="openModal(form, 'approved')"
-                                />
+                                <IconButton icon="fas fa-check" color="green" @click="openModal(form, 'approved')" />
                             </div>
                             <div>
-                                <IconButton
-                                    icon="fas fa-eye"
-                                    color="yellow"
-                                    @click="open(form)"
-                                />
+                                <IconButton icon="fas fa-eye" color="yellow" @click="open(form)" />
                             </div>
                             <div>
-                                <IconButton
-                                    icon="fas fa-times"
-                                    color="red"
-                                    @click="openModal(form, 'rejected')"
-                                />
+                                <IconButton icon="fas fa-times" color="red" @click="openModal(form, 'rejected')" />
                             </div>
                         </div>
                     </td>
@@ -142,10 +120,7 @@ const save = () => {
             </tbody>
         </table>
 
-        <div
-            v-if="forms.data.length === 0"
-            class="flex items-center justify-center p-4"
-        >
+        <div v-if="forms.data.length === 0" class="flex items-center justify-center p-4">
             <p class="text-gray-500 dark:text-gray-400">
                 Tidak ada yang mengajukan pendaftaran
             </p>
@@ -161,24 +136,15 @@ const save = () => {
                     pendaftaran ini?, data yang sudah diinput tidak dapat
                     dikembalikan
                 </p>
-                <div
-                    v-if="form.status == 'rejected'"
-                    class="mt-4 w-full dark:text-white"
-                >
+                <div v-if="form.status == 'rejected'" class="mt-4 w-full dark:text-white">
                     <InputLabel> Alasan Penolakan </InputLabel>
-                    <TextareaInput
-                        v-model="form.reason"
-                        label="Alasan Penolakan"
-                    />
+                    <TextareaInput v-model="form.reason" label="Alasan Penolakan" />
                 </div>
                 <div class="mt-4 flex gap-2 justify-end">
                     <SecondaryButton @click="closeModal">
                         Tidak
                     </SecondaryButton>
-                    <PrimaryButton
-                        @click="save"
-                        :disabled="form.status == 'rejected' && !form.reason"
-                    >
+                    <PrimaryButton @click="save" :disabled="form.status == 'rejected' && !form.reason">
                         Ya
                     </PrimaryButton>
                 </div>

@@ -131,10 +131,7 @@ const option = {
 
                         <div class="flex space-x-2">
                             <PrimaryButton @click="open(0)">
-                                <i class="fas fa-plus"></i>
-                            </PrimaryButton>
-                            <PrimaryButton>
-                                <i class="fas fa-file-import"></i>
+                                <i class="fas fa-plus mr-1"></i> Add question
                             </PrimaryButton>
                         </div>
                     </div>

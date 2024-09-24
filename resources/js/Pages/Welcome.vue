@@ -11,7 +11,10 @@ defineProps({
     canRegister: {
         type: Boolean,
     },
+    brosur: String,
+    rincian_biaya: String,
 });
+
 
 const download = async (name) => {
     try {
@@ -116,7 +119,7 @@ const setting_carousel = {
                         <div class="pb-3">
                             <!-- <h2 class="text-xl md:text-3xl font-semibold border"> -->
                             <span
-                                class="bg-gradient-to-r from-primary-700 to-primary bg-clip-text font-[800] text-transparent">{{
+                                class="bg-gradient-to-r from-primary-700 to-primary bg-clip-text font-[800]">{{
                                     $page.props.web_settings
                                         .institution_name
                                 }}</span>
@@ -239,52 +242,7 @@ const setting_carousel = {
                 </div>
             </div>
         </section>
-        <!-- <section
-            class="p-6 md:p-16 lg:p-12 xl:p-16"
-            data-aos="fade-up"
-            data-aos-duration="2000"
-        >
-            <div
-                class="container mx-auto p-6"
-                data-aos="fade-up"
-                data-aos-duration="2000"
-            >
-                <h2
-                    class="text-2xl md:text-3xl text-black text-center font-bold pb-5 mb-10 capitalize"
-                >
-                    Bekerja sama dengan
-                </h2>
-                <Carousel
-                    :itemsToShow="3.95"
-                    :wrapAround="true"
-                    :transition="500"
-                    :autoplay="setting_carousel.autoplay"
-                    v-bind="setting_carousel.settings"
-                    :breakpoints="setting_carousel.breakpoints"
-                >
-                    <Slide v-for="(x, index) in cooperate" :key="index">
-                        <div class="flex p-5">
-                            <a
-                                :href="x[0]"
-                                target="_blank"
-                                class="flex items-center justify-center"
-                            >
-                                <img
-                                    :src="x[1]"
-                                    alt="Cooperate"
-                                    class="w-20 h-20"
-                                />
-                            </a>
-                        </div>
-                    </Slide>
 
-                    <template #addons>
-                        <Navigation />
-                        <Pagination />
-                    </template>
-</Carousel>
-</div>
-</section> -->
         <section class="p-6 md:p-16 lg:p-12 xl:p-16">
             <div class="text-white" data-aos="fade-up" data-aos-duration="2000">
                 <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-4">
@@ -303,7 +261,7 @@ const setting_carousel = {
                         <div class="flex">
                             <div
                                 class="flex flex-row gap-3 items-center sm:flex-row sm:gap-5 sm:justify-end sm:items-center">
-                                <a class="p-2 bg-transparent ring-2 ring-white rounded-lg hover:bg-teal-600 text-xs sm:text-base"
+                                <a class="p-2 bg-transparent ring-2 ring-white rounded-lg hover:bg-yellow-700 text-xs sm:text-base"
                                     :href="`https://wa.me/${$page.props.web_settings.contact_whatsapp}`"
                                     target="_blank">
                                     <span class="flex items-center justify-center">
@@ -313,7 +271,7 @@ const setting_carousel = {
                                 </a>
 
                                 <Link href=""
-                                    class="p-2 bg-transparent ring-2 ring-white rounded-lg hover:bg-teal-600 text-xs sm:text-base">
+                                    class="p-2 bg-transparent ring-2 ring-white rounded-lg hover:bg-yellow-700 text-xs sm:text-base">
                                 <span class="flex items-center justify-center">
                                     <i class="fa-solid fa-book-bookmark pr-2" />
                                     Panduan
@@ -325,7 +283,7 @@ const setting_carousel = {
                     <div class="flex flex-wrap gap-2 justify-between bg-yellow-600 container mx-auto rounded-lg p-6">
                         <div>
                             <h5 class="text-2xl font-bold text-left pb-3 leading-relaxed">
-                                Browsur dan Rincian Biaya
+                                Brosur dan Rincian Biaya
                             </h5>
                             <p class="text-left font-normal">
                                 Kami menyediakan brosur dan rincian biaya
@@ -336,21 +294,21 @@ const setting_carousel = {
                         <div class="flex">
                             <div
                                 class="flex flex-row gap-3 items-center sm:flex-row sm:gap-5 sm:justify-end sm:items-center">
-                                <button type="button" @click="download('brosur.jpg')"
-                                    class="p-2 bg-transparent ring-2 ring-white rounded-lg hover:bg-teal-600 text-xs sm:text-base">
+                                <a :href="`${brosur}`" target="_blank"
+                                    class="p-2 bg-transparent ring-2 ring-white rounded-lg hover:bg-yellow-700 text-xs sm:text-base">
                                     <span class="flex items-center justify-center">
                                         <i class="fa-solid fa-image pr-2"></i>
                                         Brosur
                                     </span>
-                                </button>
+                                </a>
 
-                                <button type="button" @click="download('rincian-biaya.jpeg')"
-                                    class="p-2 bg-transparent ring-2 ring-white rounded-lg hover:bg-teal-600 text-xs sm:text-base">
+                                <a :href="`${rincian_biaya}`" target="_blank"
+                                    class="p-2 bg-transparent ring-2 ring-white rounded-lg hover:bg-yellow-700 text-xs sm:text-base">
                                     <span class="flex items-center justify-center">
                                         <i class="fa-solid fa-money-bill pr-2" />
                                         Rincian
                                     </span>
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>

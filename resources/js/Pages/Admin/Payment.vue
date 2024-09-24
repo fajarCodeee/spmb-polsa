@@ -2,22 +2,21 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import Modal from "@/Components/Modal.vue";
 import { Head, Link, useForm, usePage, router } from "@inertiajs/vue3";
-import { nextTick, ref } from "vue";
+import { computed, nextTick, onMounted, ref } from "vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
-import TextInput from "@/Components/TextInput.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import InputError from "@/Components/InputError.vue";
-import DateInput from "@/Components/DateInput.vue";
 import Combobox from "@/Components/Combobox.vue";
 import TextareaInput from "@/Components/TextareaInput.vue";
 import Grid from "@/Components/Grid.vue";
 import Display from "@/Components/Display.vue";
-import { onMounted } from 'vue';
+import SearchForm from "@/Components/SearchForm.vue";
 
-defineProps({
+
+const props = defineProps({
     payment: {
-        type: Object,
+        type: Array,
     },
 });
 
@@ -68,6 +67,10 @@ const save = () => {
         });
     }
 };
+
+onMounted(() => {
+    console.log(props.payment.data);
+});
 </script>
 
 <template>
@@ -84,6 +87,7 @@ const save = () => {
                                 Kelola Pembayaran
                             </h2>
                         </header>
+
                     </div>
 
                     <div class="relative overflow-x-auto">
@@ -118,7 +122,7 @@ const save = () => {
                             </thead>
                             <tbody>
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-                                    v-for="item in payment.data" :key="item.id">
+                                    v-for="item in props.payment.data" :key="item.id">
                                     <th scope="row"
                                         class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         {{ item.bank }}
@@ -206,14 +210,27 @@ const save = () => {
 
                         <Grid col="3" class="mt-4 mb-6">
                             <Display label="Pilihan Prodi" :value="dialogItem?.prodi.nama_prodi" />
-                            <Display label="Biaya Pendaftaran" :value="new Intl.NumberFormat('id-ID', {
+
+                            <!-- perbaiki tampilan rincian biaya.
+                             cek terlebih dahulu jika type_payment == "registration" tampilkan rincian biaya registrasi(bukan biaya pendaftaran)
+                             apabila type_payment == "form" maka tampilkan rincian biaya pendaftaran
+
+                             *nb: rincian biaya registrasi akan dikirim via WhatsApp peserta,
+                             maka ambil data harga yang dikirim oleh peserta untuk detail rincian biaya tersebut..
+
+                             coba lihat di console mungkin akan ada petunjuk 😁
+                             -->
+
+                            <Display label="Jumlah" :value="new Intl.NumberFormat('id-ID', {
                                 style: 'currency',
                                 currency: 'IDR',
                             }).format(
-                                dialogItem?.prodi.biaya_registrasi
+                                dialogItem?.amount
                             )
                                 " />
                             <Display label="Kode Pembayaran" :value="dialogItem.code" />
+                            <Display label="Tipe Pembayaran"
+                                :value="dialogItem.type_payment == 'registration' ? 'Registrasi' : 'Pendaftaran'" />
                         </Grid>
 
                         <div class="col-span-1">

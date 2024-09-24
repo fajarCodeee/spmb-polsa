@@ -8,6 +8,7 @@ use App\Models\User;
 use Inertia\Inertia;
 use Inertia\Response;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Redirect;
 
 class UsersController extends Controller
 {
@@ -71,7 +72,7 @@ class UsersController extends Controller
         }
     }
 
-    public function destroy($id): Response
+    public function destroy($id): RedirectResponse
     {
         $user = User::find($id);
         $user->delete();

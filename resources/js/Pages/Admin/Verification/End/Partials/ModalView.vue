@@ -30,7 +30,7 @@ defineProps({
                     />
                 </div>
                 <div>
-                    <Display label="Nilai Akhir" :value="item.form.grade" />
+                    <Display label="Nilai Rata Rata Ijazah" :value="item.form.grade" />
                 </div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3">

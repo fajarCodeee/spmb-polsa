@@ -30,6 +30,7 @@ const form = useForm({
     ujian: [],
     tes_wawancara: false,
     tes_kesehatan: false,
+    biaya_pendaftaran: 0,
     biaya_registrasi: 0,
     nilai_dibawah: 0,
     status: false,
@@ -40,6 +41,7 @@ const form = useForm({
     tes_wawancara: x.tes_wawancara == "true" ? true : false,
     tes_kesehatan: x.tes_kesehatan == "true" ? true : false,
     biaya_registrasi: parseInt(x.biaya_registrasi),
+    biaya_pendaftaran: parseInt(x.biaya_pendaftaran),
     nilai_dibawah: parseInt(x.nilai_dibawah) || 0,
     status: x.status == "true" ? true : false,
 }));
@@ -85,6 +87,7 @@ const editProdi = (item = null) => {
         form.tes_ujian = findProdi.tes_ujian == 1 ? "true" : "false";
         form.ujian = findProdi.ujian?.split(",") || [];
         form.tes_wawancara = findProdi.tes_wawancara == 1 ? "true" : "false";
+        form.biaya_pendaftaran = findProdi.biaya_pendaftaran;
         form.biaya_registrasi = findProdi.biaya_registrasi;
         form.nilai_dibawah = findProdi.nilai_dibawah || 0;
         form.status = findProdi.status == 1 ? "true" : "false";
@@ -149,6 +152,9 @@ const closeModal = () => {
                                     </th>
                                     <th scope="col" class="px-6 py-3">Ujian</th>
                                     <th scope="col" class="px-6 py-3">
+                                        Biaya Pendaftaran
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
                                         Biaya Registrasi
                                     </th>
                                     <th scope="col" class="px-6 py-3">
@@ -174,6 +180,16 @@ const closeModal = () => {
                                     </td>
                                     <td class="px-6 py-4">
                                         {{ prodi.tes_ujian ? "Ya" : "Tidak" }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{
+                                            new Intl.NumberFormat("id-ID", {
+                                                style: "currency",
+                                                currency: "IDR",
+                                            }).format(
+                                                prodi.biaya_pendaftaran || 0
+                                            )
+                                        }}
                                     </td>
                                     <td class="px-6 py-4">
                                         {{
@@ -261,10 +277,18 @@ const closeModal = () => {
                         </div>
 
                         <div v-if="form.tes_ujian == 'true'">
-                            <InputLabel for="nilai_dibawah" value="nilai dibawah rata - rata ijazah" class="capitalize"/>
+                            <InputLabel for="nilai_dibawah" value="nilai dibawah rata - rata ijazah"
+                                class="capitalize" />
                             <NumberInput id="nilai_dibawah" ref="nilai_dibawahInput" v-model="form.nilai_dibawah"
                                 class="mt-1 block w-full" placeholder="Nilai Dibawah" />
                             <InputError :message="form.errors.nilai_dibawah" class="mt-2" />
+                        </div>
+                        <div>
+                            <InputLabel for="biaya_pendaftaran" value="Biaya Pendaftaran" />
+                            <TextInput id="biaya_pendaftaran" ref="biaya_pendaftaranInput"
+                                v-model="form.biaya_pendaftaran" type="number" class="mt-1 block w-full"
+                                placeholder="Biaya Pendaftaran" />
+                            <InputError :message="form.errors.biaya_pendaftaran" class="mt-2" />
                         </div>
                         <div>
                             <InputLabel for="biaya_registrasi" value="Biaya Registrasi" />

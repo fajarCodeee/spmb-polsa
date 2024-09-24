@@ -21,6 +21,7 @@ class Prodi extends Model
         'tes_wawancara',
         'tes_kesehatan',
         'biaya_registrasi',
+        'biaya_pendaftaran',
         'nilai_dibawah',
     ];
 

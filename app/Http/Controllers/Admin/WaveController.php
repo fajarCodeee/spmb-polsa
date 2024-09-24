@@ -28,9 +28,9 @@ class WaveController extends Controller
             'tahun_akademik' => 'required|string|max:255',
             'awal_daftar' => 'required|date',
             'akhir_daftar' => 'required|date',
-            'tes_tulis' => 'required|date',
-            'tes_kesehatan' => 'required|date',
-            'wawancara' => 'required|date',
+            'tes_tulis' => 'nullable|date',
+            'tes_kesehatan' => 'nullable|date',
+            'wawancara' => 'nullable|date',
             'active' => 'required|boolean'
         ]);
 
@@ -57,9 +57,9 @@ class WaveController extends Controller
             'tahun_akademik' => 'required|string|max:255',
             'awal_daftar' => 'required|date',
             'akhir_daftar' => 'required|date',
-            'tes_tulis' => 'required|date',
-            'tes_kesehatan' => 'required|date',
-            'wawancara' => 'required|date',
+            'tes_tulis' => 'nullable|date',
+            'tes_kesehatan' => 'nullable|date',
+            'wawancara' => 'nullable|date',
             'active' => 'required|boolean'
         ]);
 

@@ -6,6 +6,7 @@ import TextInput from "@/Components/TextInput.vue";
 import Combobox from "@/Components/Combobox.vue";
 import DateInput from "@/Components/DateInput.vue";
 import { Link, useForm, usePage } from "@inertiajs/vue3";
+import { onMounted } from "vue";
 
 defineProps({
     mustVerifyEmail: {
@@ -14,6 +15,10 @@ defineProps({
     status: {
         type: String,
     },
+});
+
+onMounted(() => {
+    console.log(form);
 });
 
 const user = usePage().props.auth.user;
@@ -28,7 +33,7 @@ const form = useForm({
     birth_place_city: form_data.birth_place_city || ``,
     birth_place_province: form_data.birth_place_province || ``,
     birth_place_country: form_data.birth_place_country || ``,
-    national_id: `${form_data.national_id}`,
+    national_id: form_data.national_id,
 });
 </script>
 
@@ -89,8 +94,8 @@ const form = useForm({
                         v-model="form.gender"
                         autocomplete="sex"
                         :option-value="[
-                            { value: 'Male', text: 'Laki-laki' },
-                            { value: 'Female', text: 'Wanita' },
+                            { value: 'L', text: 'Laki-laki' },
+                            { value: 'P', text: 'Perempuan' },
                             { value: '', text: 'Pilih Jenis Kelamin' },
                         ]"
                     />
@@ -110,6 +115,7 @@ const form = useForm({
                             { value: 'Hindu', text: 'Hindu' },
                             { value: 'Buddha', text: 'Buddha' },
                             { value: 'Khonghucu', text: 'Khonghucu' },
+                            { value: 'Katholik', text: 'Katholik' },
                             { value: '', text: 'Pilih Agama' },
                         ]"
                     />

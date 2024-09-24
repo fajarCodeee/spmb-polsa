@@ -33,7 +33,7 @@ const statusCopy = ref(false);
             </h2>
             <p>
                 Anda sudah mengajukan pendaftaran untuk tahun ajaran
-                <span class="font-semibold">{{ wave.tahun_akademik }}</span>, silahkan melakukan pembayaran formulir
+                <span class="font-semibold">{{ wave.tahun_akademik }}</span>, silahkan melakukan pembayaran pendaftaran
                 untuk melanjutkan
                 proses pendaftaran
             </p>
@@ -98,7 +98,7 @@ const statusCopy = ref(false);
                             </span>
                             <span class="font-semibold text-blue-700">{{
                                 code
-                            }}</span>
+                                }}</span>
                         </p>
                         <div class="flex justify-end gap-4 mt-8">
                             <Link :href="route('form.payment')" as="button" type="button">

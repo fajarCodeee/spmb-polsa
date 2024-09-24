@@ -32,7 +32,7 @@ class WebSettingController extends Controller
         $validateData = $request->validated();
 
         $updateData = [
-            'name' => $validateData->name,
+            'name' => $validateData['name'],
             'title_home' => $validateData['title_home'],
             'title_dashboard' => $validateData['title_dashboard'],
             'institution_short_name' => $validateData['institution_short_name'],
@@ -42,7 +42,7 @@ class WebSettingController extends Controller
             'title_exam' => $validateData['title_exam'],
             'footer' => $validateData['footer'],
             'payment_bank' => $validateData['payment_bank'],
-            'paymnet_account' => $validateData['paymnet_account'],
+            'payment_account' => $validateData['payment_account'],
             'payment_name' => $validateData['payment_name'],
             'contact_telp' => $validateData['contact_telp'],
             'contact_email' => $validateData['contact_email'],

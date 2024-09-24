@@ -36,7 +36,7 @@ class WebSettingsRequest extends FormRequest
             'title_exam' => ['nullable', 'string'],
             'footer' => ['nullable', 'string'],
             'payment_bank' => ['nullable', 'string'],
-            'paymnet_account' => ['nullable', 'string'],
+            'payment_account' => ['nullable', 'string'],
             'payment_name' => ['nullable', 'string'],
             'contact_telp' => ['nullable', 'string'],
             'contact_email' => ['nullable', 'string'],

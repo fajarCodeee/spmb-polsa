@@ -33,6 +33,7 @@ class ProdiController extends Controller
             'ujian' => 'nullable|string|max:100',
             'tes_wawancara' => 'required|boolean',
             'tes_kesehatan' => 'required|boolean',
+            'biaya_pendaftaran' => 'required|integer',
             'biaya_registrasi' => 'required|integer',
             'status' => 'boolean',
             'nilai_dibawah' => 'nullable|integer|min:0|max:100'
@@ -47,6 +48,7 @@ class ProdiController extends Controller
             'ujian' => $request->ujian,
             'tes_wawancara' => $request->tes_wawancara,
             'tes_kesehatan' => $request->tes_kesehatan,
+            'biaya_pendaftaran' => $request->biaya_pendaftaran,
             'biaya_registrasi' => $request->biaya_registrasi,
             'status' => $request->status ?? false,
             'nilai_dibawah' => $request->nilai_dibawah ?? 0
@@ -66,6 +68,7 @@ class ProdiController extends Controller
             'ujian' => 'nullable|string|max:100',
             'tes_wawancara' => 'required|boolean',
             'tes_kesehatan' => 'required|boolean',
+            'biaya_pendaftaran' => 'required|integer',
             'biaya_registrasi' => 'required|integer',
             'status' => 'boolean',
             'nilai_dibawah' => 'nullable|integer|min:0|max:100'
@@ -80,6 +83,7 @@ class ProdiController extends Controller
             'ujian' => $request->ujian,
             'tes_wawancara' => $request->tes_wawancara,
             'tes_kesehatan' => $request->tes_kesehatan,
+            'biaya_pendaftaran' => $request->biaya_pendaftaran,
             'biaya_registrasi' => $request->biaya_registrasi,
             'status' => $request->status ?? false,
             'nilai_dibawah' => $request->nilai_dibawah ?? 0

@@ -11,9 +11,11 @@ import SecondaryButton from "@/Components/SecondaryButton.vue";
 import Modal from "@/Components/Modal.vue";
 import FileInput from "@/Components/FileInput.vue";
 import Combobox from "@/Components/Combobox.vue";
+import { onMounted } from "vue";
 
-defineProps({
+const props = defineProps({
     payment: Object,
+    user_info: Array
 });
 
 const dialog = ref(false);
@@ -29,6 +31,31 @@ const form = useForm({
     amount: "",
     type_payment: "form",
     code: "",
+});
+
+let type_payment_val = [];
+
+onMounted(() => {
+
+    console.log(props.user_info);
+
+
+    if (props.user_info == 0) {
+        type_payment_val = [{
+            value: 'form',
+            text: 'Pendaftaran',
+        }]
+    } else {
+        props.user_info.forEach(payment => {
+            if (payment['type_payment'] == 'form' && payment['status'] == "approved") {
+                type_payment_val = [{
+                    value: 'registration',
+                    text: 'Registrasi',
+                }];
+            }
+        });
+    }
+
 });
 
 const open = (i = 0, item = null) => {
@@ -254,16 +281,7 @@ const close = () => {
                                     <InputLabel for="type_payment" value="Jenis pembayaran" />
 
                                     <Combobox id="type_payment" class="mt-1 block w-full" v-model="form.type_payment"
-                                        placeholder="Pilih Jenis Pembayaran" :option-value="[
-                                            {
-                                                value: 'form',
-                                                text: 'Pendaftaran',
-                                            },
-                                            {
-                                                value: 'registration',
-                                                text: 'Registrasi',
-                                            },
-                                        ]" />
+                                        placeholder="Pilih Jenis Pembayaran" :option-value="type_payment_val" />
 
                                     <InputError class="mt-2" :message="form.errors.type_payment" />
                                 </div>

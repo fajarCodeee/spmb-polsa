@@ -17,6 +17,7 @@ class PaymentController extends Controller
 
     public function index(Request $request): Response
     {
+        $user = User::find(auth()->user()->id)->payments()->get();
         return Inertia::render(
             'Form/Payment',
             [
@@ -26,6 +27,7 @@ class PaymentController extends Controller
                         'image' => $payment->getFirstMediaUrl('image'),
                     ];
                 }),
+                'user_info' => $user
             ]
         );
     }

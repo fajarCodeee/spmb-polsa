@@ -77,7 +77,7 @@ class AdminEndValidation extends Controller
             'reason' => ['required_if:status,rejected', 'nullable']
         ]);
 
-        $form = Form::find($id);
+        $form = Form::with('user')->find($id);
         if (!$form) {
             return redirect()->back();
         }
@@ -85,8 +85,8 @@ class AdminEndValidation extends Controller
         $form->reason_rejected = $request->reason;
         $form->save();
 
-        $no_target = $form->phone_number;
-        $message = "Hasil akhir anda telah keluar, silahkan cek status pendaftaran anda.\n\n~PMB Politeknik Sawunggalih Aji";
+        $no_target = $form->user->phone;
+        $message = "*Selamat!*\nHasil akhir anda telah keluar, silahkan cek status pendaftaran Anda.\n\n~PMB Politeknik Sawunggalih Aji";
 
         $this->whatsappNotification($no_target, $message);
 

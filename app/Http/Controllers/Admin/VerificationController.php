@@ -14,9 +14,13 @@ use App\Models\Prodi;
 use App\Models\Wave;
 use App\Helper\StatusHelper;
 use App\Notifications\Candidate;
+use App\Traits\WhatsappNotificationTrait;
 
 class VerificationController extends Controller
 {
+
+    use WhatsappNotificationTrait;
+
     public function view(): Response
     {
         $form = Form::where('status', 'submitted')->orderBy('created_at', 'desc')->with('user', 'prodi')->paginate(10)->through(function ($form) {
@@ -81,6 +85,11 @@ class VerificationController extends Controller
             $form->is_lock = false;
         $form->is_submitted = $request->is_submitted;
         $form->save();
+
+        $no_target = $form->user->phone;
+        $message = "*Selamat!*\nFormulir anda telah disetujui oleh panitia. Silahkan cek untuk melanjutkan proses pendaftaran.\n\n~PMB Politeknik Sawunggalih Aji";
+
+        $this->whatsappNotification($no_target, $message);
 
         $form->user->notify(
             new Candidate(

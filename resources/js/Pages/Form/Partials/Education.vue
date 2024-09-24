@@ -3,8 +3,6 @@ import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
-import NumberInput from "@/Components/NumberInput.vue";
-import Combobox from "@/Components/Combobox.vue";
 import { Link, useForm, usePage } from "@inertiajs/vue3";
 
 const from_data = usePage().props.form;
@@ -128,7 +126,7 @@ const form = useForm({
                 </div>
 
                 <div class="col-span-1">
-                    <InputLabel for="education_grade" value="Nilai Akhir" />
+                    <InputLabel for="education_grade" value="Nilai Rata rate Ijazah" />
 
                     <TextInput id="education_grade" type="text" class="mt-1 block w-full"
                         v-model="form.education_grade" />

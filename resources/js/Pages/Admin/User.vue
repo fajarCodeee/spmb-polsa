@@ -10,7 +10,6 @@ import InputLabel from "@/Components/InputLabel.vue";
 import InputError from "@/Components/InputError.vue";
 import Multiselect from "@vueform/multiselect";
 import Combobox from "@/Components/Combobox.vue";
-import Toggel from "@/Components/Toggel.vue";
 
 defineProps({
     users: Object,
@@ -101,54 +100,33 @@ const findPage = async (url) => {
 <style src="@vueform/multiselect/themes/tailwind.css"></style>
 
 <template>
+
     <Head title="Dashboard Admin" />
     <AuthenticatedLayout>
         <div>
             <div class="max-w-7xl mx-auto">
                 <div class="shadow-md sm:shadow-lg p-4 sm:p-8 bg-white">
                     <div
-                        class="flex items-center justify-end flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 bg-white dark:bg-gray-900"
-                    >
+                        class="flex items-center justify-end flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 bg-white dark:bg-gray-900">
                         <label for="table-search" class="sr-only">Search</label>
                         <div class="relative">
                             <div
-                                class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none"
-                            >
-                                <svg
-                                    class="w-4 h-4 text-gray-500 dark:text-gray-400"
-                                    aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 20 20"
-                                >
-                                    <path
-                                        stroke="currentColor"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                                    />
+                                class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
+                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                                 </svg>
                             </div>
-                            <input
-                                type="text"
-                                id="table-search-users"
-                                v-model="search"
+                            <input type="text" id="table-search-users" v-model="search"
                                 class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Search for users"
-                                @keyup="find"
-                            />
+                                placeholder="Search for users" @keyup="find" />
                         </div>
                     </div>
-                    <div
-                        class="relative overflow-x-auto shadow-md sm:rounded-lg"
-                    >
-                        <table
-                            class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
-                        >
+                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                             <thead
-                                class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
-                            >
+                                class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
                                     <th scope="col" class="px-6 py-3">Name</th>
                                     <th scope="col" class="px-6 py-3">Phone</th>
@@ -162,26 +140,17 @@ const findPage = async (url) => {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr
-                                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
                                     v-for="user in searchUser
                                         ? searchUser.data
-                                        : users.data"
-                                    :key="user.id"
-                                >
-                                    <th
-                                        scope="row"
-                                        class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white"
-                                    >
+                                        : users.data" :key="user.id">
+                                    <th scope="row"
+                                        class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                                         <div>
-                                            <div
-                                                class="text-base font-semibold"
-                                            >
+                                            <div class="text-base font-semibold">
                                                 {{ user.name || "N/A" }}
                                             </div>
-                                            <div
-                                                class="font-normal text-gray-500"
-                                            >
+                                            <div class="font-normal text-gray-500">
                                                 {{ user.email }}
                                             </div>
                                         </div>
@@ -204,14 +173,13 @@ const findPage = async (url) => {
                                                 'bg-yellow-100 text-yellow-800':
                                                     !user.email_verified_at &&
                                                     !user.is_Banned,
-                                            }"
-                                        >
+                                            }">
                                             {{
                                                 user.is_Banned
                                                     ? "Banned"
                                                     : user.email_verified_at
-                                                    ? "Active"
-                                                    : "Inactive"
+                                                        ? "Active"
+                                                        : "Inactive"
                                             }}
                                         </span>
                                     </td>
@@ -219,8 +187,7 @@ const findPage = async (url) => {
                                         <div class="flex gap-2">
                                             <button
                                                 class="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-600"
-                                                @click="open(user, 1)"
-                                            >
+                                                @click="open(user, 1)">
                                                 <i class="fas fa-edit"></i>
                                             </button>
                                             <!-- <button
@@ -242,19 +209,14 @@ const findPage = async (url) => {
                                 :class="{
                                     'cursor-not-allowed opacity-50':
                                         link.active || !link.url,
-                                }"
-                                v-for="link in searchUser?.links
+                                }" v-for="link in searchUser?.links
                                     ? searchUser.links
-                                    : users.links"
-                                :key="link.label"
-                                :href="link.url || ''"
-                                :disabled="link.active"
+                                    : users.links" :key="link.label" :href="link.url || ''" :disabled="link.active"
                                 @click.prevent="
                                     searchUser
                                         ? findPage(link.url)
                                         : navigateTo(link.url)
-                                "
-                            >
+                                    ">
                                 <span v-html="link.label" class="truncate">
                                 </span>
                             </button>
@@ -265,9 +227,7 @@ const findPage = async (url) => {
 
             <Modal @close="close" :show="showModal">
                 <div class="p-8">
-                    <h2
-                        class="text-lg font-semibold text-gray-700 dark:text-white"
-                    >
+                    <h2 class="text-lg font-semibold text-gray-700 dark:text-white">
                         {{ idModal === 1 ? "Edit" : "Delete" }} User
                     </h2>
 
@@ -282,71 +242,41 @@ const findPage = async (url) => {
                     <div class="mt-4 grid grid-cols-1" v-if="idModal === 1">
                         <div>
                             <InputLabel for="name">Name</InputLabel>
-                            <TextInput
-                                id="name"
-                                class="mt-1 block w-full"
-                                v-model="formModal.name"
-                                :error="formModal.errors.name"
-                            />
+                            <TextInput id="name" class="mt-1 block w-full" v-model="formModal.name"
+                                :error="formModal.errors.name" />
                             <InputError :error="formModal.errors.name" />
                         </div>
                         <div>
                             <InputLabel for="email">Email</InputLabel>
-                            <TextInput
-                                id="email"
-                                class="mt-1 block w-full"
-                                v-model="formModal.email"
-                                :error="formModal.errors.email"
-                            />
+                            <TextInput id="email" class="mt-1 block w-full" v-model="formModal.email"
+                                :error="formModal.errors.email" />
                             <InputError :error="formModal.errors.email" />
                         </div>
                         <div>
                             <InputLabel for="phone">Phone</InputLabel>
-                            <TextInput
-                                id="phone"
-                                class="mt-1 block w-full"
-                                v-model="formModal.phone"
-                                :error="formModal.errors.phone"
-                            />
+                            <TextInput id="phone" class="mt-1 block w-full" v-model="formModal.phone"
+                                :error="formModal.errors.phone" />
                             <InputError :error="formModal.errors.phone" />
                         </div>
                         <div>
                             <InputLabel for="roles">Roles</InputLabel>
-                            <Multiselect
-                                id="roles"
-                                v-model="formModal.roles"
-                                mode="multiple"
-                                :close-on-select="false"
-                                class="mt-1 block w-full"
-                                :clear-on-select="false"
-                                :preserve-search="true"
-                                label="label"
-                                track-by="label"
-                                :preselect-first="true"
-                                :hide-selected="false"
-                                :options="[
+                            <Multiselect id="roles" v-model="formModal.roles" mode="multiple" :close-on-select="false"
+                                class="mt-1 block w-full" :clear-on-select="false" :preserve-search="true" label="label"
+                                track-by="label" :preselect-first="true" :hide-selected="false" :options="[
                                     { value: 'admin', label: 'Admin' },
                                     { value: 'user', label: 'User' },
                                     { value: 'keuangan', label: 'Keuangan' },
                                     { value: 'panitia', label: 'Panitia' },
-                                ]"
-                                :error="formModal.errors.roles"
-                            />
+                                ]" :error="formModal.errors.roles" />
                             <InputError :error="formModal.errors.roles" />
                         </div>
                         <div>
                             <InputLabel for="is_Banned">Banned</InputLabel>
-                            <Combobox
-                                id="is_Banned"
-                                v-model="formModal.is_Banned"
-                                class="mt-1 block w-full"
-                                placeholder="Select an option"
-                                :option-value="[
+                            <Combobox id="is_Banned" v-model="formModal.is_Banned" class="mt-1 block w-full"
+                                placeholder="Select an option" :option-value="[
                                     { value: 1, text: 'Yes' },
                                     { value: 0, text: 'No' },
-                                ]"
-                                :error="formModal.errors.is_Banned"
-                            />
+                                ]" :error="formModal.errors.is_Banned" />
                             <InputError :error="formModal.errors.is_Banned" />
                         </div>
                     </div>

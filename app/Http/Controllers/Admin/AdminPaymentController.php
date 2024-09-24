@@ -59,8 +59,8 @@ class AdminPaymentController extends Controller
         if ($request->status === 'approved' && $payment->type_payment == 'form') {
             $form->is_paid_registration = $payment->created_at;
 
-            $no_target = $form->phone_number;
-            $message = "*Selamat!*, pembayaran pendaftaran Anda telah diterima. Silahkan lengkapi data diri Anda untuk melanjutkan proses pendaftaran.\n\n~PMB Politeknik Sawunggalih Aji";
+            $no_target = $user->phone;
+            $message = "*Selamat!*\nPembayaran pendaftaran Anda telah diterima. Silahkan lengkapi data diri Anda untuk melanjutkan proses pendaftaran.\n\n~PMB Politeknik Sawunggalih Aji";
 
             $this->whatsappNotification($no_target, $message);
 
@@ -71,8 +71,6 @@ class AdminPaymentController extends Controller
                 )
             );
         } else if ($request->status === 'approved' && $payment->type_payment == 'registration') {
-
-
 
             $code_prodi = '';
             $code_entry_year = '';
@@ -127,8 +125,10 @@ class AdminPaymentController extends Controller
 
                 // Kirim notifikasi ke user
 
-                $no_target = $form->phone_number;
-                $message = "*Selamat!*, pembayaran Anda telah diterima. Anda telah berhasil mendaftar sebagai mahasiswa Politeknik Sawunggalih Aji\n\n~PMB Politeknik Sawunggalih Aji";
+                $prodi = $form->prodi;
+
+                $no_target = $user->phone;
+                $message = "*Pembayaran Anda telah diterima!*\nAnda telah berhasil mendaftar sebagai mahasiswa Politeknik Sawunggalih Aji, data Anda sebagai berikut: \n\n*Nama Lengkap:* $user->name\n*NIM:* $form->nim\n*Prodi:* $prodi->nama_prodi \n\n ~PMB Politeknik Sawunggalih Aji";
 
                 $this->whatsappNotification($no_target, $message);
 
@@ -152,7 +152,7 @@ class AdminPaymentController extends Controller
             if ($request->status === 'rejected' && ($payment->type_payment == 'form' || $payment->type_payment == 'registration')) {
 
                 $no_target = $form->phone_number;
-                $message = "Maaf, pembayaran Anda ditolak. Silahkan upload ulang bukti pembayaran!\n\n~PMB Politeknik Sawunggalih Aji";
+                $message = "Maaf, pembayaran Anda ditolak.\nSilahkan upload ulang bukti pembayaran!\n\n~PMB Politeknik Sawunggalih Aji";
 
                 $this->whatsappNotification($no_target, $message);
 

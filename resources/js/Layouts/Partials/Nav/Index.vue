@@ -1,6 +1,6 @@
 <script setup>
 import { Link, usePage } from "@inertiajs/vue3";
-import { watch } from "vue";
+import { onMounted, watch } from "vue";
 import Dropdown from "@/Components/Dropdown.vue";
 import NotifsHandler from "@/Components/NotifsHandler.vue";
 import DropdownLink from "@/Components/DropdownLink.vue";
@@ -11,6 +11,8 @@ const { unreadNotif } = useNotifs();
 defineProps({
     modelValue: Boolean,
 });
+
+const name_user = usePage().props.auth.user.name;
 
 defineEmits(["update:modelValue"]);
 </script>
@@ -43,6 +45,9 @@ defineEmits(["update:modelValue"]);
                 <div class="flex items-center ms-6">
                     <!-- Settings Dropdown -->
                     <div class="ms-3 relative">
+                        <span class="capitalize hidden md:inline">Hi, {{ name_user }}</span>
+                    </div>
+                    <div class="ms-3 relative">
                         <Dropdown align="right" width="responsive">
                             <template #trigger>
                                 <span class="inline-flex rounded-md">
@@ -63,8 +68,8 @@ defineEmits(["update:modelValue"]);
                             </template>
                         </Dropdown>
                     </div>
-                    <div class="ms-3 relative">
-                        <Dropdown align="right" width="48">
+                    <div class="m2-1 relative">
+                        <Dropdown align="right" width="responsive">
                             <template #trigger>
                                 <span class="inline-flex rounded-md">
                                     <button type="button"
@@ -76,7 +81,7 @@ defineEmits(["update:modelValue"]);
 
                             <template #content>
                                 <DropdownLink :href="route('profile.edit')">
-                                    Profile
+                                    Profile (Admin)
                                 </DropdownLink>
                                 <DropdownLink :href="route('logout')" method="post" as="button">
                                     Log Out

@@ -27,6 +27,8 @@ const checkRole = (role = []) => {
     if (role.length == 0) return true;
     return role.some((r) => usePage().props.auth.user.roles.includes(r));
 };
+
+
 </script>
 
 <template>

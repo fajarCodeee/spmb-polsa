@@ -11,10 +11,10 @@ use Illuminate\Http\Request;
 use App\Notifications\Candidate;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\PaymentRequest;
-use App\Traits\WhatsappNotificationTrait;
 use Illuminate\Http\RedirectResponse;
+use App\Jobs\SendNotificationByWhatsApp;
 use Illuminate\Support\Facades\Redirect;
+use App\Traits\WhatsappNotificationTrait;
 
 class AdminPaymentController extends Controller
 {
@@ -62,7 +62,7 @@ class AdminPaymentController extends Controller
             $no_target = $user->phone;
             $message = "*Selamat!*\nPembayaran pendaftaran Anda telah diterima. Silahkan lengkapi data diri Anda untuk melanjutkan proses pendaftaran.\n\n~PMB Politeknik Sawunggalih Aji";
 
-            $this->whatsappNotification($no_target, $message);
+            dispatch(new SendNotificationByWhatsApp($no_target, $message));
 
             $user->notify(
                 new Candidate(
@@ -130,7 +130,7 @@ class AdminPaymentController extends Controller
                 $no_target = $user->phone;
                 $message = "*Pembayaran Anda telah diterima!*\nAnda telah berhasil mendaftar sebagai mahasiswa Politeknik Sawunggalih Aji, data Anda sebagai berikut: \n\n*Nama Lengkap:* $user->name\n*NIM:* $form->nim\n*Prodi:* $prodi->nama_prodi \n\n ~PMB Politeknik Sawunggalih Aji";
 
-                $this->whatsappNotification($no_target, $message);
+                dispatch(new SendNotificationByWhatsApp($no_target, $message));
 
                 $user->notify(
                     new Candidate(
@@ -151,10 +151,10 @@ class AdminPaymentController extends Controller
         } else {
             if ($request->status === 'rejected' && ($payment->type_payment == 'form' || $payment->type_payment == 'registration')) {
 
-                $no_target = $form->phone_number;
+                $no_target = $user->phone;
                 $message = "Maaf, pembayaran Anda ditolak.\nSilahkan upload ulang bukti pembayaran!\n\n~PMB Politeknik Sawunggalih Aji";
 
-                $this->whatsappNotification($no_target, $message);
+                dispatch(new SendNotificationByWhatsApp($no_target, $message));
 
                 $user->notify(
                     new Candidate(

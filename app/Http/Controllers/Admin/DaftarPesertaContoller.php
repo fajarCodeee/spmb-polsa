@@ -19,10 +19,12 @@ class DaftarPesertaContoller extends Controller
                 $query->where('type_payment', 'form')
                     ->where('status', 'approved');
             })->whereHas('getForm', function ($query) {
-                $query->where('nim', '');
+                $query->where('nim', null);
             })
             ->latest()
             ->get();
+
+        // dd($peserta);
 
         $wave = Wave::select('tahun_akademik')
             ->distinct()

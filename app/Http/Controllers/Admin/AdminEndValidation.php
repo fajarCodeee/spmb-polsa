@@ -10,6 +10,7 @@ use App\Models\Form;
 use App\Models\Health;
 use App\Models\ExamHistory;
 use App\Http\Resources\ApiResource;
+use App\Jobs\SendNotificationByWhatsApp;
 use Illuminate\Http\RedirectResponse;
 use App\Notifications\Candidate;
 use App\Traits\WhatsappNotificationTrait;
@@ -85,10 +86,11 @@ class AdminEndValidation extends Controller
         $form->reason_rejected = $request->reason;
         $form->save();
 
-        $no_target = $form->user->phone;
+        $target = $form->user->phone;
         $message = "*Selamat!*\nHasil akhir anda telah keluar, silahkan cek status pendaftaran Anda.\n\n~PMB Politeknik Sawunggalih Aji";
 
-        $this->whatsappNotification($no_target, $message);
+        // $this->whatsappNotification($no_target, $message);
+        dispatch(new SendNotificationByWhatsApp($target, $message));
 
         $form->user->notify(
             new Candidate(

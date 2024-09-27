@@ -26,10 +26,6 @@ const props = defineProps({
     }
 });
 
-onMounted(() => {
-    console.log(props.peserta);
-
-});
 
 
 const searchFilter = ref('');
@@ -59,11 +55,12 @@ const filterItems = computed(() => {
     }
 
     if (searchFilter.value !== '') {
-        peserta = peserta.filter(peserta => peserta.name.includes(searchFilter.value) || peserta.get_form.national_id.includes(searchFilter.value));
+        peserta = peserta.filter(peserta => peserta.name.includes(searchFilter.value));
     }
 
     return peserta;
 });
+
 
 const handleSearch = (search) => {
     searchFilter.value = search;
@@ -107,7 +104,7 @@ const exportData = () => {
             const formatted = `${hari}_${bulan}_${tahun}_${jam}_${menit}_${detik}`;
 
             // Tentukan nama file yang akan didownload
-            link.setAttribute('download', `DATA_PESERTA[NON REGIS]_${formatted}.xlsx`);
+            link.setAttribute('download', `DATA_PESERTA_${formatted}.xlsx`);
 
             // Simulasikan klik untuk mendownload file
             document.body.appendChild(link);
@@ -220,7 +217,7 @@ const exportData = () => {
                                     </th>
 
                                     <th scope="row"
-                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white capitalize">
+                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         {{ peserta.get_form.mother_name ?? '(Belum Dilengkapi)' }}
                                     </th>
                                     <th scope="row"

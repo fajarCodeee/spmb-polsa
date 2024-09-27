@@ -80,8 +80,8 @@ defineEmits(["update:modelValue"]);
                             </template>
 
                             <template #content>
-                                <DropdownLink :href="route('profile.edit')">
-                                    Profile (Admin)
+                                <DropdownLink :href="route('profile.edit')" class="capitalize">
+                                    Profile ({{ name_user }})
                                 </DropdownLink>
                                 <DropdownLink :href="route('logout')" method="post" as="button">
                                     Log Out

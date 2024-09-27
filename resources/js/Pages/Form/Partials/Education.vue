@@ -1,6 +1,7 @@
 <script setup>
 import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
+import LinkButton from "@/Components/LinkButton.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
 import { Link, useForm, usePage } from "@inertiajs/vue3";
@@ -135,8 +136,18 @@ const form = useForm({
                 </div>
             </div>
 
-            <div class="flex justify-end gap-4">
-                <PrimaryButton :disabled="form.processing">Save</PrimaryButton>
+            <div class="flex justify-between">
+                <div class="flex">
+                    <LinkButton :href="route('form.edit', {
+                        id: 'disability',
+                    })">Back</LinkButton>
+                </div>
+                <div class="flex gap-2">
+                    <PrimaryButton :disabled="form.processing">Save</PrimaryButton>
+                    <LinkButton :href="route('form.edit', {
+                        id: 'parent',
+                    })">Next</LinkButton>
+                </div>
             </div>
         </form>
     </section>

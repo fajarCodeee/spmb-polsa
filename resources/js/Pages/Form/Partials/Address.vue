@@ -7,6 +7,7 @@ import Combobox from "@/Components/Combobox.vue";
 import { Link, useForm, usePage } from "@inertiajs/vue3";
 import TextareaInput from "@/Components/TextareaInput.vue";
 import NumberInput from "@/Components/NumberInput.vue";
+import LinkButton from "@/Components/LinkButton.vue";
 
 defineProps({
     mustVerifyEmail: {
@@ -135,8 +136,18 @@ const updateDisability = () => {
                 </div> -->
             </div>
 
-            <div class="flex justify-end gap-4">
-                <PrimaryButton :disabled="form.processing">Save</PrimaryButton>
+            <div class="flex justify-between">
+                <div class="flex">
+                    <LinkButton :href="route('form.edit', {
+                        id: 'personal',
+                    })">Back</LinkButton>
+                </div>
+                <div class="flex gap-2">
+                    <PrimaryButton :disabled="form.processing">Save</PrimaryButton>
+                    <LinkButton :href="route('form.edit', {
+                        id: 'disability',
+                    })">Next</LinkButton>
+                </div>
             </div>
         </form>
     </section>

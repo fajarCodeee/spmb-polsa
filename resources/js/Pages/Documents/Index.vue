@@ -7,6 +7,7 @@ import Modal from "@/Components/Modal.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import InputError from "@/Components/InputError.vue";
+import LinkButton from "@/Components/LinkButton.vue";
 
 defineProps({
     ktp: String,
@@ -82,7 +83,8 @@ const save = () => {
                         </header>
                         <!-- <PrimaryButton @click="open(0)"> create </PrimaryButton> -->
                     </div>
-                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                    <div class="relative overflow-x-auto sm:rounded-lg">
+
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4">
                             <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4"
                                 v-for="(document, index) in form_type" :key="index">
@@ -106,10 +108,18 @@ const save = () => {
                                     </div>
                                 </button>
                             </div>
+
                         </div>
                     </div>
                 </div>
+                <div class="flex justify-end my-3">
+                    <div class="flex">
+                        <LinkButton :href="route('form.submission')">Ajukan Formulir >>>
+                        </LinkButton>
+                    </div>
+                </div>
             </div>
+
 
             <Modal :show="dialog" @close="close()">
                 <div class="p-6">
@@ -120,7 +130,7 @@ const save = () => {
                         <div>
                             <InputLabel class="capitalize" for="name">{{
                                 dialogItem.replace("_", " ")
-                                }}</InputLabel>
+                            }}</InputLabel>
                             <div class="flex items-center justify-center w-full">
                                 <label for="dropzone-file"
                                     class="flex flex-col items-center justify-center w-full h-auto border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">

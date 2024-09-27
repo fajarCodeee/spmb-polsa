@@ -6,6 +6,7 @@ import TextInput from "@/Components/TextInput.vue";
 import DateInput from "@/Components/DateInput.vue";
 
 import { Link, useForm, usePage } from "@inertiajs/vue3";
+import LinkButton from "@/Components/LinkButton.vue";
 
 defineProps({
     mustVerifyEmail: {
@@ -150,8 +151,16 @@ const capitalize = (string) => {
                 </div>
             </div>
 
-            <div class="flex justify-end gap-4">
-                <PrimaryButton :disabled="form.processing">Save</PrimaryButton>
+            <div class="flex justify-between">
+                <div class="flex">
+                    <LinkButton :href="route('form.edit', {
+                        id: 'education',
+                    })">Back</LinkButton>
+                </div>
+                <div class="flex gap-2">
+                    <PrimaryButton :disabled="form.processing">Save</PrimaryButton>
+                    <LinkButton :href="route('documents.index')">Next</LinkButton>
+                </div>
             </div>
         </form>
     </section>

@@ -6,6 +6,7 @@ import TextInput from "@/Components/TextInput.vue";
 import Combobox from "@/Components/Combobox.vue";
 import { Link, useForm, usePage } from "@inertiajs/vue3";
 import TextareaInput from "@/Components/TextareaInput.vue";
+import LinkButton from "@/Components/LinkButton.vue";
 
 defineProps({
     mustVerifyEmail: {
@@ -51,63 +52,47 @@ const updateDisability = () => {
                 <div class="col-span-1">
                     <InputLabel for="is_color_blind" value="Buta Warna" />
 
-                    <Combobox
-                        id="is_color_blind"
-                        class="mt-1 block w-full"
-                        v-model="form.is_color_blind"
-                        :option-value="[
-                            { value: 'true', text: 'Ya' },
-                            { value: 'false', text: 'TIdak' },
-                        ]"
-                    />
+                    <Combobox id="is_color_blind" class="mt-1 block w-full" v-model="form.is_color_blind" :option-value="[
+                        { value: 'true', text: 'Ya' },
+                        { value: 'false', text: 'TIdak' },
+                    ]" />
 
-                    <InputError
-                        class="mt-2"
-                        :message="form.errors.is_color_blind"
-                    />
+                    <InputError class="mt-2" :message="form.errors.is_color_blind" />
                 </div>
 
                 <div class="col-span-1">
                     <InputLabel for="is_disability" value="Disabilitas" />
 
-                    <Combobox
-                        id="is_disability"
-                        class="mt-1 block w-full"
-                        v-model="form.is_disability"
-                        :option-value="[
-                            { value: 'true', text: 'Ya' },
-                            { value: 'false', text: 'Tidak' },
-                        ]"
-                    />
+                    <Combobox id="is_disability" class="mt-1 block w-full" v-model="form.is_disability" :option-value="[
+                        { value: 'true', text: 'Ya' },
+                        { value: 'false', text: 'Tidak' },
+                    ]" />
 
-                    <InputError
-                        class="mt-2"
-                        :message="form.errors.is_disability"
-                    />
+                    <InputError class="mt-2" :message="form.errors.is_disability" />
                 </div>
 
                 <div class="col-span-2" v-if="form.is_disability == 'true'">
-                    <InputLabel
-                        for="disability_note"
-                        value="Keterangan Disabilitas "
-                    />
+                    <InputLabel for="disability_note" value="Keterangan Disabilitas " />
 
-                    <TextareaInput
-                        id="disability_note"
-                        class="mt-1 block w-full"
-                        type="text"
-                        v-model="form.disability_note"
-                    />
+                    <TextareaInput id="disability_note" class="mt-1 block w-full" type="text"
+                        v-model="form.disability_note" />
 
-                    <InputError
-                        class="mt-2"
-                        :message="form.errors.disability_note"
-                    />
+                    <InputError class="mt-2" :message="form.errors.disability_note" />
                 </div>
             </div>
 
-            <div class="flex justify-end gap-4">
-                <PrimaryButton :disabled="form.processing">Save</PrimaryButton>
+            <div class="flex justify-between">
+                <div class="flex">
+                    <LinkButton :href="route('form.edit', {
+                        id: 'address',
+                    })">Back</LinkButton>
+                </div>
+                <div class="flex gap-2">
+                    <PrimaryButton :disabled="form.processing">Save</PrimaryButton>
+                    <LinkButton :href="route('form.edit', {
+                        id: 'education',
+                    })">Next</LinkButton>
+                </div>
             </div>
         </form>
     </section>

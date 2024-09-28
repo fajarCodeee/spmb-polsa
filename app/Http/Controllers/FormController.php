@@ -14,9 +14,12 @@ use App\Models\ExamHistory;
 use App\Http\Requests\FormUpdateRequest;
 use Illuminate\Support\Facades\Redirect;
 use App\Helper\MyPdf;
+use App\Jobs\SendEmailJob;
+use App\Jobs\SendNotificationByWhatsApp;
 use App\Models\Kelas;
 use App\Models\WebSettings;
 use App\Traits\WhatsappNotificationTrait;
+use Illuminate\Support\Facades\Auth;
 
 class FormController extends Controller
 {
@@ -47,6 +50,9 @@ class FormController extends Controller
 
     public function update(FormUpdateRequest $request): RedirectResponse
     {
+
+
+
         $user = auth()->user();
         if (!$user->getForm || !$user->getForm->is_paid_registration) {
             return Redirect::route('form.submission');
@@ -60,6 +66,8 @@ class FormController extends Controller
             ]);
             return Redirect::back();
         }
+
+        // dd($request);
 
         $user->getForm()->update($request->validated());
         session()->flash('alert', [
@@ -198,7 +206,14 @@ class FormController extends Controller
         $no_target = $web_setting->contact_whatsapp;
         $message = "*[FORMULIR]Menunggu Konfimasi!*\nPeserta penerimaan mahasiswa baru untuk mengkonfirmasi formulir pendaftaran:\n Nama: $user->name\n NIK: $form->national_id\n Alamat: $form->address\nProdi Pilihan $prodi";
 
-        $this->whatsappNotification($no_target, $message);
+        $data = [
+            'email' => $web_setting->contact_email,
+            'name' => 'Menunggu Konfirmasi',
+            'message' => "Menunggu Konfirmasi formulir pendaftaran peserta penerimaan mahasiswa baru :\n Nama: $user->name\n NIK: $form->national_id\n Alamat: $form->address\nProdi Pilihan $prodi"
+        ];
+
+        dispatch(new SendEmailJob($data));
+        dispatch(new SendNotificationByWhatsApp($no_target, $message));
 
         session()->flash('alert', [
             'type' => 'success',

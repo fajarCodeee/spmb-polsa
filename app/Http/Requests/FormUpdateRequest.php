@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\Age;
 use Illuminate\Foundation\Http\FormRequest;
 
 class FormUpdateRequest extends FormRequest
@@ -25,11 +26,11 @@ class FormUpdateRequest extends FormRequest
             // 'name' => ['string', 'max:255'],
             'gender' => ['string', 'max:255', 'nullable'],
             'religion' => ['string', 'max:255', 'nullable'],
-            'birth_date' => ['date', 'nullable'],
+            'birth_date' => ['date', 'nullable', new Age()],
             'birth_place_city' => ['string', 'max:255', 'nullable'],
             'birth_place_province' => ['string', 'max:255', 'nullable'],
             'birth_place_country' => ['string', 'max:255', 'nullable'],
-            'national_id' => ['string', 'nullable', 'max:16','min:16'],
+            'national_id' => ['string', 'nullable', 'digits:16'],
             'is_color_blind' => ['boolean', 'nullable',],
             'is_disability' => ['boolean', 'nullable'],
             'disability_note' => ['string', 'max:255', 'nullable'],
@@ -39,12 +40,12 @@ class FormUpdateRequest extends FormRequest
             'subdistrict' => ['string', 'max:255', 'nullable'],
             'country' => ['string', 'max:255', 'nullable'],
             'postal_code' => ['integer', 'nullable'],
-            'rt' => ['nullable', 'min:3','max:3'],
-            'rw' => ['nullable', 'min:3','max:3'],
+            'rt' => ['nullable', 'min:3', 'max:3'],
+            'rw' => ['nullable', 'min:3', 'max:3'],
             'phone_number' => ['string', 'max:255', 'nullable'],
             'phone_number_alt' => ['string', 'max:255', 'nullable'],
             'last_education' => ['string', 'max:255', 'nullable'],
-            'education_number' => ['string', 'nullable'],
+            'education_number' => ['string', 'nullable', 'digits:10'],
             'education_name' => ['string', 'max:255', 'nullable'],
             'education_city' => ['string', 'max:255', 'nullable'],
             'education_province' => ['string', 'max:255', 'nullable'],
@@ -77,10 +78,6 @@ class FormUpdateRequest extends FormRequest
             'guardian_phone' => ['string', 'max:255', 'nullable'],
             'guardian_relation' => ['string', 'max:255', 'nullable'],
 
-            // 'wave_id' => ['integer', 'required'],
-            // 'option' => ['integer', 'required'],
-            // 'option_2' => ['integer', 'nullable'],
-
 
         ];
     }
@@ -96,6 +93,7 @@ class FormUpdateRequest extends FormRequest
         return [
             'min' => 'Nilai :attribute minimal :min',
             'max' => 'Nilai :attribute maksimal :max',
+            'digits' => ':attribute harus :digits digits'
         ];
     }
 

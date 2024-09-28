@@ -1,10 +1,15 @@
 <?php
 
 use Inertia\Inertia;
+use App\Models\WebSettings;
 use Illuminate\Http\Request;
 use App\Exports\PesertaExport;
+use App\Mail\SendEmailNotifikation;
+use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\Admin\Media;
 use Illuminate\Support\Facades\Route;
+use App\Jobs\SendEmailNotificationsJob;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
@@ -12,24 +17,23 @@ use App\Http\Controllers\DocumentsController;
 use App\Http\Controllers\Admin\WaveController;
 use App\Http\Controllers\Admin\ExamsController;
 use App\Http\Controllers\Admin\KelasController;
+use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\ProdiController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Exams\HealthController;
+
 use App\Http\Controllers\Admin\AdminEndValidation;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Exams\InterviewController;
 use App\Http\Controllers\Exams\KnowledgeController;
 use App\Http\Controllers\Admin\WebSettingController;
 use App\Http\Controllers\Admin\ExamQuesionController;
-
 use App\Http\Controllers\Admin\AdminPaymentController;
 use App\Http\Controllers\Admin\DaftarPesertaContoller;
 use App\Http\Controllers\Admin\VerificationController;
 use App\Http\Controllers\Admin\AdminInterviewController;
 use App\Http\Controllers\Admin\HealthVerificationController;
-use App\Http\Controllers\Admin\Media;
-use App\Http\Controllers\Admin\MediaController;
-use App\Models\WebSettings;
+use App\Jobs\SendEmailJob;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +45,29 @@ use App\Models\WebSettings;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+// Route::get('/send-email', function () {
+//     $data = [
+//         'email' => 'pmb@polsa.ac.id',
+//         'name' => 'Syahrizal As',
+//         'body' => 'Testing Kirim Email di Santri Koding'
+//     ];
+
+//     // dd($data);
+
+//     // Mail::to('emailtujuan@gmail.com')->send(new SendEmailNotifikation($data));
+
+//     // Mail::to($data['email'])->send(new SendEmailNotifikation($data));
+
+//     dispatch(new SendEmailJob($data));
+
+//     // dispatch(new SendEmailNotificationsJob($data, 'bayu23404@gmail.com'));
+
+
+
+//     dd("Email Berhasil dikirim.");
+// });
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [

@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Payment;
-use Inertia\Response;
 use Inertia\Inertia;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Redirect;
-use App\Http\Requests\PaymentRequest;
+use Inertia\Response;
+use App\Models\Payment;
+use App\Jobs\SendEmailJob;
 use App\Models\WebSettings;
+use Illuminate\Http\Request;
 use App\Notifications\Candidate;
-use App\Traits\WhatsappNotificationTrait;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\PaymentRequest;
+use Illuminate\Http\RedirectResponse;
+use App\Jobs\SendNotificationByWhatsApp;
+use Illuminate\Support\Facades\Redirect;
+use App\Traits\WhatsappNotificationTrait;
 
 class PaymentController extends Controller
 {
@@ -63,9 +65,17 @@ class PaymentController extends Controller
         $format_date = date('d/m/Y', strtotime($payment->date));
 
         $no_target = $web_setting->contact_whatsapp;
-        $message = "*[Pembayaran]Menunggu Konfimasi!*, pembayaran peserta penerimaan mahasiswa baru untuk data sebagai berikut:\n*Kode Pembayaran:* $payment->code\n*Atas nama:* $payment->account_name\n*Tanggal:* $format_date";
+        $message = "*[Pembayaran]Menunggu Konfimasi!*\nPembayaran peserta penerimaan mahasiswa baru untuk data sebagai berikut:\n*Kode Pembayaran:* $payment->code\n*Atas nama:* $payment->account_name\n*Tanggal:* $format_date";
 
-        $this->whatsappNotification($no_target, $message);
+        $data = [
+            'email' => $web_setting->contact_email,
+            'name' => '[Pembayaran]Menunggu Konfirmasi',
+            'message' => "Pembayaran peserta penerimaan mahasiswa baru untuk data sebagai berikut:\n*Kode Pembayaran:* $payment->code\n*Atas nama:* $payment->account_name\n*Tanggal:* $format_date"
+        ];
+
+        dispatch(new SendEmailJob($data));
+
+        dispatch(new SendNotificationByWhatsApp($no_target, $message));
 
         session()->flash('alert', [
             'type' => 'success',

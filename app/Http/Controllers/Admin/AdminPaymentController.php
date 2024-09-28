@@ -7,11 +7,14 @@ use App\Models\User;
 use Inertia\Inertia;
 use Inertia\Response;
 use App\Models\Payment;
+use App\Jobs\SendEmailJob;
 use Illuminate\Http\Request;
 use App\Notifications\Candidate;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
+use App\Traits\EmailNotificationTrait;
+use App\Jobs\SendEmailNotificationsJob;
 use App\Jobs\SendNotificationByWhatsApp;
 use Illuminate\Support\Facades\Redirect;
 use App\Traits\WhatsappNotificationTrait;
@@ -61,6 +64,14 @@ class AdminPaymentController extends Controller
 
             $no_target = $user->phone;
             $message = "*Selamat!*\nPembayaran pendaftaran Anda telah diterima. Silahkan lengkapi data diri Anda untuk melanjutkan proses pendaftaran.\n\n~PMB Politeknik Sawunggalih Aji";
+
+            $data = [
+                'email' => $user->email,
+                'name' => 'Pembayaran',
+                'body' => 'Selamat, pembayaran Anda telah diterima. Silahkan lengkapi data diri Anda untuk melanjutkan proses pendaftaran.'
+            ];
+
+            dispatch(new SendEmailJob($data));
 
             dispatch(new SendNotificationByWhatsApp($no_target, $message));
 
@@ -128,14 +139,22 @@ class AdminPaymentController extends Controller
                 $prodi = $form->prodi;
 
                 $no_target = $user->phone;
-                $message = "*Pembayaran Anda telah diterima!*\nAnda telah berhasil mendaftar sebagai mahasiswa Politeknik Sawunggalih Aji, data Anda sebagai berikut: \n\n*Nama Lengkap:* $user->name\n*NIM:* $form->nim\n*Prodi:* $prodi->nama_prodi \n\n ~PMB Politeknik Sawunggalih Aji";
+                $message = "*Pembayaran Anda telah diterima!*\nSelamat Anda telah berhasil mendaftar sebagai mahasiswa Politeknik Sawunggalih Aji, data Anda sebagai berikut: \n\n*Nama Lengkap:* $user->name\n*NIM:* $form->nim\n*Prodi:* $prodi->nama_prodi \n\n ~PMB Politeknik Sawunggalih Aji";
+
+                $data = [
+                    'email' => $user->email,
+                    'name' => 'Pembayaran',
+                    'body' => `Pembayaran Anda telah diterima!. Selamat Anda telah berhasil mendaftar sebagai mahasiswa Politeknik Sawuggalih Aji, berikut adalah data Anda: \n\n*Nama Lengkap:* $user->name\n*NIM:* $form->nim\n*Prodi:* $prodi->nama_prodi`
+                ];
+
+                dispatch(new SendEmailJob($data));
 
                 dispatch(new SendNotificationByWhatsApp($no_target, $message));
 
                 $user->notify(
                     new Candidate(
                         'Pembayaran',
-                        'Selamat, pembayaran Anda telah diterima. Anda telah berhasil mendaftar sebagai mahasiswa Politeknik Sawunggalih Aji'
+                        `Pembayaran Anda telah diterima!. Selamat Anda telah berhasil mendaftar sebagai mahasiswa Politeknik Sawuggalih Aji, berikut adalah data Anda: \n\n*Nama Lengkap:* $user->name\n*NIM:* $form->nim\n*Prodi:* $prodi->nama_prodi`
                     )
                 );
 
@@ -155,6 +174,14 @@ class AdminPaymentController extends Controller
                 $message = "Maaf, pembayaran Anda ditolak.\nSilahkan upload ulang bukti pembayaran!\n\n~PMB Politeknik Sawunggalih Aji";
 
                 dispatch(new SendNotificationByWhatsApp($no_target, $message));
+
+                $data = [
+                    'email' => $user->email,
+                    'name' => 'Pembayaran',
+                    'body' => `Maaf, pembayaran Anda ditolak. Silahkan upload ulang bukti pembayaran!`
+                ];
+
+                dispatch(new SendEmailJob($data));
 
                 $user->notify(
                     new Candidate(

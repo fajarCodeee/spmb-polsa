@@ -7,6 +7,7 @@ import DateInput from "@/Components/DateInput.vue";
 
 import { Link, useForm, usePage } from "@inertiajs/vue3";
 import LinkButton from "@/Components/LinkButton.vue";
+import Combobox from "@/Components/Combobox.vue";
 
 defineProps({
     mustVerifyEmail: {
@@ -142,6 +143,18 @@ const capitalize = (string) => {
 
                         <TextInput v-else-if="field === 'email'" :id="getFieldId(member.role, field)" type="email"
                             class="mt-1 block w-full" v-model="member[field]" />
+
+                        <Combobox v-else-if="field === 'last_education'" id="getFieldId(member.role, field)"
+                            class="mt-1 block w-full" v-model="member[field]" autocomplete="religion" :option-value="[
+                                { value: 'SD', text: 'SD' },
+                                { value: 'SMP/MTs', text: 'SMP/MTs' },
+                                { value: 'SMA/SMK/MA', text: 'SMA/SMK/MA' },
+                                { value: 'D3', text: 'D3' },
+                                { value: 'S1', text: 'S1' },
+                                { value: 'S2', text: 'S2' },
+                                { value: 'S3', text: 'S3' },
+                                { value: '', text: 'Pilih Pendidikan Terakhir' },
+                            ]" />
 
                         <TextInput v-else :id="getFieldId(member.role, field)" type="text" class="mt-1 block w-full"
                             v-model="member[field]" />

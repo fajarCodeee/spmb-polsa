@@ -39,8 +39,8 @@ const form = useForm({
                 <div class="col-span-1">
                     <InputLabel for="last_education" value="Pendidikan Terakhir" />
 
-                    <TextInput id="last_education" type="text" class="mt-1 block w-full"
-                        v-model="form.last_education" />
+                    <TextInput id="last_education" type="text" class="mt-1 block w-full" v-model="form.last_education"
+                        value="SMA/SMK/MA/Paket C" disabled />
 
                     <InputError class="mt-2" :message="form.errors.last_education" />
                 </div>
@@ -55,7 +55,7 @@ const form = useForm({
                 </div>
 
                 <div class="col-span-1">
-                    <InputLabel for="education_name" value="Nama Instansi Pendidikan" />
+                    <InputLabel for="education_name" value="Nama Sekolah" />
 
                     <TextInput id="education_name" type="text" class="mt-1 block w-full"
                         v-model="form.education_name" />
@@ -127,7 +127,7 @@ const form = useForm({
                 </div>
 
                 <div class="col-span-1">
-                    <InputLabel for="education_grade" value="Nilai Rata rate Ijazah" />
+                    <InputLabel for="education_grade" value="Nilai Rata rata Ijazah" />
 
                     <TextInput id="education_grade" type="text" class="mt-1 block w-full"
                         v-model="form.education_grade" />

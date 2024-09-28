@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Redirect;
-use Inertia\Inertia;
-use Inertia\Response;
 use App\Models\Form;
 use App\Models\User;
-use App\Models\Prodi;
 use App\Models\Wave;
+use Inertia\Inertia;
+use App\Models\Prodi;
+use Inertia\Response;
+use App\Jobs\SendEmailJob;
 use App\Helper\StatusHelper;
+use Illuminate\Http\Request;
 use App\Notifications\Candidate;
+use App\Http\Controllers\Controller;
+use App\Jobs\SendNotificationByWhatsApp;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Redirect;
 use App\Traits\WhatsappNotificationTrait;
 
 class VerificationController extends Controller
@@ -89,7 +91,14 @@ class VerificationController extends Controller
         $no_target = $form->user->phone;
         $message = "*Selamat!*\nFormulir anda telah disetujui oleh panitia. Silahkan cek untuk melanjutkan proses pendaftaran.\n\n~PMB Politeknik Sawunggalih Aji";
 
-        $this->whatsappNotification($no_target, $message);
+        $data = [
+            'email' => $form->user->email,
+            'name' => 'Pendaftaran',
+            'body' => 'Selamat, formulir anda telah disetujui oleh panitia. Silahkan cek untuk melanjutkan proses pendaftaran.'
+        ];
+
+        dispatch(new SendEmailJob($data));
+        dispatch(new SendNotificationByWhatsApp($no_target, $message));
 
         $form->user->notify(
             new Candidate(

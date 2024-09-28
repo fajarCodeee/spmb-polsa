@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Form;
 use Inertia\Inertia;
 use Inertia\Response;
-use App\Models\Form;
 use App\Models\Health;
+use App\Jobs\SendEmailJob;
 use App\Models\ExamHistory;
-use App\Http\Resources\ApiResource;
-use App\Jobs\SendNotificationByWhatsApp;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use App\Notifications\Candidate;
+use App\Http\Resources\ApiResource;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
+use App\Jobs\SendNotificationByWhatsApp;
 use App\Traits\WhatsappNotificationTrait;
 
 class AdminEndValidation extends Controller
@@ -87,8 +88,16 @@ class AdminEndValidation extends Controller
         $form->save();
 
         $target = $form->user->phone;
+        $email = $form->user->email;
         $message = "*Selamat!*\nHasil akhir anda telah keluar, silahkan cek status pendaftaran Anda.\n\n~PMB Politeknik Sawunggalih Aji";
 
+        $data = [
+            'email' => $email,
+            'name' => 'Pendaftaran',
+            'body' => 'Selamat, hasil akhir anda telah keluar, silahkan cek status pendaftaran Anda.'
+        ];
+
+        dispatch(new SendEmailJob($data));
         // $this->whatsappNotification($no_target, $message);
         dispatch(new SendNotificationByWhatsApp($target, $message));
 
